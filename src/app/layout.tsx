@@ -1,23 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk} from "next/font/google";
 
 import { StoreProvider } from "@/components/StoreProvider";
 
 import "./globals.css";
+import "./globalicon.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const SpaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "React-Redux-Next-app",
-  description: "A template using React, Redux and Next.js.",
+  description: "All my beautiful jewels",
 };
 
 export default function RootLayout({
@@ -27,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={SpaceGrotesk.variable}>
         <StoreProvider>
           {children}
         </StoreProvider>

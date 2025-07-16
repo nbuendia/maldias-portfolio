@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+}
+
+.horizontal {
+  flex-direction: row;
+  margin: 20px 0;
+}
+
+.vertical {
+  flex-direction: column;
+  margin: 0 20px;
+}
+
+.inset {
+  margin: 20px;
+}
+
+.divider {
+  border: none;
+  background-color: currentColor;
+}
+
+.horizontal .divider {
+  width: 100%;
+  height: 1px;
+}
+
+.vertical .divider {
+  height: 100%;
+  width: 1px;
+}

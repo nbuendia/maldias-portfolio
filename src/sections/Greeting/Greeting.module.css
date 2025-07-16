@@ -1,0 +1,106 @@
+.hola {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  animation: fadeInOut 2s ease-in none;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  font-size: 24px;
+}
+
+.wave {
+  animation: wobble 2s ease-in-out forwards;
+}
+
+.soy {
+  animation: fadeIn 1s ease-in 2s forwards;
+  font-size: 20px;
+  opacity: 0;
+}
+
+.me {
+  font-size: 48px;
+  color: var(--primary);
+}
+
+.letter {
+  display: inline-block;
+  animation: slideInTilt 1s linear forwards;
+  opacity: 0;
+}
+
+.space {
+  margin: 8px;
+}
+
+.title {
+  animation: fadeIn 2s ease-in 6s forwards;
+  font-size: 20px;
+  opacity: 0;
+}
+
+.end {
+  animation: endGreeting 1s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes wobble {
+  0% {
+    transform: rotate(-90deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-90deg);
+  }
+  75% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInTilt {
+  from {
+    transform: translateX(100vw) rotate(45deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(0%) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes endGreeting {
+  from {
+      opacity: 1;
+  }
+  to {
+      opacity: 0;
+  }
+}
