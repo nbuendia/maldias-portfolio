@@ -1,8 +1,9 @@
 'use client'
 
+import { useGreeting } from "@/hooks";
+
 import { Box } from "@/components/Box";
 import { Container } from "@/components/Container";
-import { useGreeting } from "@/hooks";
 import { Greeting } from "@/sections/Greeting";
 
 export default function Home() {

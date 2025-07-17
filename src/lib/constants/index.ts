@@ -1,3 +1,3 @@
-import { NAME } from "./greetingConstants";
+import { FIRST_NAME, LAST_NAME } from "./greetingConstants";
 
-export { NAME };
+export { FIRST_NAME, LAST_NAME };

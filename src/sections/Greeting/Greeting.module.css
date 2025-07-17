@@ -22,6 +22,12 @@
 }
 
 .me {
+  text-wrap: nowrap;
+  gap: 8px;
+  padding: 0;
+}
+
+.name {
   font-size: 48px;
   color: var(--primary);
 }
