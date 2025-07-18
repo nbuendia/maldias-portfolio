@@ -1,12 +1,14 @@
 .container {
   display: flex;
   height: inherit;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  width: 100%;
+  box-shadow: 0 0 10px #141414;
 }
 
 .subContainer {
   display: flex;
+  justify-content: flex-end;
+  box-shadow: 0 0 10px #000;
   background-color: #141414;
   margin: 20px;
   width: 100%;
@@ -17,11 +19,45 @@
 }
 
 .command {
+  animation: glitch 1s ease-in 1s forwards;
   color: magenta;
-  font-family: var(--font-space-grotesk);
+  font-family: var(--font-cutive-mono);
 }
 
 .response {
   color: cyan;
-  font-family: var(--font-space-grotesk);
+  font-family: var(--font-cutive-mono);
+}
+
+.letter {
+  display: inline-block;
+  animation: typeEffect 1s step-start 3s forwards;
+  opacity: 0;
+}
+
+@keyframes glitch {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes typeEffect {
+  0%, 50% {
+    opacity: 0;
+  }
+  51%, 100% {
+    opacity: 1;
+  }
 }

@@ -6,8 +6,8 @@ import { CommandBar } from "@/components/CommandBar";
 import { Box } from "@/components/Box";
 import { Banner } from "@/sections/Banner";
 import { AboutMe } from "@/sections/AboutMe";
-import { Projects } from "@/sections/Projects";
-import { Contact } from "@/sections/Contact";
+// import { Projects } from "@/sections/Projects";
+// import { Contact } from "@/sections/Contact";
 
 import styles from "./Main.module.css";
 
@@ -35,8 +35,8 @@ export default function Main() {
 
           <Box className={styles.contentContainer}>
             <AboutMe />
-            <Projects />
-            <Contact />
+            {/* <Projects /> */}
+            {/* <Contact /> */}
           </Box>
           
           <CommandBar onCommand={handleCommand} />

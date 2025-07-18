@@ -1,5 +1,5 @@
-import { TECH_STACK } from "./AboutMe";
+import { ABOUT_ME_ART, TECH_STACK, WHO_AM_I } from "./AboutMe";
 import { MAX_LENGTH } from "./CommandBarConstants";
 import { FIRST_NAME, LAST_NAME } from "./greetingConstants";
 
-export { TECH_STACK, MAX_LENGTH, FIRST_NAME, LAST_NAME };
+export { ABOUT_ME_ART, TECH_STACK, WHO_AM_I, MAX_LENGTH, FIRST_NAME, LAST_NAME };
