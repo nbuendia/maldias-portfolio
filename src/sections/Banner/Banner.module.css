@@ -1,5 +1,5 @@
 .container {
-  animation: slideUp 1s ease-in forwards;
+  animation: slideDown 1s ease-in forwards;
   position: fixed;
   display: flex;
   justify-content: center;
@@ -21,9 +21,9 @@
   text-shadow: 0 0 2px white;
 }
 
-@keyframes slideUp {
+@keyframes slideDown {
   from {
-    transform: translateY(100vh);
+    transform: translateY(-10rem);
     opacity: 0;
   }
   to {
