@@ -1,6 +1,5 @@
-'use client'
-
 import { HTMLAttributes, ReactNode } from "react";
+
 import styles from "./Box.module.css";
 
 interface BoxProps extends HTMLAttributes<HTMLElement> {

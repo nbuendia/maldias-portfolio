@@ -1,5 +1,3 @@
-'use client'
-
 import { HTMLAttributes, ReactNode } from "react";
 import styles from "./Container.module.css";
 

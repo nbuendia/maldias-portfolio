@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk} from "next/font/google";
+import { Space_Grotesk, Cutive_Mono } from "next/font/google";
 
 import { StoreProvider } from "@/components/StoreProvider";
 
@@ -9,6 +9,12 @@ import "./globalicon.css";
 const SpaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
+});
+
+const CutiveMono = Cutive_Mono({
+  variable: "--font-cutive-mono",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -23,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={SpaceGrotesk.variable}>
+      <body className={`${SpaceGrotesk.variable} ${CutiveMono.variable}`}>
         <StoreProvider>
           {children}
         </StoreProvider>

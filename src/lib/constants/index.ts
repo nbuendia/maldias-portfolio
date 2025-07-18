@@ -1,3 +1,4 @@
+import { MAX_LENGTH } from "./CommandBarConstants";
 import { FIRST_NAME, LAST_NAME } from "./greetingConstants";
 
-export { FIRST_NAME, LAST_NAME };
+export { MAX_LENGTH, FIRST_NAME, LAST_NAME };

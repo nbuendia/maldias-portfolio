@@ -1,24 +1,13 @@
-'use client'
-
-import { useGreeting } from "@/hooks";
-
-import { Box } from "@/components/Box";
 import { Container } from "@/components/Container";
 import { Greeting } from "@/sections/Greeting";
+import { Main } from "@/sections/Main";
 
 export default function Home() {
-  const {showComponent} = useGreeting();
 
   return (
-    <Container column style={{background: "#2D2C2C", justifyContent: 'center'}}>
+    <Container column style={{background: "#2D2C2C", height: "100vh"}}>
       <Greeting />
-
-      {/* REMOVE USE CLIENT ONCE THIS IS IN ITS OWN FILE */}
-      {!showComponent && (
-        <Box>
-          <div>REST OF APP</div>
-        </Box>
-      )}
+      <Main />
     </Container>
   );
 }

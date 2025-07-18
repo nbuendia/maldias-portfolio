@@ -1,33 +1,42 @@
 "use client";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetPokemonByNameQuery } from "@/services/pokemon";
+import { useGreeting } from "@/hooks";
+
+import { CommandBar } from "@/components/CommandBar";
+import { Box } from "@/components/Box";
+import { Banner } from "@/sections/Banner";
+
+import styles from "./Main.module.css";
 
 export default function Main() {
-  const {
-    data: pokemonData,
-    error: pokemonError,
-    isLoading: pokemonDataIsLoading,
-  } = useGetPokemonByNameQuery("bulbasaur");
+  const {showComponent} = useGreeting();
+  
+  function handleCommand(cmd: string) {
+    const match = cmd.match(/^go (.+)$/i);
+
+    if (match) {
+      const elementId = match[1].toLowerCase();
+      const element = document.getElementById(elementId);
+
+      if (element) element.scrollIntoView({behavior: "smooth"});
+      else console.warn(`Section with id ${elementId} not found.`);
+    }
+    else console.warn(`Unknown command: "${cmd}"`);
+  }
 
   return (
     <>
-      {pokemonError ? (
-        <h2>OH NO! SOMETHING WENT WRONG!</h2>
-      ) : pokemonDataIsLoading ? (
-        <h2>LOADING...</h2>
-      ) : (
+      {!showComponent && (
         <>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}>
-            <h4>POKEMON DATA</h4>
-            <span>{(pokemonData as any).species.name}</span>
-            <img src={(pokemonData as any).sprites.front_shiny} />
-          </div>
+          <Banner />
+
+          <Box className={styles.contentContainer}>
+            <div id="about">ABOUT </div>
+            <div id="projects">PROJECTS</div>
+            <div id="contact">CONTACT</div>
+          </Box>
+          
+          <CommandBar onCommand={handleCommand} />
         </>
       )}
     </>

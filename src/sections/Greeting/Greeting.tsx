@@ -17,7 +17,7 @@ export default function Greeting() {
     return (
         <>
             {showComponent && (
-                <Box column className={endGreeting ? styles.end : ''}>
+                <Box column className={`${styles.center} ${endGreeting ? styles.end : ''}`}>
                     <span className={styles.hola}>
                         <h1>HOLA</h1> 
                         <Icon name="waving_hand" size="32px" className={styles.wave} />
