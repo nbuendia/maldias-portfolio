@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 
-import styles from "./CommandBar.module.css";
 import { useCommandBar } from "@/hooks";
+
+import styles from "./CommandBar.module.css";
 
 interface CommandBarProps {
     onCommand: (cmd: string) => void;

@@ -21,6 +21,10 @@
   text-shadow: 0 0 2px white;
 }
 
+.bio {
+  text-align: center;
+}
+
 @keyframes slideDown {
   from {
     transform: translateY(-10rem);

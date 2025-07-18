@@ -5,6 +5,9 @@ import { useGreeting } from "@/hooks";
 import { CommandBar } from "@/components/CommandBar";
 import { Box } from "@/components/Box";
 import { Banner } from "@/sections/Banner";
+import { AboutMe } from "@/sections/AboutMe";
+import { Projects } from "@/sections/Projects";
+import { Contact } from "@/sections/Contact";
 
 import styles from "./Main.module.css";
 
@@ -31,9 +34,9 @@ export default function Main() {
           <Banner />
 
           <Box className={styles.contentContainer}>
-            <div id="about" style={{height: "200%", scrollSnapAlign: "start", scrollSnapStop: "always"}}>ABOUT </div>
-            <div id="projects" style={{height: "200%", scrollSnapAlign: "start", scrollSnapStop: "always"}}>PROJECTS</div>
-            <div id="contact" style={{height: "200%", scrollSnapAlign: "start", scrollSnapStop: "always"}}>CONTACT</div>
+            <AboutMe />
+            <Projects />
+            <Contact />
           </Box>
           
           <CommandBar onCommand={handleCommand} />

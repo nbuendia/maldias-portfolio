@@ -6,6 +6,8 @@
   height: calc(100vh - 13rem);
   padding: 0;
   width: 100%;
+  /* scroll-snap-type: y mandatory; */
+  scroll-padding-top: 0;
   scroll-behavior: smooth;
   overflow-y: auto;
   opacity: 0;

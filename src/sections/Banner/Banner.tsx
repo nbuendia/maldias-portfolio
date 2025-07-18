@@ -15,7 +15,7 @@ export default function Banner() {
                 </h1>
                 
                 <h4 className={styles.bio}>
-                    Frontend Engineer. Space Enthusiast. Pixel Pusher.
+                    I make websites that feel like magic.
                 </h4>
             </Box>
         </header>
