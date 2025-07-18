@@ -1,3 +1,4 @@
+import { useCommandBar } from "./useCommandBar";
 import { useGreeting } from "./useGreeting";
 
-export { useGreeting };
+export { useCommandBar, useGreeting };

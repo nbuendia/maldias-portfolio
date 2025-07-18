@@ -31,9 +31,9 @@ export default function Main() {
           <Banner />
 
           <Box className={styles.contentContainer}>
-            <div id="about">ABOUT </div>
-            <div id="projects">PROJECTS</div>
-            <div id="contact">CONTACT</div>
+            <div id="about" style={{height: "200%", scrollSnapAlign: "start", scrollSnapStop: "always"}}>ABOUT </div>
+            <div id="projects" style={{height: "200%", scrollSnapAlign: "start", scrollSnapStop: "always"}}>PROJECTS</div>
+            <div id="contact" style={{height: "200%", scrollSnapAlign: "start", scrollSnapStop: "always"}}>CONTACT</div>
           </Box>
           
           <CommandBar onCommand={handleCommand} />
