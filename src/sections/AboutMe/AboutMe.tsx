@@ -1,41 +1,14 @@
-import { useState } from "react";
 import { ABOUT_ME_ART, TECH_STACK, WHO_AM_I } from "@/lib/constants";
+import { useAboutMeTxt, useTechStack, useWhoami } from "@/hooks";
 
 import { Box } from "@/components/Box";
 
 import styles from "./AboutMe.module.css";
 
 export default function AboutMe() {
-  const [startAboutMeAnimation, setStartAboutMeAnimation] = useState(false);
-  const [showAboutMeArt, setShowAboutMeArt] = useState(false);
-  const [showWhoami, setShowWhoami] = useState(false);
-  const [startWhoamiAnimation, setStartWhoamiAnimation] = useState(false);
-  const [showTechStack, setShowTechStack] = useState(false);
-  const [startTechStackAnimation, setStartTechStackAnimation] = useState(false);
-  
-  setTimeout(() => {
-    setStartAboutMeAnimation(true);
-  }, 1000);
-
-  function handleShowAboutMeArt() {
-    setShowAboutMeArt(true);
-
-    setTimeout(() => {
-      setShowWhoami(true);
-    }, 2000);
-  }
-
-  function handleShowWhoami() {
-    setStartWhoamiAnimation(true);
-
-    setTimeout(() => {
-      setShowTechStack(true);
-    }, 6000);
-  }
-
-  function handleShowTechStack() {
-    setStartTechStackAnimation(true);
-  }
+  const {startAboutMeAnimation, showAboutMeArt, handleShowAboutMeArt} = useAboutMeTxt();
+  const {showWhoami, startWhoamiAnimation, handleShowWhoami} = useWhoami();
+  const {showTechStack, startTechStackAnimation, currentTechIndex, handleSetStartTechStackAnimation} = useTechStack();
   
   return (
     <div id="about" className={styles.container}>
@@ -43,7 +16,7 @@ export default function AboutMe() {
         {startAboutMeAnimation && (
             <>
                 <pre className={styles.command} onAnimationEnd={handleShowAboutMeArt}>
-                    $ about-me.txt
+                    $ cat about-me.txt
                 </pre>
                 {showAboutMeArt && <pre className={styles.art}>{ABOUT_ME_ART}</pre>}
             </>
@@ -76,21 +49,21 @@ export default function AboutMe() {
 
         {showTechStack && (
             <>
-                <pre className={styles.command} onAnimationEnd={handleShowTechStack}
+                <pre className={styles.command} onAnimationEnd={handleSetStartTechStackAnimation}
                 style={{animationDelay: "250ms"}}>
                     $ tech-stack
                 </pre>
                 {startTechStackAnimation && (
                     <>
-                        {TECH_STACK.map((tech, lineKey) => (
-                        <pre key={lineKey} className={styles.response}>
-                            {tech.split("").map((letter, letterKey) => (
-                                <span key={letterKey} className={styles.letter}
-                                    style={{animationDelay: `${lineKey * 1 + letterKey * 0.05}s`}}>
-                                    {letter}
-                                </span>
-                            ))}
-                        </pre>
+                        {TECH_STACK.slice(0, currentTechIndex + 1).map((tech, lineKey) => (
+                            <pre key={lineKey} className={styles.response}>
+                                {tech.split("").map((letter, letterKey) => (
+                                    <span key={letterKey} className={styles.letter}
+                                        style={{animationDelay: `${letterKey * 0.05}s`}}>
+                                        {letter}
+                                    </span>
+                                ))}
+                            </pre>
                         ))}
                     </>
                 )}
