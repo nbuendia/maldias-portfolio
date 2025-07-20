@@ -7,3 +7,41 @@
 .art {
   color: yellow;
 }
+
+.response {
+  color: cyan;
+  font-family: var(--font-cutive-mono);
+}
+
+.letter {
+  display: inline-block;
+  animation: typeEffect 1s step-start 3s forwards;
+  opacity: 0;
+}
+
+@keyframes glitch {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes typeEffect {
+  0%, 50% {
+    opacity: 0;
+  }
+  51%, 100% {
+    opacity: 1;
+  }
+}

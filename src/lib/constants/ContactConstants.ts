@@ -9,3 +9,5 @@ export const CONTACT_ASCII =
  |___|___|       //  \\\\  <<   >>  _// \\\\_  )(  (__)     _// \\\\  //   \\\\  \\\\    >>  _// \\\\_  |||_  
  (__) (__)      (_")("_)(__) (__)(__) (__)(__)         (__)(__)(_") ("_)(__)  (__)(__) (__)(__)_) 
 `;
+
+export const CONTACT_INFO = ["> Name: Nicole Buendia", "> Email: nicole.buendia424@gmail.com", "> GitHub: github.com/nbuendia", "> LinkedIn: linkedin.com/in/nicole-buendia"];

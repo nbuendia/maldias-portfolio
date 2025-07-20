@@ -1,5 +1,5 @@
 export const WHO_AM_I = "Frontend Engineer. Space Enthusiast. Pixel Pusher.";
-export const TECH_STACK = ["> TypeScript", "> JavaScript", "> HTML/CSS", "> C#", "> .NET", "> Express", "> React", "> Vue.js", "> Redux", "> Pinia", "> Node.js", "> MongoDb", "> SQL", "> Kubernetes"];
+export const TECH_STACK = ["> TypeScript", "> JavaScript", "> HTML/CSS", "> C#", "> .NET", "> Node.js", "> Express", "> React", "> Vue.js", "> Redux", "> Pinia", "> MongoDb", "> SQL", "> Kubernetes"];
 
 export const ABOUT_ME_ART = 
 `
