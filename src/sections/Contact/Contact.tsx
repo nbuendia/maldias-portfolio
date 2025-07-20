@@ -1,25 +1,14 @@
-import { Box } from "@/components/Box";
+import { CONTACT_ASCII } from "@/lib/constants/ContactConstants";
 
 import styles from "./Contact.module.css";
 
 export default function Contact() {
   return (
-    <div id="contact" className={styles.container}>
-      <Box className={styles.subContainer}>
-        <pre className={styles.art}>
-          {`
-    _______      ,-----.    ,---.   .--.,---------.    ____        _______ ,---------.  
-   /   __  \\   .'  .-,  '.  |    \\  |  |\\          \\ .'  __ \`.    /   __  \\\\          \\ 
-  | ,_/  \\__) / ,-.|  \\ _ \\ |  ,  \\ |  | \`--.  ,---'/   '  \\  \\  | ,_/  \\__)\`--.  ,---' 
-,-./  )      ;  \\  '_ /  | :|  |\\_ \\|  |    |   \\   |___|  /  |,-./  )         |   \\    
-\\  '_ '\`)    |  _\`,/ \\ _/  ||  _( )_\\  |    :_ _:      _.-\`   |\\  '_ '\`)       :_ _:    
- > (_)  )  __: (  '\\_/ \\   ;| (_ o _)  |    (_I_)   .'   _    | > (_)  )  __   (_I_)    
-(  .  .-'_/  )\\ \`"/  \\  ) / |  (_,_)\  |   (_(=)_)  |  _( )_  |(  .  .-'_/  ) (_(=)_)   
- \`-'\`-'     /  '. \\_/ \`\`."\'  |  |    |  |    (_I_)   \\ (_ o _) / \`-'\`-'     /   (_I_)    
-   \`._____.'     '-----'    '--'    '--'    '---'    '.(_,_).'    \`._____.'    '---'    
-      `}
-        </pre>
-      </Box>
-    </div>
+    <>
+      <pre className={styles.command}>
+        $ cat lets-chat.txt
+      </pre>
+      <pre className={styles.art}>{CONTACT_ASCII}</pre>
+    </>
   )
 }

@@ -1,15 +1,7 @@
-.container {
-  display: flex;
-  height: inherit;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-.subContainer {
-  display: flex;
-  background-color: #141414;
-  margin: 20px;
-  width: 100%;
+.command {
+  animation: glitch 1s ease-in 1s forwards;
+  color: magenta;
+  font-family: var(--font-cutive-mono);
 }
 
 .art {
