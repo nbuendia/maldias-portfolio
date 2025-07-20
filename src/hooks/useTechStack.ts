@@ -2,13 +2,19 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { TECH_STACK } from "@/lib/constants";
-import { setCurrentTechIndex, setStartTechStackAnimation } from "@/features/AboutMe";
+import { setCurrentTechIndex, setShowTechStack, setStartTechStackAnimation } from "@/features/AboutMe";
 
 export function useTechStack() {
   const dispatch = useDispatch();
   const showTechStack = useSelector((state: RootState) => state.AboutMeSlice.showTechStack);
   const startTechStackAnimation = useSelector((state: RootState) => state.AboutMeSlice.startTechStackAnimation);
   const currentTechIndex = useSelector((state: RootState) => state.AboutMeSlice.currentTechIndex);
+
+  const handleTeckStackStateReset = useCallback(() => {
+    dispatch(setShowTechStack(false));
+    dispatch(setStartTechStackAnimation(false));
+    dispatch(setCurrentTechIndex(-1));
+  }, [dispatch]);
 
   const handleSetCurrentTechIndex = useCallback((state: number) => {
     dispatch(setCurrentTechIndex(currentTechIndex + state));
@@ -30,5 +36,5 @@ export function useTechStack() {
     }
   }, [startTechStackAnimation, currentTechIndex, handleSetCurrentTechIndex]);
 
-  return {showTechStack, startTechStackAnimation, currentTechIndex, handleSetStartTechStackAnimation};
+  return {showTechStack, startTechStackAnimation, currentTechIndex, handleSetStartTechStackAnimation, handleTeckStackStateReset};
 }

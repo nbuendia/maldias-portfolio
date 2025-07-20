@@ -1,18 +1,25 @@
+import { useEffect } from "react";
+
 import { ABOUT_ME_ART, TECH_STACK, WHO_AM_I } from "@/lib/constants";
 import { useAboutMeTxt, useTechStack, useWhoami } from "@/hooks";
-
-import { Box } from "@/components/Box";
 
 import styles from "./AboutMe.module.css";
 
 export default function AboutMe() {
-  const {startAboutMeAnimation, showAboutMeArt, handleShowAboutMeArt} = useAboutMeTxt();
-  const {showWhoami, startWhoamiAnimation, handleShowWhoami} = useWhoami();
-  const {showTechStack, startTechStackAnimation, currentTechIndex, handleSetStartTechStackAnimation} = useTechStack();
-  
+  const {startAboutMeAnimation, showAboutMeArt, handleShowAboutMeArt, handleAboutMeStateReset} = useAboutMeTxt();
+  const {showWhoami, startWhoamiAnimation, handleShowWhoami, handleWhoamiStateReset} = useWhoami();
+  const {showTechStack, startTechStackAnimation, currentTechIndex, handleSetStartTechStackAnimation, handleTeckStackStateReset} = useTechStack();
+
+  useEffect(() => {
+    return () => {
+        handleAboutMeStateReset();
+        handleWhoamiStateReset();
+        handleTeckStackStateReset();
+    }
+  }, [handleAboutMeStateReset, handleWhoamiStateReset, handleTeckStackStateReset]);
+
   return (
-    <div id="about" className={styles.container}>
-      <Box column className={styles.subContainer}>
+    <>
         {startAboutMeAnimation && (
             <>
                 <pre className={styles.command} onAnimationEnd={handleShowAboutMeArt}>
@@ -69,7 +76,6 @@ export default function AboutMe() {
                 )}
             </>
         )}
-      </Box>
-    </div>
+    </>
   );
 }

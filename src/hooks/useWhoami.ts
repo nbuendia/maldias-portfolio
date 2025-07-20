@@ -1,11 +1,17 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { setShowTechStack, setStartWhoamiAnimation } from "@/features/AboutMe";
+import { setShowTechStack, setShowWhoami, setStartWhoamiAnimation } from "@/features/AboutMe";
 
 export function useWhoami() {
   const dispatch = useDispatch();
   const showWhoami = useSelector((state: RootState) => state.AboutMeSlice.showWhoami);
   const startWhoamiAnimation = useSelector((state: RootState) => state.AboutMeSlice.startWhoamiAnimation);
+
+  const handleWhoamiStateReset = useCallback(() => {
+    dispatch(setShowWhoami(false));
+    dispatch(setStartWhoamiAnimation(false));
+  }, [dispatch]);
 
   function handleShowWhoami() {
     dispatch(setStartWhoamiAnimation(true));
@@ -17,5 +23,5 @@ export function useWhoami() {
     return () => clearTimeout(whoamiTimeout);
   }
 
-  return {showWhoami, startWhoamiAnimation, handleShowWhoami};
+  return {showWhoami, startWhoamiAnimation, handleShowWhoami, handleWhoamiStateReset};
 }
