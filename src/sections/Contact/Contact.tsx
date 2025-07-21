@@ -1,59 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import { CONTACT_ASCII, CONTACT_INFO } from "@/lib/constants/ContactConstants";
+import { CONTACT_ASCII, CONTACT_INFO } from "@/lib/constants";
+import { useContactMeAscii, useConactMeInfo } from "@/hooks";
 
 import styles from "./Contact.module.css";
 
 export default function Contact() {
-  const [showContactSection, setShowContactSection] = useState(false);
-  const [showContactAscii, setShowContactAscii] = useState(false);
-  const [showContactInfoSection, setShowContactInfoSection] = useState(false);
-  const [showContactInfo, setShowContactInfo] = useState(false);
-  const [currentContactIndex, setCurrentContactIndex] = useState(-1);
+  const {showContactSection, showContactAscii, handleShowContactAscii, handleContactStateRest} = useContactMeAscii();
+  const {showContactInfoSection, showContactInfo, currentContactIndex, handleShowContactInfo, handleContactInfoStateReset} = useConactMeInfo();
   
   useEffect(() => {
     return () => {
-      setShowContactSection(false);
-      setShowContactInfoSection(false);
+      handleContactStateRest();
+      handleContactInfoStateReset();
     }
-  }, [setShowContactSection, setShowContactInfoSection]);
-
-  useEffect(() => {
-    const showContactSectionTimeout = setTimeout(() => {
-      setShowContactSection(true);
-    }, 1000);
-
-    return () => clearTimeout(showContactSectionTimeout);
-  }, []);
-
-  useEffect(() => {
-    const delay = currentContactIndex === -1 ? 500 
-      : currentContactIndex === 0 ? 2000 : 2500;
-    
-    if (!showContactInfo) return;
-
-    if (currentContactIndex < CONTACT_INFO.length - 1) {
-      const currentContactIndexTimeout = setTimeout(() => {
-        setCurrentContactIndex((prev) => prev + 1);
-      }, delay);
-
-      return () => clearTimeout(currentContactIndexTimeout);
-    }
-  });
-
-  function handleShowContactAscii() {
-    setShowContactAscii(true);
-
-    const showContactInfoSectionTimeout = setTimeout(() => {
-      setShowContactInfoSection(true);
-    }, 1000);
-
-    return () => clearTimeout(showContactInfoSectionTimeout)
-  }
-
-  function handleShowContactInfo() {
-    setShowContactInfo(true);
-  }
+  }, [handleContactStateRest, handleContactInfoStateReset]);
 
   return (
     <>

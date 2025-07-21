@@ -5,6 +5,7 @@ import { pokemonApi } from '@/services/pokemon';
 import { greetingSlice } from '@/features/Greeting';
 import { commandBarSlice } from '@/features/CommandBar';
 import { aboutMeSlice } from '@/features/AboutMe';
+import { contactMeSlice } from '@/features/ContactMe';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     [greetingSlice.reducerPath]: greetingSlice.reducer,
     [commandBarSlice.reducerPath]: commandBarSlice.reducer,
     [aboutMeSlice.reducerPath]: aboutMeSlice.reducer,
+    [contactMeSlice.reducerPath]: contactMeSlice.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
