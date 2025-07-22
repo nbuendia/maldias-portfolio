@@ -19,6 +19,51 @@
   opacity: 0;
 }
 
+.emailPrompt {
+  display: flex;
+  align-items: center;
+  color: magenta;
+  font-family: var(--font-cutive-mono);
+}
+
+.emailPromptAnimation {
+  animation: glitch 1s ease-in 500ms forwards;
+}
+
+.promptCheck {
+  width: min-content;
+  margin-left: 0;
+}
+
+.promptYesNo {
+  color: #BB00BB;
+  font-style: italic;
+}
+
+.noEmail {
+  display: flex;
+  align-items: center;
+  color: #979797;
+  font-style: italic;
+}
+
+.yesEmail {
+  color: #00B9B9;
+  font-style: italic;
+}
+
+.ellipsisAnimation {
+  display: inline-block;
+  animation: typeEffect 1s step-start infinite;
+  opacity: 0;
+}
+
+.userResponse {
+  display: flex;
+  align-items: center;
+  font-style: italic;
+}
+
 @keyframes glitch {
   0% {
     opacity: 1;

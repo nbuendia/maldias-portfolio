@@ -1,11 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+export interface UserInfo {
+  userEmail: string | null;
+  userMsg: string | null;
+}
+
+export interface YesEmailPrompts {
+  triggerYesEmail: boolean;
+  userResponseIsLoading: boolean;
+  showMsgPrompt: boolean;
+  showCheckPrompt: boolean;
+  triggerCheckAnimation: boolean;
+  showConfirmPrompt: boolean;
+}
+
 interface ContactMeState {
   showContactSection: boolean;
   showContactAscii: boolean;
   showContactInfoSection: boolean;
   showContactInfo: boolean;
   currentContactIndex: number;
+  showEmailSection: boolean;
+  triggerNoEmail: boolean;
+  triggerEmailAnimation: boolean;
+  yesEmailPrompts: YesEmailPrompts;
+  userInfo: UserInfo;
 };
 
 const initialState = {
@@ -14,6 +33,21 @@ const initialState = {
   showContactInfoSection: false,
   showContactInfo: false,
   currentContactIndex: -1,
+  showEmailSection: false,
+  triggerNoEmail: false,
+  triggerEmailAnimation: false,
+  yesEmailPrompts: {
+    triggerYesEmail: false,
+    userResponseIsLoading: false,
+    showMsgPrompt: false,
+    showCheckPrompt: false,
+    triggerCheckAnimation: false,
+    showConfirmPrompt: false,
+  } as YesEmailPrompts,
+  userInfo: {
+    userEmail: null,
+    userMsg: null,
+  } as UserInfo,
 } satisfies ContactMeState as ContactMeState;
 
 
@@ -36,6 +70,27 @@ export const contactMeSlice = createSlice({
     },
     setCurrentContactIndex: (state, action) => {
         state.currentContactIndex = action.payload;
+    },
+    setShowEmailSection: (state, action) => {
+      state.showEmailSection = action.payload;
+    },
+    setTriggerNoEmail: (state, action) => {
+      state.triggerNoEmail = action.payload;
+    },
+    setTriggerEmailAnimation: (state, action) => {
+      state.triggerEmailAnimation = action.payload;
+    },
+    setYesEmailPrompts: (state, action) => {
+      state.yesEmailPrompts = {
+        ...state.yesEmailPrompts,
+        ...action.payload,
+      };
+    },
+    setUserInfo: (state, action) => {
+      state.userInfo = {
+        ...state.userInfo,
+        ...action.payload,
+      };
     },
   }
 });
