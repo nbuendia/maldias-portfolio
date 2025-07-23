@@ -37,6 +37,26 @@ export function useContactMeEmail() {
     dispatch(setUserInfo(userInfoReset));
   }, [dispatch]);
 
+  const handleContactPromptsReset = useCallback(() => {
+    const yesEmailPromptsReset = {
+      triggerYesEmail: false,
+      userResponseIsLoading: false,
+      showMsgPrompt: false,
+      showCheckPrompt: false,
+      triggerCheckAnimation: false,
+      showConfirmPrompt: false
+    } as YesEmailPrompts;
+
+    const userInfoReset = {
+      userEmail: null,
+      userMsg: null,
+    } as UserInfo;
+
+    dispatch(setTriggerEmailAnimation(false));
+    dispatch(setUserInfo(userInfoReset));
+    dispatch(setYesEmailPrompts(yesEmailPromptsReset));
+  }, [dispatch]);
+
   const handleSetUserInfo = useCallback((key: keyof UserInfo, value: string) => {
     dispatch(setUserInfo({[key]: value}));
   }, [dispatch]);
@@ -51,45 +71,45 @@ export function useContactMeEmail() {
     if (userInfo.userEmail && userInfo.userMsg && cmd === "y") {
       handleYesEmailPrompts("triggerCheckAnimation", true);
 
-      setTimeout(() => {
-        handleYesEmailPrompts("showConfirmPrompt", true);
-      }, 2000);
+      setTimeout(() =>
+        handleYesEmailPrompts("showConfirmPrompt", true), 2000);
     } else if (userInfo.userEmail && userInfo.userMsg && cmd === "n") {
+      handleYesEmailPrompts("triggerCheckAnimation", false);
       handleYesEmailPrompts("triggerCheckAnimation", true);
+      
+      const contactPromptsResetTimeout = setTimeout(() => {
+        cmd = 'y';
+        handleContactPromptsReset();
+      }, 2000);
 
-      // RESTART PROMPTS
+      return () => clearTimeout(contactPromptsResetTimeout);
     }
 
     if (cmd === "n") {
       dispatch(setTriggerEmailAnimation(true));
         
-      const triggerNoEmailTimeout = setTimeout(() => {
-        dispatch(setTriggerNoEmail(true));
-      }, 2000);
+      const triggerNoEmailTimeout = setTimeout(() =>
+        dispatch(setTriggerNoEmail(true)), 2000);
       
       return () => clearTimeout(triggerNoEmailTimeout); 
     } else if (cmd === "y") {
       dispatch(setTriggerEmailAnimation(true));
       
-      const YesEmailPromptsTimeout = setTimeout(() => {
-        handleYesEmailPrompts("triggerYesEmail", true);
-      }, 2000);
+      const YesEmailPromptsTimeout = setTimeout(() =>
+        handleYesEmailPrompts("triggerYesEmail", true), 2000);
 
-      return () => {
-        clearTimeout(YesEmailPromptsTimeout);
-      }
+      return () => clearTimeout(YesEmailPromptsTimeout);
     } else if (cmd.startsWith("--email")) {      
         handleYesEmailPrompts("userResponseIsLoading", true);
         
-        const email = cmd.match(/^--email\s+"([^\s"]+@[^\s"]+\.[^\s"]+)"\s*$/i);
+        const email = cmd.match(/^--email\s+(['"])([^\s"']+@[^\s"']+\.[^\s"']+)\1\s*$/i);
         const userResponseIsLoadingTimeout = setTimeout(() => {
           if (email) handleSetUserInfo("userEmail", email[1]);
           handleYesEmailPrompts("userResponseIsLoading", false);
         }, 2000);
 
-        const showMsgPromptTimeout = setTimeout(() => {
-          handleYesEmailPrompts("showMsgPrompt", true);            
-        }, 3000);
+        const showMsgPromptTimeout = setTimeout(() =>
+          handleYesEmailPrompts("showMsgPrompt", true), 3000);
 
       return () => {
         clearTimeout(userResponseIsLoadingTimeout);
@@ -98,15 +118,14 @@ export function useContactMeEmail() {
     } else if (cmd.startsWith("--msg")) {
         handleYesEmailPrompts("userResponseIsLoading", true);
         
-        const msg = cmd.match(/^--msg\s+"(.{1,250})"\s*$/i);
+        const msg = cmd.match(/^--msg\s+(['"])(.{1,250})\1\s*$/i);
         const userResponseIsLoadingTimeout = setTimeout(() => {
           if (msg) handleSetUserInfo("userMsg", msg[1]);
           handleYesEmailPrompts("userResponseIsLoading", false);
         }, 2000);
 
-        const showCheckPromptTimeout = setTimeout(() => {
-          handleYesEmailPrompts("showCheckPrompt", true);
-        }, 3000);
+        const showCheckPromptTimeout = setTimeout(() =>
+          handleYesEmailPrompts("showCheckPrompt", true), 3000);
 
       return () => {
         clearTimeout(userResponseIsLoadingTimeout);
