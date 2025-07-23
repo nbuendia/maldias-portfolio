@@ -41,7 +41,8 @@ export function useContactMeEmail() {
   const handleContactPromptsReset = useCallback(() => {
     const yesEmailPromptsReset = {
       triggerYesEmail: false,
-      userResponseIsLoading: false,
+      userEmailResponseIsLoading: false,
+      userMsgResponseIsLoading: false,
       showMsgPrompt: false,
       showCheckPrompt: false,
       triggerCheckAnimation: false,
