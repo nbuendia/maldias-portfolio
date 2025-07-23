@@ -7,11 +7,13 @@ export interface UserInfo {
 
 export interface YesEmailPrompts {
   triggerYesEmail: boolean;
-  userResponseIsLoading: boolean;
+  userEmailResponseIsLoading: boolean;
+  userMsgResponseIsLoading: boolean;
   showMsgPrompt: boolean;
   showCheckPrompt: boolean;
   triggerCheckAnimation: boolean;
   showConfirmPrompt: boolean;
+  emailError: boolean;
   msgError: boolean;
 }
 
@@ -39,11 +41,13 @@ const initialState = {
   triggerEmailAnimation: false,
   yesEmailPrompts: {
     triggerYesEmail: false,
-    userResponseIsLoading: false,
+    userEmailResponseIsLoading: false,
+    userMsgResponseIsLoading: false,
     showMsgPrompt: false,
     showCheckPrompt: false,
     triggerCheckAnimation: false,
     showConfirmPrompt: false,
+    emailError: false,
     msgError: false,
   } as YesEmailPrompts,
   userInfo: {

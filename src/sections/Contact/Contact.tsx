@@ -83,7 +83,7 @@ export default function Contact() {
                 <span className={styles.yesEmail}>(--email &quot;your-email@snailmail.com&quot;)</span>
               </pre>
 
-              {yesEmailPrompts.userResponseIsLoading && !userInfo.userEmail && (
+              {yesEmailPrompts.userEmailResponseIsLoading && (
                 <pre>
                   {[". ", ". ", ". "].map((dot, key) => (
                     <span key={key} className={styles.ellipsisAnimation} 
@@ -93,8 +93,18 @@ export default function Contact() {
                   ))}
                 </pre>
               )}
+
+              {yesEmailPrompts.emailError && !yesEmailPrompts.userEmailResponseIsLoading && (
+                <>
+                  <pre className={styles.msgError}>
+                    <Icon name="warning" size="16px" color="yellow" className={styles.promptCheck} />
+                    Email wasn&apos;t saved. Please make sure email is correct and command is using proper syntax.<br />
+                  </pre>
+                  <pre className={styles.syntaxFix}>--email &quot;me@email.com&quot;</pre>
+                </>
+              )}
             
-              {userInfo.userEmail && (
+              {userInfo.userEmail && !yesEmailPrompts.userEmailResponseIsLoading && (
                 <pre className={styles.userResponse}>
                   <Icon name="keyboard_double_arrow_right" size="16px" className={styles.promptCheck} />
                   {userInfo.userEmail}
@@ -108,7 +118,7 @@ export default function Contact() {
                     <span className={styles.yesEmail}>(--msg &quot;Lets chat!&quot;)</span>
                   </pre>
                   
-                  {yesEmailPrompts.userResponseIsLoading && (
+                  {yesEmailPrompts.userMsgResponseIsLoading && (
                     <pre>
                       {[". ", ". ", ". "].map((dot, key) => (
                         <span key={key} className={styles.ellipsisAnimation} 
@@ -119,7 +129,7 @@ export default function Contact() {
                     </pre>
                   )}
 
-                  {yesEmailPrompts.msgError && !yesEmailPrompts.userResponseIsLoading && (
+                  {yesEmailPrompts.msgError && !yesEmailPrompts.userMsgResponseIsLoading && (
                     <>
                       <pre className={styles.msgError}>
                         <Icon name="warning" size="16px" color="yellow" className={styles.promptCheck} />
@@ -129,7 +139,7 @@ export default function Contact() {
                     </>
                   )}
 
-                  {userInfo.userMsg && !yesEmailPrompts.userResponseIsLoading && (
+                  {userInfo.userMsg && !yesEmailPrompts.userMsgResponseIsLoading && (
                     <pre className={styles.userResponse}>
                       <Icon name="keyboard_double_arrow_right" size="16px" className={styles.promptCheck} />
                       {userInfo.userMsg}
