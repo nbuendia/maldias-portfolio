@@ -1,49 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Portfolio
+
+<p align="center">
+    <a href="https://nbuendia.github.io/#/">
+        <img src="https://img.shields.io/badge/Author-Nicole%20Buendia-green?style=for-the-badge&labelColor=grey">
+    </a>
+<p>
+
+## Introduction
+
+### THIS PROJECT IS STILL A WORK IN PROGRESS!
+
+Welcome to my portfolio! Here I showcase my favorite projects. I was inspired to make this feel as close to a computer terminal as I can manage. I had an idea and ran with it!
+
+Use commands to see different parts of the page, answer prompts and maybe even find some easter eggs 😁
+
+Give it a try! Tell me what you think!
+
+Check out the "Getting started" section to run this project locally
+
+## Description
+
+Upon entering you'll see a small intro animation and then the terminal style page will render. Use the input at the bottom of the page to trigger different views on the terminal section of the page.
+
+### A few commands you might find handy
+to navigate to different parts of the page, use:
+- run about
+- run contact
+- run projects
+
+## Where to view
+
+Deployed link is coming soon!
+
+<p align='center'>
+    <a target="_blank" rel="noopener" href="https://github.com/nbuendia/maldias-portfolio">
+        <img src="https://img.shields.io/badge/COMING%20SOON-white?style=plastic&logo=airplayvideo&labelColor=red">
+    </a>
+</p>
+
+## Tech Stack
+
+- TypeScript
+- CSS
+- React
+- Redux
 
 ## Getting Started
 
-First, run the development server:
+Like what you see? Want to try it out on your personal computer?
+clone this repo, then,
 
-```bash
+```
+npm install
+```
+
+To run project
+
+```
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open browser and navigate to localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Social Media
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Empty folders
-- app/features
-- app/hooks
-- app/lib/[contants, data, utils]
-- app/types
-
-## Project Setup
-The app is using with redux and is already setup with the store globally
-- Add new "slices" in the app/features
-- Add new "api" calls in app/services
-
-When adding new slices and api calls, make sure you export the new slice/api call in its index file approprately. Then in the app/store file, add the reducer and middleware. If needed, create a hook to to call the slices.
-
-The lib folder is alaredy divided into seprate sections where you can add the files needed to keep your files clean
-- Add any non changing variables in "constants"
-- Add any static data in "data"
-- Add any functions for your sections and components in "utils"
-- Every folder should include an "index.ts" file thatll export every function inside the sister files for cleaner imports
-
-REMEMBER to clean up any empty folders and what you no longer need!
+<p align="center">
+    <a href="https://github.com/nbuendia">
+        <img src="https://img.shields.io/badge/GitHub-grey?style=plastic&logo=github&labelColor=grey">
+    </a>
+    <a href="https://www.linkedin.com/in/nicole-buendia/">
+        <img src="https://img.shields.io/badge/LinkedIn-blue?style=plastic&logo=linkedin&labelColor=blue">
+    </a>
+</p
