@@ -67,6 +67,7 @@ export function useContactMeEmail() {
 
   function handleContactCommand(cmd: string) {
     if (!showEmailSection) return;
+    if (yesEmailPrompts.showConfirmPrompt || triggerNoEmail) return;
 
     if (userInfo.userEmail && userInfo.userMsg && cmd === "y") {
       handleYesEmailPrompts("triggerCheckAnimation", true);
@@ -104,7 +105,7 @@ export function useContactMeEmail() {
         
         const email = cmd.match(/^--email\s+(['"])([^\s"']+@[^\s"']+\.[^\s"']+)\1\s*$/i);
         const userResponseIsLoadingTimeout = setTimeout(() => {
-          if (email) handleSetUserInfo("userEmail", email[1]);
+          if (email) handleSetUserInfo("userEmail", email[2]);
           handleYesEmailPrompts("userResponseIsLoading", false);
         }, 2000);
 
@@ -115,22 +116,38 @@ export function useContactMeEmail() {
         clearTimeout(userResponseIsLoadingTimeout);
         clearTimeout(showMsgPromptTimeout);
       }
-    } else if (cmd.startsWith("--msg")) {
+    } else if (cmd.startsWith("--msg") && userInfo.userEmail) {
         handleYesEmailPrompts("userResponseIsLoading", true);
         
         const msg = cmd.match(/^--msg\s+(['"])(.{1,250})\1\s*$/i);
-        const userResponseIsLoadingTimeout = setTimeout(() => {
-          if (msg) handleSetUserInfo("userMsg", msg[1]);
-          handleYesEmailPrompts("userResponseIsLoading", false);
-        }, 2000);
 
-        const showCheckPromptTimeout = setTimeout(() =>
-          handleYesEmailPrompts("showCheckPrompt", true), 3000);
+        if (msg) {
+          handleYesEmailPrompts("msgError", false);
+          handleSetUserInfo("userMsg", msg[2]);
 
-      return () => {
-        clearTimeout(userResponseIsLoadingTimeout);
-        clearTimeout(showCheckPromptTimeout);
-      }
+          const userResponseIsLoadingTimeout = setTimeout(() =>
+            handleYesEmailPrompts("userResponseIsLoading", false), 2000);
+
+          const showCheckPromptTimeout = setTimeout(() =>
+            handleYesEmailPrompts("showCheckPrompt", true), 3000);
+
+          return () => {
+            clearTimeout(userResponseIsLoadingTimeout);
+            clearTimeout(showCheckPromptTimeout);
+          }
+        } else if (!msg) {
+          const userResponseIsLoadingTimeout = setTimeout(() =>
+            handleYesEmailPrompts("userResponseIsLoading", false), 2000);
+          
+          const msgErrorTimeout = setTimeout(() => {
+            handleYesEmailPrompts("msgError", true);
+          }, 2000); 
+
+          return () => {
+            clearTimeout(userResponseIsLoadingTimeout);
+            clearTimeout(msgErrorTimeout);
+          }
+        }
     } else console.warn(`Unknown command: "${cmd}"`);
   }
 

@@ -108,7 +108,7 @@ export default function Contact() {
                     <span className={styles.yesEmail}>(--msg &quot;Lets chat!&quot;)</span>
                   </pre>
                   
-                  {yesEmailPrompts.userResponseIsLoading && !userInfo.userMsg && (
+                  {yesEmailPrompts.userResponseIsLoading && (
                     <pre>
                       {[". ", ". ", ". "].map((dot, key) => (
                         <span key={key} className={styles.ellipsisAnimation} 
@@ -119,7 +119,17 @@ export default function Contact() {
                     </pre>
                   )}
 
-                  {userInfo.userMsg && (
+                  {yesEmailPrompts.msgError && !yesEmailPrompts.userResponseIsLoading && (
+                    <>
+                      <pre className={styles.msgError}>
+                        <Icon name="warning" size="16px" color="yellow" className={styles.promptCheck} />
+                        Message wasn&apos;t saved. Please use the following syntax to save email message.<br />
+                      </pre>
+                      <pre className={styles.syntaxFix}>--msg &quot;Lets chat!&quot;</pre>
+                    </>
+                  )}
+
+                  {userInfo.userMsg && !yesEmailPrompts.userResponseIsLoading && (
                     <pre className={styles.userResponse}>
                       <Icon name="keyboard_double_arrow_right" size="16px" className={styles.promptCheck} />
                       {userInfo.userMsg}

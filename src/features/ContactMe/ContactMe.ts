@@ -12,6 +12,7 @@ export interface YesEmailPrompts {
   showCheckPrompt: boolean;
   triggerCheckAnimation: boolean;
   showConfirmPrompt: boolean;
+  msgError: boolean;
 }
 
 interface ContactMeState {
@@ -43,6 +44,7 @@ const initialState = {
     showCheckPrompt: false,
     triggerCheckAnimation: false,
     showConfirmPrompt: false,
+    msgError: false,
   } as YesEmailPrompts,
   userInfo: {
     userEmail: null,

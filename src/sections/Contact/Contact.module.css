@@ -64,6 +64,16 @@
   font-style: italic;
 }
 
+.msgError {
+  display: flex;
+  align-items: center;
+  font-style: italic;
+}
+
+.syntaxFix {
+  color: #FFFFFFb3;
+}
+
 @keyframes glitch {
   0% {
     opacity: 1;
