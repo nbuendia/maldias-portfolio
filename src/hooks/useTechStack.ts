@@ -6,9 +6,9 @@ import { setCurrentTechIndex, setShowTechStack, setStartTechStackAnimation } fro
 
 export function useTechStack() {
   const dispatch = useDispatch();
-  const showTechStack = useSelector((state: RootState) => state.AboutMeSlice.showTechStack);
-  const startTechStackAnimation = useSelector((state: RootState) => state.AboutMeSlice.startTechStackAnimation);
-  const currentTechIndex = useSelector((state: RootState) => state.AboutMeSlice.currentTechIndex);
+  const showTechStack = useSelector((state: RootState) => state.aboutMeSlice.showTechStack);
+  const startTechStackAnimation = useSelector((state: RootState) => state.aboutMeSlice.startTechStackAnimation);
+  const currentTechIndex = useSelector((state: RootState) => state.aboutMeSlice.currentTechIndex);
 
   const handleTeckStackStateReset = useCallback(() => {
     dispatch(setShowTechStack(false));

@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
-
-import { useContactMeEmail, useGreeting } from "@/hooks";
+import { useContactMeEmail, useMain } from "@/hooks";
 
 import { CommandBar } from "@/components/CommandBar";
 import { Box } from "@/components/Box";
@@ -14,10 +12,8 @@ import { Contact } from "@/sections/Contact";
 import styles from "./Main.module.css";
 
 export default function Main() {
-  const {showComponent} = useGreeting();
+  const {terminalView, showComponent, handleTerminalView} = useMain();
   const {handleContactCommand} = useContactMeEmail();
-
-  const [terminalView, setTerminalView] = useState('about');
 
   function handleCommand(cmd: string) {
     const contactCmd = cmd.trim().toLowerCase();
@@ -25,7 +21,7 @@ export default function Main() {
     const match = cmd.match(/^run (.+)$/i);
     
     if (match && terminals.includes(match[1].toLowerCase())) {
-      setTerminalView(match[1].toLowerCase());
+      handleTerminalView(match[1].toLowerCase());
       return
     }
 
@@ -47,7 +43,7 @@ export default function Main() {
 
   return (
     <>
-      {!showComponent && (
+      {showComponent && (
         <>
           <Banner />
 

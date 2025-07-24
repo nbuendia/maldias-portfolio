@@ -21,7 +21,7 @@ export default function Icon({ name, size, color, ...props }: IconProps) {
   }
 
     return (
-      <span className={`material-symbols-outlined ${classes}`} style={propStyles}>
+      <span className={`material-symbols-outlined ${classes}`} style={propStyles} onAnimationEnd={props.onAnimationEnd}>
         {name}
       </span>
     )

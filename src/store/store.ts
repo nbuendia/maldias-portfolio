@@ -6,6 +6,8 @@ import { greetingSlice } from '@/features/Greeting';
 import { commandBarSlice } from '@/features/CommandBar';
 import { aboutMeSlice } from '@/features/AboutMe';
 import { contactMeSlice } from '@/features/ContactMe';
+import { welcomeBackSlice } from '@/features/WelcomeBack';
+import { mainSlice } from '@/features/Main';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
     [commandBarSlice.reducerPath]: commandBarSlice.reducer,
     [aboutMeSlice.reducerPath]: aboutMeSlice.reducer,
     [contactMeSlice.reducerPath]: contactMeSlice.reducer,
+    [welcomeBackSlice.reducerPath]: welcomeBackSlice.reducer,
+    [mainSlice.reducerPath]: mainSlice.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>

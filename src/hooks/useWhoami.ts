@@ -5,8 +5,8 @@ import { setShowTechStack, setShowWhoami, setStartWhoamiAnimation } from "@/feat
 
 export function useWhoami() {
   const dispatch = useDispatch();
-  const showWhoami = useSelector((state: RootState) => state.AboutMeSlice.showWhoami);
-  const startWhoamiAnimation = useSelector((state: RootState) => state.AboutMeSlice.startWhoamiAnimation);
+  const showWhoami = useSelector((state: RootState) => state.aboutMeSlice.showWhoami);
+  const startWhoamiAnimation = useSelector((state: RootState) => state.aboutMeSlice.startWhoamiAnimation);
 
   const handleWhoamiStateReset = useCallback(() => {
     dispatch(setShowWhoami(false));

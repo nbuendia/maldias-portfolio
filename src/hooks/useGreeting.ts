@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { setShowComponent, setIsGreetingEnding } from "@/features/Greeting";
@@ -8,8 +8,13 @@ export function useGreeting() {
   const showComponent = useSelector((state: RootState) => state.greetingSlice.showComponent);
   const endGreeting = useSelector((state: RootState) => state.greetingSlice.isGreetingEnding);
 
+  useEffect(() => {
+    const isReturnUser = localStorage.getItem("isReturnUser");
+    if (!isReturnUser) dispatch(setShowComponent(true));
+  }, [dispatch]);
+
   const handleShowComponent = useCallback((state: boolean) => {
-      dispatch(setShowComponent(state));
+    dispatch(setShowComponent(state));
   }, [dispatch]);
 
   const handleEndAnimation = useCallback(() => {

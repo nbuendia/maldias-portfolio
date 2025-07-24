@@ -6,7 +6,7 @@ interface GreetingState {
 }
 
 const initialState = { 
-  showComponent: true,
+  showComponent: false,
   isGreetingEnding: false,
 } satisfies GreetingState as GreetingState;
 

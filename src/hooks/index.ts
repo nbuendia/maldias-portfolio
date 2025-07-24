@@ -4,7 +4,9 @@ import { useConactMeInfo } from "./useConactMeInfo";
 import { useContactMeAscii } from "./useContactMeAscii";
 import { useContactMeEmail } from "./useContactMeEmail";
 import { useGreeting } from "./useGreeting";
+import { useMain } from "./useMain";
 import { useTechStack } from "./useTechStack";
+import { useWelcomeBack } from "./useWelcomeBack";
 import { useWhoami } from "./useWhoami";
 
 export {
@@ -14,6 +16,8 @@ export {
   useContactMeAscii,
   useContactMeEmail,
   useGreeting,
+  useMain,
   useTechStack,
+  useWelcomeBack,
   useWhoami,
 };

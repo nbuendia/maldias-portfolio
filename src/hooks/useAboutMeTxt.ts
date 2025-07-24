@@ -5,8 +5,8 @@ import { setStartAboutMeAnimation, setShowAboutMeArt, setShowWhoami } from "@/fe
 
 export function useAboutMeTxt() {
   const dispatch = useDispatch();
-  const startAboutMeAnimation = useSelector((state: RootState) => state.AboutMeSlice.startAboutMeAnimation);
-  const showAboutMeArt = useSelector((state: RootState) => state.AboutMeSlice.showAboutMeArt);
+  const startAboutMeAnimation = useSelector((state: RootState) => state.aboutMeSlice.startAboutMeAnimation);
+  const showAboutMeArt = useSelector((state: RootState) => state.aboutMeSlice.showAboutMeArt);
   
   const handleAboutMeStateReset = useCallback(() => {
     dispatch(setStartAboutMeAnimation(false));

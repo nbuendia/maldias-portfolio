@@ -21,8 +21,8 @@ const initialState = {
 } satisfies AboutMeState as AboutMeState;
 
 export const aboutMeSlice = createSlice({
-  name: "AboutMe",
-  reducerPath: "AboutMeSlice",
+  name: "aboutMe",
+  reducerPath: "aboutMeSlice",
   initialState,
   reducers: {
     setStartAboutMeAnimation: (state, action) => {
