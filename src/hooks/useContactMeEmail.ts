@@ -89,6 +89,7 @@ export function useContactMeEmail() {
     }
 
     if (cmd === "n") {
+      if (yesEmailPrompts.triggerYesEmail) return;
       dispatch(setTriggerEmailAnimation(true));
         
       const triggerNoEmailTimeout = setTimeout(() =>
@@ -102,7 +103,9 @@ export function useContactMeEmail() {
         handleYesEmailPrompts("triggerYesEmail", true), 2000);
 
       return () => clearTimeout(YesEmailPromptsTimeout);
-    } else if (cmd.startsWith("--email")) {      
+    } else if (cmd.startsWith("--email")) {
+        if (userInfo.userEmail) return;
+
         handleYesEmailPrompts("userEmailResponseIsLoading", true);
         const email = cmd.match(/^--email\s+(['"])([^\s"']+@[^\s"']+\.[^\s"']+)\1\s*$/i);
         
@@ -135,6 +138,8 @@ export function useContactMeEmail() {
           }
         }
     } else if (cmd.startsWith("--msg") && userInfo.userEmail) {
+        if (userInfo.userMsg) return;
+        
         handleYesEmailPrompts("userMsgResponseIsLoading", true);
         const msg = cmd.match(/^--msg\s+(['"])(.{1,250})\1\s*$/i);
 
