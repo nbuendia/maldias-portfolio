@@ -1,9 +1,26 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { UserInfo, YesEmailPrompts } from "@/features/ContactMe";
 
-import { setShowEmailSection, setCurrentContactIndex, setTriggerNoEmail, setTriggerEmailAnimation, setYesEmailPrompts, setUserInfo } from "@/features/ContactMe";
+import {
+  setShowEmailSection,
+  setCurrentContactIndex,
+  setTriggerNoEmail,
+  setTriggerEmailAnimation,
+  setYesEmailPrompts,
+  setUserInfo,
+  UserInfo,
+  YesEmailPrompts,
+} from "@/features/ContactMe";
+
+import {
+  triggerConfirmationPromptAction,
+  triggerEmailPromptAction,
+  triggerMessagePromptAction,
+  triggerNoEmailAction,
+  triggerPromptResetAction,
+  triggerYesEmailAction,
+} from "@/lib/utils";
 
 export function useContactMeEmail() {
   const dispatch = useDispatch();
@@ -71,106 +88,25 @@ export function useContactMeEmail() {
     if (!showEmailSection) return;
     if (yesEmailPrompts.showConfirmPrompt || triggerNoEmail) return;
 
-    if (userInfo.userEmail && userInfo.userMsg && cmd === "y") {
-      handleYesEmailPrompts("triggerCheckAnimation", true);
+    if (userInfo.userEmail && userInfo.userMsg && cmd === "y")
+      triggerConfirmationPromptAction(handleYesEmailPrompts);
+    
+    else if (userInfo.userEmail && userInfo.userMsg && cmd === "n")
+      triggerPromptResetAction(cmd, handleYesEmailPrompts, handleContactPromptsReset);
 
-      setTimeout(() =>
-        handleYesEmailPrompts("showConfirmPrompt", true), 2000);
-    } else if (userInfo.userEmail && userInfo.userMsg && cmd === "n") {
-      handleYesEmailPrompts("triggerCheckAnimation", false);
-      handleYesEmailPrompts("triggerCheckAnimation", true);
-      
-      const contactPromptsResetTimeout = setTimeout(() => {
-        cmd = 'y';
-        handleContactPromptsReset();
-      }, 2000);
-
-      return () => clearTimeout(contactPromptsResetTimeout);
-    }
-
-    if (cmd === "n") {
-      if (yesEmailPrompts.triggerYesEmail) return;
-      dispatch(setTriggerEmailAnimation(true));
-        
-      const triggerNoEmailTimeout = setTimeout(() =>
-        dispatch(setTriggerNoEmail(true)), 2000);
-      
-      return () => clearTimeout(triggerNoEmailTimeout); 
-    } else if (cmd === "y") {
-      dispatch(setTriggerEmailAnimation(true));
-      
-      const YesEmailPromptsTimeout = setTimeout(() =>
-        handleYesEmailPrompts("triggerYesEmail", true), 2000);
-
-      return () => clearTimeout(YesEmailPromptsTimeout);
-    } else if (cmd.startsWith("--email")) {
-        if (userInfo.userEmail) return;
-
-        handleYesEmailPrompts("userEmailResponseIsLoading", true);
-        const email = cmd.match(/^--email\s+(['"])([^\s"']+@[^\s"']+\.[^\s"']+)\1\s*$/i);
-        
-        if (email) {
-          handleYesEmailPrompts("emailError", false);
-          handleSetUserInfo("userEmail", email[2]);
-          
-          const userResponseIsLoadingTimeout = setTimeout(() => {
-            handleYesEmailPrompts("userEmailResponseIsLoading", false);
-          }, 2000);
-
-          const showMsgPromptTimeout = setTimeout(() =>
-            handleYesEmailPrompts("showMsgPrompt", true), 3000);
-
-          return () => {
-            clearTimeout(userResponseIsLoadingTimeout);
-            clearTimeout(showMsgPromptTimeout);
-          }
-        } else if (!email) {
-          const userResponseIsLoadingTimeout = setTimeout(() =>
-            handleYesEmailPrompts("userEmailResponseIsLoading", false), 2000);
-          
-          const emailErrorTimeout = setTimeout(() => {
-            handleYesEmailPrompts("emailError", true);
-          }, 2000); 
-
-          return () => {
-            clearTimeout(userResponseIsLoadingTimeout);
-            clearTimeout(emailErrorTimeout);
-          }
-        }
-    } else if (cmd.startsWith("--msg") && userInfo.userEmail) {
-        if (userInfo.userMsg) return;
-        
-        handleYesEmailPrompts("userMsgResponseIsLoading", true);
-        const msg = cmd.match(/^--msg\s+(['"])(.{1,250})\1\s*$/i);
-
-        if (msg) {
-          handleYesEmailPrompts("msgError", false);
-          handleSetUserInfo("userMsg", msg[2]);
-
-          const userResponseIsLoadingTimeout = setTimeout(() =>
-            handleYesEmailPrompts("userMsgResponseIsLoading", false), 2000);
-
-          const showCheckPromptTimeout = setTimeout(() =>
-            handleYesEmailPrompts("showCheckPrompt", true), 3000);
-
-          return () => {
-            clearTimeout(userResponseIsLoadingTimeout);
-            clearTimeout(showCheckPromptTimeout);
-          }
-        } else if (!msg) {
-          const userResponseIsLoadingTimeout = setTimeout(() =>
-            handleYesEmailPrompts("userMsgResponseIsLoading", false), 2000);
-          
-          const msgErrorTimeout = setTimeout(() => {
-            handleYesEmailPrompts("msgError", true);
-          }, 2000); 
-
-          return () => {
-            clearTimeout(userResponseIsLoadingTimeout);
-            clearTimeout(msgErrorTimeout);
-          }
-        }
-    } else console.warn(`Unknown command: "${cmd}"`);
+    if (cmd === "n")
+      triggerNoEmailAction(dispatch, yesEmailPrompts, setTriggerEmailAnimation, setTriggerNoEmail);
+    
+    else if (cmd === "y")
+      triggerYesEmailAction(dispatch, setTriggerEmailAnimation, handleYesEmailPrompts);
+    
+    else if (cmd.startsWith("--email"))
+      triggerEmailPromptAction(userInfo, cmd, handleYesEmailPrompts, handleSetUserInfo);
+    
+    else if (cmd.startsWith("--msg") && userInfo.userEmail)
+      triggerMessagePromptAction(userInfo, cmd, handleYesEmailPrompts, handleSetUserInfo);
+    
+    else console.warn(`Unknown command: "${cmd}"`);
   }
 
   useEffect(() => {

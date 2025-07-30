@@ -11,3 +11,6 @@ export const CONTACT_ASCII =
 `;
 
 export const CONTACT_INFO = ["> Name: Nicole Buendia", "> Email: test@email.com", "> GitHub: github.com/nbuendia", "> LinkedIn: linkedin.com/in/nicole-buendia"];
+
+export const EMAIL_REGEX = /^--email\s+(['"])([^\s"']+@[^\s"']+\.[^\s"']+)\1\s*$/i;
+export const MESSAGE_REGEX = /^--msg\s+(['"])(.{1,250})\1\s*$/i;
