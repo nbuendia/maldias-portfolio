@@ -1,0 +1,14 @@
+.ellipsisAnimation {
+  display: inline-block;
+  animation: typeEffect 1s step-start infinite;
+  opacity: 0;
+}
+
+@keyframes typeEffect {
+  0%, 50% {
+    opacity: 0;
+  }
+  51%, 100% {
+    opacity: 1;
+  }
+}

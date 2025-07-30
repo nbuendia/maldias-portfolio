@@ -11,6 +11,7 @@ import {
   setUserInfo,
   UserInfo,
   YesEmailPrompts,
+  setNoEmailResetIsLoading,
 } from "@/features/ContactMe";
 
 import {
@@ -19,6 +20,7 @@ import {
   triggerMessagePromptAction,
   triggerNoEmailAction,
   triggerPromptResetAction,
+  triggerResetEmailPrompt,
   triggerYesEmailAction,
 } from "@/lib/utils";
 
@@ -30,6 +32,13 @@ export function useContactMeEmail() {
   const yesEmailPrompts = useSelector((state: RootState) => state.contactMeSlice.yesEmailPrompts);
   const triggerEmailAnimation = useSelector((state: RootState) => state.contactMeSlice.triggerEmailAnimation);
   const userInfo = useSelector((state: RootState) => state.contactMeSlice.userInfo);
+  const noEmailResetIsLoading = useSelector((state: RootState) => state.contactMeSlice.noEmailResetIsLoading);
+
+  const handleEmailPromptsReset = useCallback(() => {
+    dispatch(setTriggerNoEmail(false));
+    dispatch(setTriggerEmailAnimation(false));
+    dispatch(setNoEmailResetIsLoading(true));
+  }, [dispatch]);
 
   const handleContactStateReset = useCallback(() => {
     const yesEmailPromptsReset = {
@@ -86,7 +95,7 @@ export function useContactMeEmail() {
 
   function handleContactCommand(cmd: string) {
     if (!showEmailSection) return;
-    if (yesEmailPrompts.showConfirmPrompt || triggerNoEmail) return;
+    if (yesEmailPrompts.showConfirmPrompt) return;
 
     if (userInfo.userEmail && userInfo.userMsg && cmd === "y")
       triggerConfirmationPromptAction(handleYesEmailPrompts);
@@ -96,7 +105,7 @@ export function useContactMeEmail() {
 
     if (cmd === "n")
       triggerNoEmailAction(dispatch, yesEmailPrompts, setTriggerEmailAnimation, setTriggerNoEmail);
-    
+
     else if (cmd === "y")
       triggerYesEmailAction(dispatch, setTriggerEmailAnimation, handleYesEmailPrompts);
     
@@ -106,18 +115,19 @@ export function useContactMeEmail() {
     else if (cmd.startsWith("--msg") && userInfo.userEmail)
       triggerMessagePromptAction(userInfo, cmd, handleYesEmailPrompts, handleSetUserInfo);
     
+    else if (cmd.startsWith("--reset") && triggerNoEmail) 
+      triggerResetEmailPrompt(dispatch, setNoEmailResetIsLoading, handleEmailPromptsReset, handleContactPromptsReset);
+
     else console.warn(`Unknown command: "${cmd}"`);
   }
 
   useEffect(() => {
     const emailSectionTimeout = setTimeout(() => {
-      if (currentContactIndex === 3) {
-        dispatch(setShowEmailSection(true));
-      }
+      if (currentContactIndex === 3) dispatch(setShowEmailSection(true));
     }, 3500);
   
     return () => clearTimeout(emailSectionTimeout);
   }, [dispatch, currentContactIndex]);
 
-  return {showEmailSection, triggerNoEmail, yesEmailPrompts, triggerEmailAnimation, userInfo, handleContactCommand, handleContactStateReset};
+  return {showEmailSection, triggerNoEmail, yesEmailPrompts, triggerEmailAnimation, userInfo, noEmailResetIsLoading, handleContactCommand, handleContactStateReset};
 }

@@ -14,3 +14,4 @@ export const CONTACT_INFO = ["> Name: Nicole Buendia", "> Email: test@email.com"
 
 export const EMAIL_REGEX = /^--email\s+(['"])([^\s"']+@[^\s"']+\.[^\s"']+)\1\s*$/i;
 export const MESSAGE_REGEX = /^--msg\s+(['"])(.{1,250})\1\s*$/i;
+export const RESET_REGEX = /^--reset(?:\s+([\w-]+))?/;

@@ -25,6 +25,7 @@ interface ContactMeState {
   currentContactIndex: number;
   showEmailSection: boolean;
   triggerNoEmail: boolean;
+  noEmailResetIsLoading: boolean;
   triggerEmailAnimation: boolean;
   yesEmailPrompts: YesEmailPrompts;
   userInfo: UserInfo;
@@ -38,6 +39,7 @@ const initialState = {
   currentContactIndex: -1,
   showEmailSection: false,
   triggerNoEmail: false,
+  noEmailResetIsLoading: false,
   triggerEmailAnimation: false,
   yesEmailPrompts: {
     triggerYesEmail: false,
@@ -82,6 +84,9 @@ export const contactMeSlice = createSlice({
     },
     setTriggerNoEmail: (state, action) => {
       state.triggerNoEmail = action.payload;
+    },
+    setNoEmailResetIsLoading: (state, action) => {
+      state.noEmailResetIsLoading = action.payload;
     },
     setTriggerEmailAnimation: (state, action) => {
       state.triggerEmailAnimation = action.payload;

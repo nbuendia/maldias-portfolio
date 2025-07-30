@@ -11,6 +11,7 @@ export const {
   setCurrentContactIndex,
   setShowEmailSection,
   setTriggerNoEmail,
+  setNoEmailResetIsLoading,
   setTriggerEmailAnimation,
   setYesEmailPrompts,
   setUserInfo,

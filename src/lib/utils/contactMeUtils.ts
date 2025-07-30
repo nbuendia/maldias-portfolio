@@ -2,6 +2,26 @@ import { Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import { UserInfo, YesEmailPrompts } from "@/features/ContactMe";
 import { EMAIL_REGEX, MESSAGE_REGEX } from "@/lib/constants";
 
+export function triggerResetEmailPrompt(
+  dispatch: Dispatch,
+  setNoEmailResetIsLoading: (state: boolean) => PayloadAction,
+  handleEmailPromptsReset: () => void,
+  handleContactPromptsReset: () => void,
+) {
+  handleEmailPromptsReset();
+
+  const noEmailResetIsLoadingTimeout = setTimeout(() =>
+    dispatch(setNoEmailResetIsLoading(false)), 2000);
+
+  const noEmailResetTimeout = setTimeout(() =>
+    handleContactPromptsReset(), 3000);
+
+  return () => {
+    clearTimeout(noEmailResetIsLoadingTimeout);
+    clearTimeout(noEmailResetTimeout);
+  }
+}
+
 export function triggerConfirmationPromptAction(
   handleYesEmailPrompts: (key: keyof YesEmailPrompts, value: boolean) => void,
 ) {

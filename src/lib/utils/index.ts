@@ -5,6 +5,7 @@ import {
   triggerMessagePromptAction,
   triggerNoEmailAction,
   triggerPromptResetAction,
+  triggerResetEmailPrompt,
   triggerYesEmailAction,
 } from "./contactMeUtils";
 
@@ -16,5 +17,6 @@ export {
   triggerMessagePromptAction,
   triggerNoEmailAction,
   triggerPromptResetAction,
+  triggerResetEmailPrompt,
   triggerYesEmailAction,
 };

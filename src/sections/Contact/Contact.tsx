@@ -4,13 +4,14 @@ import { CONTACT_ASCII, CONTACT_INFO } from "@/lib/constants";
 import { useContactMeAscii, useConactMeInfo, useContactMeEmail } from "@/hooks";
 
 import { Icon } from "@/components/Icon";
+import { EllipsisLoader } from "@/components/EllipsisLoader";
 
 import styles from "./Contact.module.css";
 
 export default function Contact() {
   const {showContactSection, showContactAscii, handleShowContactAscii, handleContactStateRest} = useContactMeAscii();
   const {showContactInfoSection, showContactInfo, currentContactIndex, handleShowContactInfo, handleContactInfoStateReset} = useConactMeInfo();
-  const {showEmailSection, triggerNoEmail, yesEmailPrompts, triggerEmailAnimation, userInfo, handleContactStateReset} = useContactMeEmail();
+  const {showEmailSection, triggerNoEmail, yesEmailPrompts, triggerEmailAnimation, userInfo, noEmailResetIsLoading, handleContactStateReset} = useContactMeEmail();
 
   useEffect(() => {
     return () => {
@@ -60,21 +61,24 @@ export default function Contact() {
 
       {showEmailSection && (
         <>
-          <pre className={`${styles.emailPrompt} ${triggerEmailAnimation ? styles.emailPromptAnimation : ""}`}>
-            <Icon name="check" size="16px" color="green" className={styles.promptCheck} />
-            Would you like to send me an email?
-            <span className={styles.promptYesNo}>(y/n)</span>
-          </pre>
+          {!noEmailResetIsLoading &&
+            <pre className={`${styles.emailPrompt} ${triggerEmailAnimation ? styles.emailPromptAnimation : ""}`}>
+              <Icon name="check" size="16px" color="green" className={styles.promptCheck} />
+              Would you like to send me an email?
+              <span className={styles.promptYesNo}>(y/n)</span>
+            </pre>
+          }
 
           {triggerNoEmail && (
             <pre className={styles.response}>
               Okay! If you change your mind, use command:<br/>
               <span className={styles.noEmail}>
-                <Icon name="keyboard_double_arrow_right" size="16px" className={styles.promptCheck} />
-                send email --from &quot;your-email@email.com&quot; --msg &quot;Lets chat!&quot;
+                --reset send-email
               </span>
             </pre>
           )}
+
+          {noEmailResetIsLoading && <EllipsisLoader />}
 
           {yesEmailPrompts.triggerYesEmail && (
             <>
@@ -83,16 +87,7 @@ export default function Contact() {
                 <span className={styles.yesEmail}>(--email &quot;your-email@snailmail.com&quot;)</span>
               </pre>
 
-              {yesEmailPrompts.userEmailResponseIsLoading && (
-                <pre>
-                  {[". ", ". ", ". "].map((dot, key) => (
-                    <span key={key} className={styles.ellipsisAnimation} 
-                      style={{animationDelay: `${key * 0.2}s`}}>
-                      {dot}
-                    </span>
-                  ))}
-                </pre>
-              )}
+              {yesEmailPrompts.userEmailResponseIsLoading && <EllipsisLoader />}
 
               {yesEmailPrompts.emailError && !yesEmailPrompts.userEmailResponseIsLoading && (
                 <>
@@ -118,16 +113,7 @@ export default function Contact() {
                     <span className={styles.yesEmail}>(--msg &quot;Lets chat!&quot;)</span>
                   </pre>
                   
-                  {yesEmailPrompts.userMsgResponseIsLoading && (
-                    <pre>
-                      {[". ", ". ", ". "].map((dot, key) => (
-                        <span key={key} className={styles.ellipsisAnimation} 
-                          style={{animationDelay: `${key * 0.2}s`}}>
-                          {dot}
-                        </span>
-                      ))}
-                    </pre>
-                  )}
+                  {yesEmailPrompts.userMsgResponseIsLoading && <EllipsisLoader />}
 
                   {yesEmailPrompts.msgError && !yesEmailPrompts.userMsgResponseIsLoading && (
                     <>
