@@ -52,12 +52,6 @@
   font-style: italic;
 }
 
-.ellipsisAnimation {
-  display: inline-block;
-  animation: typeEffect 1s step-start infinite;
-  opacity: 0;
-}
-
 .userResponse {
   display: flex;
   align-items: center;
