@@ -1,9 +1,10 @@
 "use client";
 
-import { useContactMeEmail, useMain } from "@/hooks";
+import { useContactMeEmail, useMain, useToast } from "@/hooks";
 
 import { CommandBar } from "@/components/CommandBar";
 import { Box } from "@/components/Box";
+import { Toast } from "@/components/Toast";
 import { Banner } from "@/sections/Banner";
 import { AboutMe } from "@/sections/AboutMe";
 import { Projects } from "@/sections/Projects";
@@ -12,18 +13,15 @@ import { Contact } from "@/sections/Contact";
 import styles from "./Main.module.css";
 
 export default function Main() {
-  const {terminalView, showComponent, handleTerminalView} = useMain();
+  const {displayToast, messageToast} = useToast();
+  const {showComponent, terminalView, handleTerminalView} = useMain();
   const {handleContactCommand} = useContactMeEmail();
 
   function handleCommand(cmd: string) {
-    const contactCmd = cmd.trim().toLowerCase();
-    const terminals = ["about", "projects", "contact"];
-    const match = cmd.match(/^run (.+)$/i);
+    const runMatch = cmd.match(/^run (.+)$/i);
+    const terminal = runMatch && runMatch[1].toLowerCase();
     
-    if (match && terminals.includes(match[1].toLowerCase())) {
-      handleTerminalView(match[1].toLowerCase());
-      return
-    }
+    if (runMatch && terminal) handleTerminalView(terminal);
 
     switch (terminalView) {
       case "about":
@@ -33,10 +31,9 @@ export default function Main() {
         // handleProjectsCommand(cmd);
         break;
       case "contact":
-        handleContactCommand(contactCmd);
+        handleContactCommand(cmd);
         break;
       default:
-        console.warn(`Unknown command: "${cmd}"`);
         break;
     }
   }
@@ -49,7 +46,9 @@ export default function Main() {
 
           <Box className={styles.contentContainer}>
             <Box column className={styles.terminal}>
-              {terminalView === "about" ?
+              {terminalView === "home" ?
+                <>HOME</>
+                : terminalView === "about" ?
                 <AboutMe />
                 : terminalView === "projects" ?
                 <Projects /> 
@@ -59,9 +58,15 @@ export default function Main() {
               }
             </Box>
           </Box>
-          
+        
           <CommandBar onCommand={handleCommand} />
         </>
+      )}
+
+      {displayToast && (
+        <Toast>
+          <>{messageToast}</>
+        </Toast>
       )}
     </>
   );

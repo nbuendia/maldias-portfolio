@@ -6,6 +6,7 @@ import { useContactMeEmail } from "./useContactMeEmail";
 import { useGreeting } from "./useGreeting";
 import { useMain } from "./useMain";
 import { useTechStack } from "./useTechStack";
+import { useToast } from "./useToast";
 import { useWelcomeBack } from "./useWelcomeBack";
 import { useWhoami } from "./useWhoami";
 
@@ -18,6 +19,7 @@ export {
   useGreeting,
   useMain,
   useTechStack,
+  useToast,
   useWelcomeBack,
   useWhoami,
 };

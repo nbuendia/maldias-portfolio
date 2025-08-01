@@ -1,0 +1,29 @@
+.container {
+  animation: slideUp 500ms ease-in-out, fadeOut 500ms ease-out 1500ms forwards;
+  position: absolute;
+  z-index: 1000;
+  bottom: 0;
+  display: flex;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: magenta;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

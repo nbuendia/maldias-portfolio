@@ -1,5 +1,5 @@
 import { mainSlice } from "./Main";
 
-export {mainSlice};
+export { mainSlice };
 
-export const {setTerminalView, setShowComponent} = mainSlice.actions;
+export const { setTerminalView, setShowComponent } = mainSlice.actions;
