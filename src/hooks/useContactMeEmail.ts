@@ -14,6 +14,8 @@ import {
   setNoEmailResetIsLoading,
 } from "@/features/ContactMe";
 
+import { setDisplayToast, setMessageToast } from "@/features/Toast";
+
 import {
   triggerConfirmationPromptAction,
   triggerEmailPromptAction,
@@ -118,7 +120,16 @@ export function useContactMeEmail() {
     else if (cmd.startsWith("--reset") && triggerNoEmail) 
       triggerResetEmailPrompt(dispatch, setNoEmailResetIsLoading, handleEmailPromptsReset, handleContactPromptsReset);
 
-    else console.warn(`Unknown command: "${cmd}"`);
+    else {
+      dispatch(setMessageToast(`Unknown command was entered: ${cmd}`));
+      dispatch(setDisplayToast(true));
+
+      const toastTimeout = setTimeout(() => {
+        dispatch(setDisplayToast(false));
+      }, 2000);
+        
+      return () => clearTimeout(toastTimeout);
+    }
   }
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useContactMeEmail, useMain, useToast } from "@/hooks";
+import { useAboutMeTxt, useContactMeEmail, useMain, useToast } from "@/hooks";
 
 import { CommandBar } from "@/components/CommandBar";
 import { Box } from "@/components/Box";
@@ -16,6 +16,7 @@ export default function Main() {
   const {displayToast, messageToast} = useToast();
   const {showComponent, terminalView, handleTerminalView} = useMain();
   const {handleContactCommand} = useContactMeEmail();
+  const {handleAboutCommand} = useAboutMeTxt();
 
   function handleCommand(cmd: string) {
     const runMatch = cmd.match(/^run (.+)$/i);
@@ -25,7 +26,7 @@ export default function Main() {
 
     switch (terminalView) {
       case "about":
-        // handleAboutCommand(cmd);
+        handleAboutCommand(cmd);
         break;
       case "projects":
         // handleProjectsCommand(cmd);
