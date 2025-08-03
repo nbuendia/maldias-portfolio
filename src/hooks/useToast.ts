@@ -9,6 +9,10 @@ export function useToast() {
   const displayToast = useSelector((state: RootState) => state.toastSlice.displayToast);
   const messageToast = useSelector((state: RootState) => state.toastSlice.messageToast);
 
+  const handleOnCloseToast = () => {
+    dispatch(setDisplayToast(false));
+  };
+
   const handleToast = useCallback((message?: string) => {
     const toastMessage = message ? message : `Unknown command was entered.`;
       
@@ -17,10 +21,10 @@ export function useToast() {
   
     const toastTimeout = setTimeout(() => {
       dispatch(setDisplayToast(false));
-    }, 2000);
+    }, 5000);
   
     return () => clearTimeout(toastTimeout);
   }, [dispatch]);
 
-  return { displayToast, messageToast, handleToast };
+  return { displayToast, messageToast, handleToast, handleOnCloseToast };
 }

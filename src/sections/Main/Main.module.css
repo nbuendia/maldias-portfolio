@@ -19,6 +19,17 @@
   overflow-y: clip;
 }
 
+.toastContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.toastMessage {
+  color: red;
+  font-family: var(--font-cutive-mono);
+}
+
 @keyframes appear {
   from {
     opacity: 0;
