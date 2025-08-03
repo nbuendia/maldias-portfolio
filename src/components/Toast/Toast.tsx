@@ -5,13 +5,13 @@ import styles from "./Toast.module.css";
 
 interface ToastProps {
   children: ReactNode;
+  portalId: number | string,
   alignment?: "left" |"right";
-  closeButton?: boolean;
   fontSize?: string;
   onClose?: () => void;
 }
 
-export default function Toast({ alignment, closeButton, fontSize = "14px", onClose, children }: ToastProps) {
+export default function Toast({ alignment, fontSize = "14px", onClose, children, portalId }: ToastProps) {
   const propStyles = {
     ...(alignment === "right" && {right: 0}),
     ...(alignment === "left" && {left: 0}),
@@ -31,16 +31,17 @@ export default function Toast({ alignment, closeButton, fontSize = "14px", onClo
   };
 
   return createPortal(
-    <div className={`${styles.container} ${closeButton ? styles.closeButton : ""}`}
+    <div className={`${styles.container} ${onClose ? styles.closeButton : ""}`}
       style={propStyles} onClick={onClose}>
       {children}
 
-      {closeButton && onClose && (
-        <span id="close" className="material-symbols-outlined" style={buttonStyles}>
+      {onClose && (
+        <span className="material-symbols-outlined" style={buttonStyles}>
           close
         </span>
       )}
     </div>,
     document.body,
-    )
+    portalId,
+  )
 }

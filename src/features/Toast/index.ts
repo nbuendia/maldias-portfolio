@@ -1,5 +1,6 @@
 import { toastSlice } from "./Toast";
 
 export { toastSlice };
+export type { Toast } from "./Toast";
 
-export const {setDisplayToast, setMessageToast} = toastSlice.actions;
+export const { addToast, removeToast, removeToastById } = toastSlice.actions;

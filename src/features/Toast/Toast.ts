@@ -1,25 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { Toast } from "@/components/Toast";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface ToastState {
-  displayToast: boolean;
-  messageToast: string;
+export interface Toast {
+  id: number;
+  message: string;
 }
 
 const initialState = {
-  displayToast: false,
-  messageToast: "Unknown command was entered",
-} satisfies ToastState as ToastState;
+  toasts: [] as Toast[],
+}
 
 export const toastSlice = createSlice({
   name: "toast",
   reducerPath: "toastSlice",
-  initialState,
+  initialState: initialState,
   reducers: {
-    setDisplayToast: (state, action) => {
-      state.displayToast = action.payload;
+    addToast: (state, action: PayloadAction<Toast>) => {
+      state.toasts.push(action.payload);
     },
-    setMessageToast: (state, action) => {
-      state.messageToast = action.payload;
+    removeToast: (state) => {
+      state.toasts.shift();
+    },
+    removeToastById: (state, action: PayloadAction<number>) => {
+      state.toasts = state.toasts.filter((toast) => toast.id !== action.payload);
     },
   },
 });

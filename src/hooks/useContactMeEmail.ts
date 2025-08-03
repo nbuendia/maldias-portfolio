@@ -14,7 +14,7 @@ import {
   setNoEmailResetIsLoading,
 } from "@/features/ContactMe";
 
-import { setDisplayToast, setMessageToast } from "@/features/Toast";
+import { useToast } from "./useToast";
 
 import {
   triggerConfirmationPromptAction,
@@ -35,6 +35,7 @@ export function useContactMeEmail() {
   const triggerEmailAnimation = useSelector((state: RootState) => state.contactMeSlice.triggerEmailAnimation);
   const userInfo = useSelector((state: RootState) => state.contactMeSlice.userInfo);
   const noEmailResetIsLoading = useSelector((state: RootState) => state.contactMeSlice.noEmailResetIsLoading);
+  const { handleToast } = useToast();
 
   const handleEmailPromptsReset = useCallback(() => {
     dispatch(setTriggerNoEmail(false));
@@ -120,16 +121,8 @@ export function useContactMeEmail() {
     else if (cmd.startsWith("--reset") && triggerNoEmail) 
       triggerResetEmailPrompt(dispatch, setNoEmailResetIsLoading, handleEmailPromptsReset, handleContactPromptsReset);
 
-    else {
-      dispatch(setMessageToast(`Unknown command was entered: ${cmd}`));
-      dispatch(setDisplayToast(true));
-
-      const toastTimeout = setTimeout(() => {
-        dispatch(setDisplayToast(false));
-      }, 5000);
-        
-      return () => clearTimeout(toastTimeout);
-    }
+    else
+      handleToast(`Unknown command was entered: ${cmd}`);
   }
 
   useEffect(() => {

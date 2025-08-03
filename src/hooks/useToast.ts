@@ -2,29 +2,30 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 
-import { setDisplayToast, setMessageToast } from "@/features/Toast";
+import { addToast, removeToast, removeToastById } from "@/features/Toast";
 
 export function useToast() {
   const dispatch = useDispatch();
-  const displayToast = useSelector((state: RootState) => state.toastSlice.displayToast);
-  const messageToast = useSelector((state: RootState) => state.toastSlice.messageToast);
+  const toasts = useSelector((state: RootState) => state.toastSlice.toasts);
 
-  const handleOnCloseToast = () => {
-    dispatch(setDisplayToast(false));
+  const handleOnCloseToast = (id: number) => {
+    dispatch(removeToastById(id));
   };
 
   const handleToast = useCallback((message?: string) => {
-    const toastMessage = message ? message : `Unknown command was entered.`;
+    const toast = {
+      id: Date.now(),
+      message: message || "Unknown command was entered.",
+    };
       
-    dispatch(setMessageToast(toastMessage));
-    dispatch(setDisplayToast(true));
+    dispatch(addToast(toast));
   
     const toastTimeout = setTimeout(() => {
-      dispatch(setDisplayToast(false));
+      dispatch(removeToast());
     }, 5000);
   
     return () => clearTimeout(toastTimeout);
   }, [dispatch]);
 
-  return { displayToast, messageToast, handleToast, handleOnCloseToast };
+  return { toasts, handleToast, handleOnCloseToast };
 }

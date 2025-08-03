@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 
 import { setStartAboutMeAnimation, setShowAboutMeArt, setShowWhoami } from "@/features/AboutMe";
-import { setDisplayToast, setMessageToast } from "@/features/Toast";
+import { useToast } from "./useToast";
 
 export function useAboutMeTxt() {
   const dispatch = useDispatch();
   const startAboutMeAnimation = useSelector((state: RootState) => state.aboutMeSlice.startAboutMeAnimation);
   const showAboutMeArt = useSelector((state: RootState) => state.aboutMeSlice.showAboutMeArt);
+  const { handleToast } = useToast();
   
   const handleAboutMeStateReset = useCallback(() => {
     dispatch(setStartAboutMeAnimation(false));
@@ -28,16 +29,7 @@ export function useAboutMeTxt() {
   function handleAboutCommand (cmd: string) {
     const runMatch = cmd.match(/^run (.+)$/i);
 
-    if (!runMatch) {
-      dispatch(setMessageToast(`Unknown command was entered: ${cmd}`));
-      dispatch(setDisplayToast(true));
-
-      const toastTimeout = setTimeout(() => {
-        dispatch(setDisplayToast(false));
-      }, 5000);
-        
-      return () => clearTimeout(toastTimeout);
-    }
+    if (!runMatch) handleToast(`Unknown command was entered: ${cmd}`);
   }
 
   useEffect(() => {

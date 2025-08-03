@@ -13,7 +13,7 @@ import { Contact } from "@/sections/Contact";
 import styles from "./Main.module.css";
 
 export default function Main() {
-  const {displayToast, messageToast, handleOnCloseToast} = useToast();
+  const {toasts, handleOnCloseToast} = useToast();
   const {showComponent, terminalView, handleTerminalView} = useMain();
   const {handleContactCommand} = useContactMeEmail();
   const {handleAboutCommand} = useAboutMeTxt();
@@ -64,17 +64,20 @@ export default function Main() {
         </>
       )}
 
-      {displayToast && (
-        <Toast closeButton alignment="right" onClose={handleOnCloseToast}>
-          <div className={styles.toastContainer}>
-            <>{messageToast.split(":")[0]}:</>
-            
-            <pre className={styles.toastMessage}>
-              {messageToast.split(":")[1]}
-            </pre>
-          </div>
-        </Toast>
-      )}
+      <div className={styles.toastsWrapper}>
+        {toasts.map((toast) => (
+          <Toast key={toast.id} portalId={toast.id} alignment="right"
+            onClose={() => handleOnCloseToast(toast.id)}>
+            <div className={styles.toastContainer}>
+              <>{toast.message.split(":")[0]}:</>
+              
+              <pre className={styles.toastMessage}>
+                {toast.message.split(":")[1]}
+              </pre>
+            </div>
+          </Toast>
+        ))}
+      </div>
     </>
   );
 }
