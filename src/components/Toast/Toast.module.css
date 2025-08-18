@@ -1,6 +1,7 @@
 .container {
   animation: slideUp 500ms ease-in-out, fadeOut 500ms ease-out 4500ms forwards;
   z-index: 1000;
+  position: relative;
   display: flex;
   align-items: center;
   margin: 10px;

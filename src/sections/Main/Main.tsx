@@ -64,7 +64,6 @@ export default function Main() {
         </>
       )}
 
-      <div className={styles.toastsWrapper}>
         {toasts.map((toast) => (
           <Toast key={toast.id} portalId={toast.id} alignment="right"
             onClose={() => handleOnCloseToast(toast.id)}>
@@ -77,7 +76,6 @@ export default function Main() {
             </div>
           </Toast>
         ))}
-      </div>
     </>
   );
 }

@@ -13,10 +13,10 @@ interface ToastProps {
 
 export default function Toast({ alignment, fontSize = "14px", onClose, children, portalId }: ToastProps) {
   const propStyles = {
-    ...(alignment === "right" && {right: 0}),
-    ...(alignment === "left" && {left: 0}),
+    ...(alignment === "right" && {alignSelf: "flex-end"}),
+    ...(alignment === "left" && {alignSelf: "flex-start"}),
     ...({fontSize: fontSize})
-  };
+  } as CSSProperties;
 
   const fontSizeNum = +fontSize.split("px")[0];
   const padding = 3;
