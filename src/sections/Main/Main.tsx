@@ -46,7 +46,7 @@ export default function Main() {
           <Banner />
 
           <Box className={styles.contentContainer}>
-            <Box column className={styles.terminal}>
+            <Box column square className={styles.terminal}>
               {terminalView === "home" ?
                 <>HOME</>
                 : terminalView === "about" ?

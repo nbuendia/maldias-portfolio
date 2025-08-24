@@ -25,6 +25,11 @@ export function useTechStack() {
   };
 
   useEffect(() => {
+    const elem = document.getElementById("about");
+    elem?.scrollTo(0, elem?.scrollHeight);
+  });
+
+  useEffect(() => {
     if (!startTechStackAnimation) return;
   
     if (currentTechIndex < TECH_STACK.length - 1) {

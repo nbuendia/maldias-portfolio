@@ -22,7 +22,7 @@ export default function Contact() {
   }, [handleContactStateRest, handleContactInfoStateReset, handleContactStateReset]);
 
   return (
-    <>
+    <div id="contact" className={styles.container}>
       {showContactSection && (
         <>
           <pre className={styles.command} onAnimationEnd={handleShowContactAscii}>
@@ -152,6 +152,6 @@ export default function Contact() {
           )}
         </>
       )}
-    </>
+    </div>
   )
 }

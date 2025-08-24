@@ -10,7 +10,7 @@ export default function AboutMe() {
   const {showWhoami, startWhoamiAnimation, handleShowWhoami, handleWhoamiStateReset} = useWhoami();
   const {showTechStack, startTechStackAnimation, currentTechIndex, handleSetStartTechStackAnimation, handleTeckStackStateReset} = useTechStack();
 
-  useEffect(() => {
+  useEffect(() => {   
     return () => {
         handleAboutMeStateReset();
         handleWhoamiStateReset();
@@ -19,7 +19,7 @@ export default function AboutMe() {
   }, [handleAboutMeStateReset, handleWhoamiStateReset, handleTeckStackStateReset]);
 
   return (
-    <>
+    <div id="about" className={styles.container}>
         {startAboutMeAnimation && (
             <>
                 <pre className={styles.command} onAnimationEnd={handleShowAboutMeArt}>
@@ -76,6 +76,6 @@ export default function AboutMe() {
                 )}
             </>
         )}
-    </>
+    </div>
   );
 }

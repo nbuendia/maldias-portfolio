@@ -1,3 +1,10 @@
+.container {
+  align-content: flex-end;
+  overflow-y: auto;
+  height: 100%;
+  padding: 20px;
+}
+
 .command {
   animation: glitch 1s ease-in 1s forwards;
   color: magenta;
@@ -5,6 +12,8 @@
 }
 
 .art {
+  display: flex;
+  justify-content: center;
   color: yellow;
 }
 

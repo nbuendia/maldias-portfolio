@@ -12,11 +12,12 @@
 .terminal {
   display: flex;
   justify-content: flex-end;
-  box-shadow: 0 0 10px #000;
   background-color: #141414;
+  border: solid 1px #5E5E5E;
   margin: 20px;
+  padding: 0;
   width: 100%;
-  overflow-y: clip;
+  overflow-y: auto;
 }
 
 .toastContainer {

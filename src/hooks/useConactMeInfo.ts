@@ -25,6 +25,9 @@ export function useConactMeInfo() {
   }, [dispatch, currentContactIndex]);
 
   useEffect(() => {
+    const elem = document.getElementById("contact");
+    elem?.scrollTo(0, elem?.scrollHeight);
+
     const delay = currentContactIndex === -1 ? 500 
       : currentContactIndex === 0 ? 2000 : 2500;
     

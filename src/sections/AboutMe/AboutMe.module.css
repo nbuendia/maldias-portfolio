@@ -1,4 +1,13 @@
+.container {
+  align-content: flex-end;
+  overflow-y: auto;
+  height: 100%;
+  padding: 20px;
+}
+
 .art {
+  display: flex;
+  justify-content: center;
   color: yellow;
 }
 
