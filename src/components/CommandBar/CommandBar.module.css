@@ -12,6 +12,7 @@
   height: 3rem;
   padding: 0 1rem;
   font-family: var(--font-cutive-mono);
+  overflow: hidden;
 }
 
 .prompt {
@@ -28,12 +29,25 @@
   outline: none;
   margin-left: 0.5rem;
   min-height: 1rem;
-  white-space: pre;
+  height: inherit;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow: auto;
   cursor: text;
+}
+
+.commandInput::-webkit-scrollbar {
+  width: 0;
 }
 
 .commandInput:focus {
   outline: none;
+}
+
+.commandInputText {
+  position: relative;
+  max-height: fit-content;
+  padding: 5px 0;
 }
 
 .caret {
