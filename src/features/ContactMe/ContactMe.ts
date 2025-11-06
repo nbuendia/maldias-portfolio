@@ -1,20 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 export interface UserInfo {
+  userName: string | null;
   userEmail: string | null;
   userMsg: string | null;
 }
 
+export interface NoEmailPrompts {
+  triggerNoEmail: boolean;
+  noEmailResetIsLoading: boolean;
+}
+
 export interface YesEmailPrompts {
   triggerYesEmail: boolean;
-  userEmailResponseIsLoading: boolean;
-  userMsgResponseIsLoading: boolean;
-  showMsgPrompt: boolean;
-  showCheckPrompt: boolean;
-  triggerCheckAnimation: boolean;
-  showConfirmPrompt: boolean;
-  emailError: boolean;
-  msgError: boolean;
+  triggerEmailBlurAnimation: boolean;
 }
 
 interface ContactMeState {
@@ -24,9 +23,8 @@ interface ContactMeState {
   showContactInfo: boolean;
   currentContactIndex: number;
   showEmailSection: boolean;
-  triggerNoEmail: boolean;
-  noEmailResetIsLoading: boolean;
   triggerEmailAnimation: boolean;
+  noEmailPrompts: NoEmailPrompts;
   yesEmailPrompts: YesEmailPrompts;
   userInfo: UserInfo;
 };
@@ -38,21 +36,19 @@ const initialState = {
   showContactInfo: false,
   currentContactIndex: -1,
   showEmailSection: false,
-  triggerNoEmail: false,
-  noEmailResetIsLoading: false,
   triggerEmailAnimation: false,
+
+  noEmailPrompts: {
+    triggerNoEmail: false,
+    noEmailResetIsLoading: false,
+  } as NoEmailPrompts,  
+
   yesEmailPrompts: {
-    triggerYesEmail: false,
-    userEmailResponseIsLoading: false,
-    userMsgResponseIsLoading: false,
-    showMsgPrompt: false,
-    showCheckPrompt: false,
-    triggerCheckAnimation: false,
-    showConfirmPrompt: false,
-    emailError: false,
-    msgError: false,
+    triggerYesEmail: false,    
   } as YesEmailPrompts,
+  
   userInfo: {
+    userName: null,
     userEmail: null,
     userMsg: null,
   } as UserInfo,
@@ -82,14 +78,14 @@ export const contactMeSlice = createSlice({
     setShowEmailSection: (state, action) => {
       state.showEmailSection = action.payload;
     },
-    setTriggerNoEmail: (state, action) => {
-      state.triggerNoEmail = action.payload;
-    },
-    setNoEmailResetIsLoading: (state, action) => {
-      state.noEmailResetIsLoading = action.payload;
-    },
     setTriggerEmailAnimation: (state, action) => {
       state.triggerEmailAnimation = action.payload;
+    },
+    setNoEmailPrompts: (state, action) => {
+      state.noEmailPrompts = {
+        ...state.noEmailPrompts,
+        ...action.payload,
+      };
     },
     setYesEmailPrompts: (state, action) => {
       state.yesEmailPrompts = {

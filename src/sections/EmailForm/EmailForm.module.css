@@ -1,0 +1,74 @@
+.container {
+  z-index: 1000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 13rem);
+  backdrop-filter: blur(5px);
+  background: #00000080;
+  overflow: auto;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid 1px #5E5E5E;
+  background: #282828;
+  width: 50%;
+  min-width: 30rem;
+  padding: 25px;
+  overflow: auto;
+  gap: 1rem;
+}
+
+.fromSubsection{
+  display: flex;
+  flex-direction: column;
+
+  input {
+    padding: 0.5rem;
+  }
+
+  textarea {
+    padding: 0.5rem;
+    resize: none;
+  }
+}
+
+.formSubmitButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.backgroundBlurAnimation {
+  animation: blur 500ms ease-in;
+}
+
+.formOpenAnimation {
+  animation: open 300ms linear;
+}
+
+@keyframes blur {
+  from {
+    backdrop-filter: blur(0);
+  }
+  to {
+    backdrop-filter: blur(5px);
+  }
+}
+
+@keyframes open {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

@@ -5,53 +5,50 @@ import { RootState } from "@/store";
 import {
   setShowEmailSection,
   setCurrentContactIndex,
-  setTriggerNoEmail,
   setTriggerEmailAnimation,
+  setNoEmailPrompts,
   setYesEmailPrompts,
   setUserInfo,
   UserInfo,
   YesEmailPrompts,
-  setNoEmailResetIsLoading,
+  NoEmailPrompts,
 } from "@/features/ContactMe";
 
-import { useToast } from "./useToast";
-
 import {
-  triggerConfirmationPromptAction,
-  triggerEmailPromptAction,
-  triggerMessagePromptAction,
   triggerNoEmailAction,
-  triggerPromptResetAction,
   triggerResetEmailPrompt,
   triggerYesEmailAction,
 } from "@/lib/utils";
+
+import { useToast } from "./useToast";
 
 export function useContactMeEmail() {
   const dispatch = useDispatch();
   const showEmailSection = useSelector((state: RootState) => state.contactMeSlice.showEmailSection);
   const currentContactIndex = useSelector((state: RootState) => state.contactMeSlice.currentContactIndex);
-  const triggerNoEmail = useSelector((state: RootState) => state.contactMeSlice.triggerNoEmail);
-  const yesEmailPrompts = useSelector((state: RootState) => state.contactMeSlice.yesEmailPrompts);
+  const noEmailPrompts = useSelector((state: RootState) => state.contactMeSlice.noEmailPrompts);  
+  const yesEmailPrompts = useSelector((state: RootState) => state.contactMeSlice.yesEmailPrompts);  
   const triggerEmailAnimation = useSelector((state: RootState) => state.contactMeSlice.triggerEmailAnimation);
   const userInfo = useSelector((state: RootState) => state.contactMeSlice.userInfo);
-  const noEmailResetIsLoading = useSelector((state: RootState) => state.contactMeSlice.noEmailResetIsLoading);
   const { handleToast } = useToast();
 
   const handleEmailPromptsReset = useCallback(() => {
-    dispatch(setTriggerNoEmail(false));
+    const noEmailPromptReset = {
+      triggerNoEmail: false,
+      noEmailResetIsLoading: true,
+    } as NoEmailPrompts;
+
+    dispatch(setNoEmailPrompts(noEmailPromptReset))
     dispatch(setTriggerEmailAnimation(false));
-    dispatch(setNoEmailResetIsLoading(true));
   }, [dispatch]);
 
   const handleContactStateReset = useCallback(() => {
+    const noEmailPromptReset = {
+      triggerNoEmail: false,
+    } as NoEmailPrompts;
+
     const yesEmailPromptsReset = {
       triggerYesEmail: false,
-      userEmailResponseIsLoading: false,
-      userMsgResponseIsLoading: false,
-      showMsgPrompt: false,
-      showCheckPrompt: false,
-      triggerCheckAnimation: false,
-      showConfirmPrompt: false
     } as YesEmailPrompts;
 
     const userInfoReset = {
@@ -61,7 +58,7 @@ export function useContactMeEmail() {
 
     dispatch(setShowEmailSection(false));
     dispatch(setCurrentContactIndex(-1));
-    dispatch(setTriggerNoEmail(false));
+    dispatch(setNoEmailPrompts(noEmailPromptReset));
     dispatch(setYesEmailPrompts(yesEmailPromptsReset));
     dispatch(setTriggerEmailAnimation(false));
     dispatch(setUserInfo(userInfoReset));
@@ -70,12 +67,6 @@ export function useContactMeEmail() {
   const handleContactPromptsReset = useCallback(() => {
     const yesEmailPromptsReset = {
       triggerYesEmail: false,
-      userEmailResponseIsLoading: false,
-      userMsgResponseIsLoading: false,
-      showMsgPrompt: false,
-      showCheckPrompt: false,
-      triggerCheckAnimation: false,
-      showConfirmPrompt: false
     } as YesEmailPrompts;
 
     const userInfoReset = {
@@ -88,41 +79,43 @@ export function useContactMeEmail() {
     dispatch(setYesEmailPrompts(yesEmailPromptsReset));
   }, [dispatch]);
 
-  const handleSetUserInfo = useCallback((key: keyof UserInfo, value: string) => {
-    dispatch(setUserInfo({[key]: value}));
+  // WILL NEED LATER
+  // const handleSetUserInfo = useCallback((key: keyof UserInfo, value: string) => {
+  //   dispatch(setUserInfo({[key]: value}));
+  // }, [dispatch]);
+
+  const handleNoEmailPrompts = useCallback((key: keyof NoEmailPrompts, value: boolean) => {
+    dispatch(setNoEmailPrompts({ [key]: value }));
   }, [dispatch]);
 
   const handleYesEmailPrompts = useCallback((key: keyof YesEmailPrompts, value: boolean) => {
-    dispatch(setYesEmailPrompts({[key]: value}));
+    dispatch(setYesEmailPrompts({ [key]: value }));
   }, [dispatch]);
 
   function handleContactCommand(cmd: string) {
     if (!showEmailSection) return;
-    if (yesEmailPrompts.showConfirmPrompt) return;
 
-    if (userInfo.userEmail && userInfo.userMsg && cmd === "y")
-      triggerConfirmationPromptAction(handleYesEmailPrompts);
-    
-    else if (userInfo.userEmail && userInfo.userMsg && cmd === "n")
-      triggerPromptResetAction(cmd, handleYesEmailPrompts, handleContactPromptsReset);
+    if (cmd === "n" || cmd === "N")
+      triggerNoEmailAction(dispatch, yesEmailPrompts, setTriggerEmailAnimation, handleNoEmailPrompts);
 
-    if (cmd === "n")
-      triggerNoEmailAction(dispatch, yesEmailPrompts, setTriggerEmailAnimation, setTriggerNoEmail);
-
-    else if (cmd === "y")
+    else if (cmd === "y" || cmd === "Y")
       triggerYesEmailAction(dispatch, setTriggerEmailAnimation, handleYesEmailPrompts);
     
-    else if (cmd.startsWith("--email"))
-      triggerEmailPromptAction(userInfo, cmd, handleYesEmailPrompts, handleSetUserInfo);
-    
-    else if (cmd.startsWith("--msg") && userInfo.userEmail)
-      triggerMessagePromptAction(userInfo, cmd, handleYesEmailPrompts, handleSetUserInfo);
-    
-    else if (cmd.startsWith("--reset") && triggerNoEmail) 
-      triggerResetEmailPrompt(dispatch, setNoEmailResetIsLoading, handleEmailPromptsReset, handleContactPromptsReset);
+    else if (cmd.startsWith("--reset") && noEmailPrompts.triggerNoEmail) 
+      triggerResetEmailPrompt(handleNoEmailPrompts, handleEmailPromptsReset, handleContactPromptsReset);
 
+    // WHEN RUN RUNNING OTHER COMMANDS, IT TRIGGERS ERROR TOAST AFTER N OR Y HAS BEEN ENTERED
     else
       handleToast(`Unknown command was entered: ${cmd}`);
+  }
+
+  const triggerBlurAction = () => {
+    handleYesEmailPrompts("triggerEmailBlurAnimation", true);
+  }
+
+  function handleUserInfoAction(userFormInfo: UserInfo) {
+    console.log("CLICKY MF", userFormInfo);
+    // USE EMAILJS HERE
   }
 
   useEffect(() => {
@@ -133,5 +126,5 @@ export function useContactMeEmail() {
     return () => clearTimeout(emailSectionTimeout);
   }, [dispatch, currentContactIndex]);
 
-  return {showEmailSection, triggerNoEmail, yesEmailPrompts, triggerEmailAnimation, userInfo, noEmailResetIsLoading, handleContactCommand, handleContactStateReset};
+  return {showEmailSection, noEmailPrompts, yesEmailPrompts, triggerEmailAnimation, userInfo, handleContactCommand, triggerBlurAction, handleUserInfoAction, handleContactStateReset};
 }
