@@ -31,5 +31,5 @@ export function useContactMeAscii() {
     return () => clearTimeout(showContactSectionTimeout);
   }, [dispatch]);
 
-    return {showContactSection, showContactAscii, handleShowContactAscii, handleContactStateRest};
+  return {showContactSection, showContactAscii, handleShowContactAscii, handleContactStateRest};
 }

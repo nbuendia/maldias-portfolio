@@ -73,7 +73,7 @@ export const contactMeSlice = createSlice({
       state.showContactInfo = action.payload;
     },
     setCurrentContactIndex: (state, action) => {
-        state.currentContactIndex = action.payload;
+      state.currentContactIndex = action.payload;
     },
     setShowEmailSection: (state, action) => {
       state.showEmailSection = action.payload;
