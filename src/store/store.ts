@@ -9,6 +9,7 @@ import { contactMeSlice } from '@/features/ContactMe';
 import { welcomeBackSlice } from '@/features/WelcomeBack';
 import { mainSlice } from '@/features/Main';
 import { toastSlice } from '@/features/Toast';
+import { projectsSlice } from '@/features/Projects';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     [welcomeBackSlice.reducerPath]: welcomeBackSlice.reducer,
     [mainSlice.reducerPath]: mainSlice.reducer,
     [toastSlice.reducerPath]: toastSlice.reducer,
+    [projectsSlice.reducerPath]: projectsSlice.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>

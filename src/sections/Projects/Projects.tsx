@@ -1,89 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { ProjectStatus } from "@/features/Projects";
 import { PROJECT_ASCII } from "@/lib/constants";
+import { useProjects, useProjectsAscii } from "@/hooks";
 
 import { Icon } from "@/components/Icon";
 
 import styles from "./Projects.module.css";
-import projectsList from "@/lib/data/projects.json";
-
-interface ProjectsList {
-  id: number;
-  name: string;
-  description: string;
-  technologies: string[];
-  image: string;
-  status: string;
-  url: string;
-  github: string;
-  tags: string[];
-}
-
-interface ProjectStatus {
-  "not-started": string;
-  wip: string;
-  completed: string;
-}
 
 export default function Projects() {
-  const [showProjectsAscii, setShowProjectsAscii] = useState(false);
-  const [startProjectAnimation, setStartProjectAnimation] = useState(false);
-  const [projects, setProjects] = useState<ProjectsList[]>([]);
-  const [showProjectsSection, setShowProjectsSection] = useState(false);
-  const [showProjects, setShowProjects] = useState(false);
-  const [currentlProjectIndex, setCurrentlProjectIndex] = useState(-1);
+  const { startProjectAnimation, showProjectsAscii, showProjectsSection, handleProjectsAsciiReset, handleShowProjectAscii } = useProjectsAscii();
+  const { showProjects, projects, currentProjectIndex, handleProjectsStateReset, handleShowProjects, handleProjectStatus } = useProjects();
 
   useEffect(() => {
-    const projectsTimeout = setTimeout(() => {
-      setStartProjectAnimation(true);
-    }, 1000);
-
-    return () => clearTimeout(projectsTimeout);
-  }, []);
-
-  useEffect(() => {
-    if (projectsList) setProjects(projectsList);
-  }, [projects]);
-
-  useEffect(() => {
-    if (!showProjects) return;
-    
-    const delay = currentlProjectIndex < 0 ? 500 : 2000;
-    const elem = document.getElementById("projects");
-    
-    elem?.scrollTo(0, elem?.scrollHeight);
-
-    if (currentlProjectIndex < projects.length) {
-      const currentlProjectIndexTimeout = setTimeout(() => {
-        setCurrentlProjectIndex(currentlProjectIndex + 1);
-      }, delay);
-
-      return () => clearTimeout(currentlProjectIndexTimeout);
+    return () => {
+      handleProjectsAsciiReset();
+      handleProjectsStateReset();
     }
-  });
-
-  const handleShowProjectAscii = () => {
-    setShowProjectsAscii(true);
-
-    const projectTimeout = setTimeout(() => {
-      setShowProjectsSection(true);
-    }, 2000);
-
-    return () => clearTimeout(projectTimeout);
-  };
-
-  const handleShowProjects = () => {
-    setShowProjects(true);
-  }
-
-  function handleProjectStatus(status: keyof ProjectStatus) {
-    const statusColor = {
-      "not-started": "gray",
-      wip: "yellow",
-      completed: "lime",
-    } as ProjectStatus;
-
-    return statusColor[status];
-  }
+  }, [handleProjectsAsciiReset, handleProjectsStateReset]);
 
   return (
     <div id="projects" className={styles.container}>
@@ -106,7 +39,7 @@ export default function Projects() {
 
           {showProjects && (
             <>
-              {projects.slice(0, currentlProjectIndex + 1).map((project, idx) => (
+              {projects.slice(0, currentProjectIndex + 1).map((project, idx) => (
                 <div key={idx} className={styles.projectsContainer}>
                   <Icon name="image" size="75px" />
 

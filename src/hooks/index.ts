@@ -5,6 +5,8 @@ import { useContactMeAscii } from "./useContactMeAscii";
 import { useContactMeEmail } from "./useContactMeEmail";
 import { useGreeting } from "./useGreeting";
 import { useMain } from "./useMain";
+import { useProjectsAscii } from "./useProjectAscii";
+import { useProjects } from "./useProjects";
 import { useTechStack } from "./useTechStack";
 import { useToast } from "./useToast";
 import { useWelcomeBack } from "./useWelcomeBack";
@@ -18,6 +20,8 @@ export {
   useContactMeEmail,
   useGreeting,
   useMain,
+  useProjectsAscii,
+  useProjects,
   useTechStack,
   useToast,
   useWelcomeBack,
