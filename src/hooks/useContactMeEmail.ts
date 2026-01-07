@@ -99,7 +99,7 @@ export function useContactMeEmail() {
       triggerNoEmailAction(dispatch, yesEmailPrompts, setTriggerEmailAnimation, handleNoEmailPrompts);
 
     else if (cmd === "y" || cmd === "Y")
-      triggerYesEmailAction(dispatch, setTriggerEmailAnimation, handleYesEmailPrompts);
+      triggerYesEmailAction(dispatch, noEmailPrompts, setTriggerEmailAnimation, handleYesEmailPrompts);
     
     else if (cmd.startsWith("--reset") && noEmailPrompts.triggerNoEmail) 
       triggerResetEmailPrompt(handleNoEmailPrompts, handleEmailPromptsReset, handleContactPromptsReset);

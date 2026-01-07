@@ -38,9 +38,11 @@ export function triggerNoEmailAction(
 
 export function triggerYesEmailAction(
   dispatch: Dispatch,
+  noEmailPrompts: NoEmailPrompts,
   setTriggerEmailAnimation: (state: boolean) => PayloadAction,
   handleYesEmailPrompts: (key: keyof YesEmailPrompts, value: boolean) => void,
 ) {
+  if (noEmailPrompts.triggerNoEmail) return;
   dispatch(setTriggerEmailAnimation(true));
         
   const YesEmailPromptsTimeout = setTimeout(() =>
