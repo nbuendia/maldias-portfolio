@@ -3,6 +3,7 @@ import { useCommandBar } from "./useCommandBar";
 import { useConactMeInfo } from "./useConactMeInfo";
 import { useContactMeAscii } from "./useContactMeAscii";
 import { useContactMeEmail } from "./useContactMeEmail";
+import { useEmailForm } from "./useEmailForm";
 import { useGreeting } from "./useGreeting";
 import { useMain } from "./useMain";
 import { useProjectsAscii } from "./useProjectAscii";
@@ -18,6 +19,7 @@ export {
   useConactMeInfo,
   useContactMeAscii,
   useContactMeEmail,
+  useEmailForm,
   useGreeting,
   useMain,
   useProjectsAscii,

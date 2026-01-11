@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
-import { UserInfo } from "@/features/ContactMe";
+import { useEffect } from "react";
+
+import { UserInfo } from "@/features/EmailForm";
+import { useEmailForm } from "@/hooks";
 
 import { Icon } from "@/components/Icon";
 
@@ -10,46 +12,44 @@ interface EmailFormProps {
 }
 
 export default function EmailForm({ onSubmit }: EmailFormProps) {
-  const [nameValue, setNameValue] = useState("");
-  const [emailValue, setEmailValue] = useState("");
-  const [messageValue, setMessageValue] = useState("");
-  const [userFormInfo, setUserFormInfo] = useState<UserInfo>({} as UserInfo);
-
-  const [displayForm, setDisplayForm] = useState(false);
-
+  const {userFormInfo, isSubmitDisabled, displayForm, handleSetUserInfo, handleCancelEmail, handleDisplayForm, handleEmailFormReset} = useEmailForm();
+  
   useEffect(() => {
-    if (nameValue && emailValue && messageValue) {
-      setUserFormInfo({
-        userName: nameValue,
-        userEmail: emailValue,
-        userMsg: messageValue,
-      })
+    return () => {
+      handleEmailFormReset();
     }
-  }, [nameValue, emailValue, messageValue]);
+  }, [handleEmailFormReset]);
 
   return (
-    <div className={`${styles.container} ${styles.backgroundBlurAnimation}`} onAnimationEnd={() => setDisplayForm(true)}>
+    <div className={`${styles.container} ${styles.backgroundBlurAnimation}`} onAnimationEnd={() => handleDisplayForm(true)}>
       {displayForm && (
         <div className={`${styles.formContainer} ${styles.formOpenAnimation}`}>
         <span className={styles.fromSubsection}>
           <span>Name: </span>
-          <input type="text" value={nameValue} onChange={(event) => setNameValue(event .target.value)} />
+          <input type="text" value={userFormInfo.userName ?? ""} onChange={(event) => handleSetUserInfo("userName", event.target.value)} />
         </span>
 
         <span className={styles.fromSubsection}>
           <span>Email: </span>
-          <input type="text" value={emailValue} onChange={(event) => setEmailValue(event.target.value)} />
+          <input type="text" value={userFormInfo.userEmail ?? ""} onChange={(event) => handleSetUserInfo("userEmail", event.target.value)} />
         </span>
         
         <span className={styles.fromSubsection}>
           <span>Message: </span>
-          <textarea rows={5} value={messageValue} onChange={(event) => setMessageValue(event.target.value)} />
+          <textarea rows={5} value={userFormInfo.userMsg ?? ""} onChange={(event) => handleSetUserInfo("userMsg", event.target.value)} />
         </span>
 
-        <button className={styles.formSubmitButton} onClick={() => onSubmit(userFormInfo)}>
-          Send Email
-          <Icon name="mail" size="16px" />
-        </button>
+        <div className={styles.buttonGroup}>
+          <button className={styles.formSubmitButton} onClick={handleCancelEmail}>
+            <Icon name="close" size="16px" />
+            <span className={styles.buttonLabel}>Cancel</span>
+          </button>
+
+          <button className={styles.formSubmitButton} disabled={isSubmitDisabled} onClick={() => onSubmit(userFormInfo)}>
+            <span className={styles.buttonLabel}>Send Email</span>
+            <Icon name="mail" size="16px" />
+          </button>
+        </div>
       </div>
       )}
     </div>

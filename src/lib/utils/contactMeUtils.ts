@@ -1,52 +1,57 @@
-import { Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import { YesEmailPrompts } from "@/features/ContactMe";
-import { NoEmailPrompts } from "@/features/ContactMe/ContactMe";
+import { NoEmailPrompts, SendEmailPrompts } from "@/features/ContactMe";
 
 export function triggerResetEmailPrompt(
+  handleShowEllipsis: (state: boolean) => void,
   handleNoEmailPrompts: (key: keyof NoEmailPrompts, value: boolean) => void,
-  handleEmailPromptsReset: () => void,
-  handleContactPromptsReset: () => void,
+  handleSendEmailPrompts: (key: keyof SendEmailPrompts, value: boolean) => void,
 ) {
-  handleEmailPromptsReset();
 
-  const noEmailResetIsLoadingTimeout = setTimeout(() =>
-    handleNoEmailPrompts("noEmailResetIsLoading", false), 2000);
+    handleNoEmailPrompts("triggerNoEmail", false);
+    handleShowEllipsis(true);
 
-  const noEmailResetTimeout = setTimeout(() =>
-    handleContactPromptsReset(), 3000);
+    const hideEllipsisTimeout = setTimeout(() =>
+      handleShowEllipsis(false), 2000);
 
-  return () => {
-    clearTimeout(noEmailResetIsLoadingTimeout);
-    clearTimeout(noEmailResetTimeout);
-  }
+    const sendEmailPromptTimeout = setTimeout(() =>
+      handleSendEmailPrompts("sendEmailPrompt", true), 2500);
+
+    return () => {
+      clearTimeout(hideEllipsisTimeout);
+      clearTimeout(sendEmailPromptTimeout);
+    }
 }
 
 export function triggerNoEmailAction(
-  dispatch: Dispatch,
   yesEmailPrompts: YesEmailPrompts,
-  setTriggerEmailAnimation: (state: boolean) => PayloadAction,
+  handleSendEmailPrompts: (key: keyof SendEmailPrompts, value: boolean) => void,
   handleNoEmailPrompts: (key: keyof NoEmailPrompts, value: boolean) => void,
 ) {
   if (yesEmailPrompts.triggerYesEmail) return;
-  dispatch(setTriggerEmailAnimation(true));
-          
-  const triggerNoEmailTimeout = setTimeout(() =>
-    handleNoEmailPrompts("triggerNoEmail", true), 2000);
+  handleSendEmailPrompts("triggerEmailAnimation", true);
+  
+  const triggerActionsTimeout = setTimeout(() => {
+    handleSendEmailPrompts("sendEmailPrompt", false);
+    handleNoEmailPrompts("triggerNoEmail", true);
+    handleSendEmailPrompts("triggerEmailAnimation", false);
+  }, 2000);
         
-  return () => clearTimeout(triggerNoEmailTimeout);
+  return () => clearTimeout(triggerActionsTimeout);
 }
 
 export function triggerYesEmailAction(
-  dispatch: Dispatch,
   noEmailPrompts: NoEmailPrompts,
-  setTriggerEmailAnimation: (state: boolean) => PayloadAction,
+  handleSendEmailPrompts: (key: keyof SendEmailPrompts, value: boolean) => void,
   handleYesEmailPrompts: (key: keyof YesEmailPrompts, value: boolean) => void,
 ) {
   if (noEmailPrompts.triggerNoEmail) return;
-  dispatch(setTriggerEmailAnimation(true));
-        
-  const YesEmailPromptsTimeout = setTimeout(() =>
-    handleYesEmailPrompts("triggerYesEmail", true), 2000);
+  handleSendEmailPrompts("triggerEmailAnimation", true);
+  
+  const YesEmailPromptsTimeout = setTimeout(() => {
+    handleSendEmailPrompts("sendEmailPrompt", false);
+    handleYesEmailPrompts("triggerYesEmail", true);
+    handleSendEmailPrompts("triggerEmailAnimation", false);
+  }, 2000)
   
   return () => clearTimeout(YesEmailPromptsTimeout);
 }

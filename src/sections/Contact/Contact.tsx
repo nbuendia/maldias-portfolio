@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { CONTACT_ASCII, CONTACT_INFO } from "@/lib/constants";
-import { useContactMeAscii, useConactMeInfo, useContactMeEmail } from "@/hooks";
+import { useContactMeAscii, useConactMeInfo, useContactMeEmail, useEmailForm } from "@/hooks";
 
 import { Icon } from "@/components/Icon";
 import { EllipsisLoader } from "@/components/EllipsisLoader";
@@ -12,7 +12,8 @@ import styles from "./Contact.module.css";
 export default function Contact() {
   const {showContactSection, showContactAscii, handleShowContactAscii, handleContactStateRest} = useContactMeAscii();
   const {showContactInfoSection, showContactInfo, currentContactIndex, handleShowContactInfo, handleContactInfoStateReset} = useConactMeInfo();
-  const {showEmailSection, noEmailPrompts, yesEmailPrompts, triggerEmailAnimation, handleUserInfoAction, triggerBlurAction, handleContactStateReset} = useContactMeEmail();
+  const {showEmailSection, sendEmailPrompts, noEmailPrompts, yesEmailPrompts, showEllipsis, triggerBlurAction, handleContactStateReset} = useContactMeEmail();
+  const {handleUserInfoAction} = useEmailForm();
 
   useEffect(() => {
     return () => {
@@ -62,11 +63,11 @@ export default function Contact() {
 
       {showEmailSection && (
         <>
-          {noEmailPrompts.noEmailResetIsLoading && <EllipsisLoader />}
+          {showEllipsis && <EllipsisLoader />}
 
-          {!noEmailPrompts.noEmailResetIsLoading &&
+          {sendEmailPrompts.sendEmailPrompt &&
             // MOVE "ON ANIMATION END" TO EMAIL FORM COMPONENT
-            <pre className={`${styles.emailPrompt} ${triggerEmailAnimation ? styles.emailPromptAnimation : ""}`} onAnimationEnd={triggerBlurAction}>
+            <pre className={`${styles.emailPrompt} ${sendEmailPrompts.triggerEmailAnimation ? styles.emailPromptAnimation : ""}`} onAnimationEnd={triggerBlurAction}>
               <Icon name="check" size="16px" color="green" className={styles.promptCheck} />
               Would you like to send me an email?
               <span className={styles.promptYesNo}>(y/n)</span>

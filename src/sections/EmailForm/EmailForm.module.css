@@ -55,6 +55,18 @@
   animation: open 300ms linear;
 }
 
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.buttonLabel {
+  display: flex;
+  align-items: center;
+  margin: 6px;
+}
+
 @keyframes blur {
   from {
     backdrop-filter: blur(0);

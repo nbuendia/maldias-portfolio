@@ -1,7 +1,7 @@
 import { contactMeSlice } from "./ContactMe";
 
 export { contactMeSlice };
-export type { UserInfo, NoEmailPrompts, YesEmailPrompts } from "./ContactMe";
+export type { SendEmailPrompts, NoEmailPrompts, YesEmailPrompts } from "./ContactMe";
 
 export const {
   setShowContactSection,
@@ -10,8 +10,8 @@ export const {
   setShowContactInfo,
   setCurrentContactIndex,
   setShowEmailSection,
-  setTriggerEmailAnimation,
+  setShowEllipsis,
+  setSendEmailPrompts,
   setNoEmailPrompts,
   setYesEmailPrompts,
-  setUserInfo,
 } = contactMeSlice.actions;

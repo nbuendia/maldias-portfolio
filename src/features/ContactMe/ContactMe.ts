@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-export interface UserInfo {
-  userName: string | null;
-  userEmail: string | null;
-  userMsg: string | null;
+export interface SendEmailPrompts {
+  sendEmailPrompt: boolean;
+  triggerEmailAnimation: boolean;
 }
 
 export interface NoEmailPrompts {
@@ -23,10 +22,10 @@ interface ContactMeState {
   showContactInfo: boolean;
   currentContactIndex: number;
   showEmailSection: boolean;
-  triggerEmailAnimation: boolean;
+  showEllipsis: boolean;
+  sendEmailPrompts: SendEmailPrompts;
   noEmailPrompts: NoEmailPrompts;
   yesEmailPrompts: YesEmailPrompts;
-  userInfo: UserInfo;
 };
 
 const initialState = {
@@ -36,7 +35,12 @@ const initialState = {
   showContactInfo: false,
   currentContactIndex: -1,
   showEmailSection: false,
-  triggerEmailAnimation: false,
+  showEllipsis: false,
+  
+  sendEmailPrompts: {
+    sendEmailPrompt: false,
+    triggerEmailAnimation: false,
+  } as SendEmailPrompts,
 
   noEmailPrompts: {
     triggerNoEmail: false,
@@ -44,14 +48,8 @@ const initialState = {
   } as NoEmailPrompts,  
 
   yesEmailPrompts: {
-    triggerYesEmail: false,    
+    triggerYesEmail: false,
   } as YesEmailPrompts,
-  
-  userInfo: {
-    userName: null,
-    userEmail: null,
-    userMsg: null,
-  } as UserInfo,
 } satisfies ContactMeState as ContactMeState;
 
 
@@ -78,8 +76,14 @@ export const contactMeSlice = createSlice({
     setShowEmailSection: (state, action) => {
       state.showEmailSection = action.payload;
     },
-    setTriggerEmailAnimation: (state, action) => {
-      state.triggerEmailAnimation = action.payload;
+    setShowEllipsis: (state, action) => {
+      state.showEllipsis = action.payload;
+    },
+    setSendEmailPrompts: (state, action) => {
+      state.sendEmailPrompts = {
+        ...state.sendEmailPrompts,
+        ...action.payload,
+      };
     },
     setNoEmailPrompts: (state, action) => {
       state.noEmailPrompts = {
@@ -90,12 +94,6 @@ export const contactMeSlice = createSlice({
     setYesEmailPrompts: (state, action) => {
       state.yesEmailPrompts = {
         ...state.yesEmailPrompts,
-        ...action.payload,
-      };
-    },
-    setUserInfo: (state, action) => {
-      state.userInfo = {
-        ...state.userInfo,
         ...action.payload,
       };
     },
