@@ -4,7 +4,7 @@ import {
   triggerYesEmailAction,
   triggerResetEmailPrompt,
 } from "./contactMeUtils";
-import { triggerCancelEmail } from "./emailFormUtils";
+import { triggerCancelEmail, triggerSendEmail } from "./emailFormUtils";
 
 export {
   handleBackspace,
@@ -13,4 +13,5 @@ export {
   triggerYesEmailAction,
   triggerResetEmailPrompt,
   triggerCancelEmail,
+  triggerSendEmail,
 };

@@ -14,6 +14,7 @@
 }
 
 .formContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,6 +68,22 @@
   margin: 6px;
 }
 
+.loadingSpinnerContainer {
+  position: absolute;
+  transform: translate(-25px, 0);
+  backdrop-filter: blur(1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.loadingSpinner {
+  position: absolute;
+  animation: spin 500ms infinite linear;
+}
+
 @keyframes blur {
   from {
     backdrop-filter: blur(0);
@@ -82,5 +99,14 @@
   }
   to {
     transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

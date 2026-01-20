@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { CONTACT_ASCII, CONTACT_INFO } from "@/lib/constants";
-import { useContactMeAscii, useConactMeInfo, useContactMeEmail, useEmailForm } from "@/hooks";
+import { useContactMeAscii, useConactMeInfo, useContactMeEmail } from "@/hooks";
 
 import { Icon } from "@/components/Icon";
 import { EllipsisLoader } from "@/components/EllipsisLoader";
@@ -13,7 +13,6 @@ export default function Contact() {
   const {showContactSection, showContactAscii, handleShowContactAscii, handleContactStateRest} = useContactMeAscii();
   const {showContactInfoSection, showContactInfo, currentContactIndex, handleShowContactInfo, handleContactInfoStateReset} = useConactMeInfo();
   const {showEmailSection, sendEmailPrompts, noEmailPrompts, yesEmailPrompts, showEllipsis, triggerBlurAction, handleContactStateReset} = useContactMeEmail();
-  const {handleUserInfoAction} = useEmailForm();
 
   useEffect(() => {
     return () => {
@@ -84,10 +83,14 @@ export default function Contact() {
             </pre>
           )}
 
+          {sendEmailPrompts.sentEmailConfrimation && (
+            <pre className={styles.confrimation}>
+              Your email has been sent!
+            </pre>
+          )}
+
           {yesEmailPrompts.triggerYesEmail && (
-            <>
-              <EmailForm onSubmit={handleUserInfoAction} /> 
-            </>
+            <EmailForm /> 
           )}
         </>
       )}

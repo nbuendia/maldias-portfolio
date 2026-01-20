@@ -68,11 +68,17 @@ export default function Main() {
           <Toast key={toast.id} portalId={toast.id} alignment="right"
             onClose={() => handleOnCloseToast(toast.id)}>
             <div className={styles.toastContainer}>
-              <>{toast.message.split(":")[0]}:</>
+              {toast.message.includes(":") ? (
+                <>
+                  <>{toast.message.split(":")[0]}:</>
               
-              <pre className={styles.toastMessage}>
-                {toast.message.split(":")[1]}
-              </pre>
+                  <pre className={styles.toastMessage}>
+                    {toast.message.split(":")[1]}
+                  </pre>
+                </>
+              ) : (
+                <>{toast.message}</>
+              )}
             </div>
           </Toast>
         ))}

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 export interface SendEmailPrompts {
   sendEmailPrompt: boolean;
   triggerEmailAnimation: boolean;
+  sentEmailConfrimation: boolean;
 }
 
 export interface NoEmailPrompts {
@@ -40,6 +41,7 @@ const initialState = {
   sendEmailPrompts: {
     sendEmailPrompt: false,
     triggerEmailAnimation: false,
+    sentEmailConfrimation: false,
   } as SendEmailPrompts,
 
   noEmailPrompts: {
