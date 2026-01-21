@@ -69,7 +69,9 @@ export function useEmailForm() {
     dispatch(setShowEllipsis(state));
   }, [dispatch]);
 
-  function handleCancelEmail() {
+  function handleCancelEmail(event: MouseEvent) {
+    event.preventDefault();
+
     triggerCancelEmail(handleDisplayForm, handleYesEmailPrompts, handleShowEllipsis, handleNoEmailPrompts);   
     handleClearUserInfo();
   };

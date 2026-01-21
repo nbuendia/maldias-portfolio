@@ -45,7 +45,7 @@ export default function EmailForm() {
           </span>
 
           <div className={styles.buttonGroup}>
-            <button className={styles.formSubmitButton} onClick={handleCancelEmail}>
+            <button className={styles.formSubmitButton} onClick={(e) => handleCancelEmail(e)}>
               <Icon name="close" size="16px" />
               <span className={styles.buttonLabel}>Cancel</span>
             </button>
