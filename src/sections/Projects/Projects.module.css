@@ -6,8 +6,8 @@
 }
 
 .art {
-  display: flex;
   color: yellow;
+  overflow: clip;
 }
 
 .command {
@@ -34,6 +34,7 @@
 .projectDescriptionContainer {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   padding: 10px; 
   color: cyan;
   font-family: var(--font-cutive-mono);
@@ -54,6 +55,10 @@
 .projectLink {
   display: flex;
   align-items: center;
+
+  a {
+    overflow-wrap: anywhere;
+  }
 
   a:hover {
     text-decoration: underline;
