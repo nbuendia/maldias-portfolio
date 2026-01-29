@@ -1,4 +1,5 @@
 import { useAboutMeTxt } from "./useAboutMeTxt";
+import { useAsciiScroll } from "./useAsciiScroll";
 import { useCommandBar } from "./useCommandBar";
 import { useConactMeInfo } from "./useConactMeInfo";
 import { useContactMeAscii } from "./useContactMeAscii";
@@ -15,6 +16,7 @@ import { useWhoami } from "./useWhoami";
 
 export {
   useAboutMeTxt,
+  useAsciiScroll,
   useCommandBar,
   useConactMeInfo,
   useContactMeAscii,

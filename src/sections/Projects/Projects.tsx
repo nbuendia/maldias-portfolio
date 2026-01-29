@@ -1,15 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ProjectStatus } from "@/features/Projects";
 import { PROJECT_ASCII } from "@/lib/constants";
-import { useProjects, useProjectsAscii } from "@/hooks";
+import { useAsciiScroll, useProjects, useProjectsAscii } from "@/hooks";
 
 import { Icon } from "@/components/Icon";
 
 import styles from "./Projects.module.css";
 
 export default function Projects() {
+  const projectContainerRef = useRef<HTMLDivElement>(null);
   const { startProjectAnimation, showProjectsAscii, showProjectsSection, handleProjectsAsciiReset, handleShowProjectAscii } = useProjectsAscii();
   const { showProjects, projects, currentProjectIndex, handleProjectsStateReset, handleShowProjects, handleProjectStatus } = useProjects();
+  
+  const [startArtAnim, setStartArtAnim] = useState(false);
+
+  useAsciiScroll(projectContainerRef, setStartArtAnim);
 
   useEffect(() => {
     return () => {
@@ -18,14 +23,29 @@ export default function Projects() {
     }
   }, [handleProjectsAsciiReset, handleProjectsStateReset]);
 
+  const resizeObserver = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      const elemPaddingCss = window.getComputedStyle(entry.target).padding;
+      const elemPaddingNum = parseFloat(elemPaddingCss);
+      const artElem = entry.target.children.namedItem("art");
+
+      if (artElem) {
+        const isScrollable = artElem.clientWidth <= artElem.scrollWidth - elemPaddingNum;
+        
+        if (isScrollable) setStartArtAnim(true);
+        else setStartArtAnim(false);
+      }
+    }
+  });
+
   return (
-    <div id="projects" className={styles.container}>
+    <div id="projects" ref={projectContainerRef} className={styles.container}>
       {startProjectAnimation && (
         <>
           <pre className={styles.command} onAnimationEnd={handleShowProjectAscii}>
             $ cat projects.txt
           </pre>
-          {showProjectsAscii && <pre className={styles.art}>{PROJECT_ASCII}</pre>}
+          {showProjectsAscii && <pre id="art" className={`${styles.art} ${startArtAnim && styles.artAnim}`}>{PROJECT_ASCII}</pre>}
         </>
       )}
 

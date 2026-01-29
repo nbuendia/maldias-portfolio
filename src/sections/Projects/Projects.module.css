@@ -1,13 +1,14 @@
 .container {
   align-content: flex-end;
   overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
   padding: 20px;
 }
 
 .art {
   color: yellow;
-  overflow: clip;
+  overflow: visible;
 }
 
 .command {
@@ -69,6 +70,10 @@
   animation: breathe 2s infinite linear;
 }
 
+.artAnim {
+  animation: scrollLeft 10s infinite linear;
+}
+
 @keyframes glitch {
   0% {
     opacity: 1;
@@ -111,5 +116,20 @@
   }
   100% {
     filter: brightness(0%);
+  }
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  50.001% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
