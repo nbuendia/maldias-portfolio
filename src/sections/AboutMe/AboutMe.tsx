@@ -16,70 +16,67 @@ export default function AboutMe() {
 
   useEffect(() => {   
     return () => {
-        handleAboutMeStateReset();
-        handleWhoamiStateReset();
-        handleTeckStackStateReset();
+      handleAboutMeStateReset();
+      handleWhoamiStateReset();
+      handleTeckStackStateReset();
     }
   }, [handleAboutMeStateReset, handleWhoamiStateReset, handleTeckStackStateReset]);
 
   return (
     <div id="about" ref={projectContainerRef} className={styles.container}>
-        {startAboutMeAnimation && (
+      {startAboutMeAnimation && (
+        <>
+          <pre className={styles.command} onAnimationEnd={handleShowAboutMeArt}>
+            $ cat about-me.txt
+          </pre>
+
+          {showAboutMeArt && <pre id="art" className={`${styles.art} ${startAnim && "artAnim"}`}>{ABOUT_ME_ART}</pre>}
+        </>
+      )}
+
+      <br />
+
+      {showWhoami && (
+        <>
+          <pre className={styles.command} onAnimationEnd={handleShowWhoami} style={{animationDelay: "250ms"}}>
+            $ whoami
+          </pre>
+            
+          {startWhoamiAnimation && (
+            <pre className={styles.response}>
+              {WHO_AM_I.split("").map((letter, key) => (
+                <span key={key} className={styles.letter} style={{animationDelay: `${key * 0.1}s`}}>
+                  {letter}
+                </span>
+              ))}
+            </pre>
+          )}
+        </>
+      )}
+
+      <br />
+
+      {showTechStack && (
+        <>
+          <pre className={styles.command} onAnimationEnd={handleSetStartTechStackAnimation} style={{animationDelay: "250ms"}}>
+            $ tech-stack
+          </pre>
+          
+          {startTechStackAnimation && (
             <>
-                <pre className={styles.command} onAnimationEnd={handleShowAboutMeArt}>
-                    $ cat about-me.txt
+              {TECH_STACK.slice(0, currentTechIndex + 1).map((tech, lineKey) => (
+                <pre key={lineKey} className={styles.response}>
+                  {tech.split("").map((letter, letterKey) => (
+                    <span key={letterKey} className={styles.letter} style={{animationDelay: `${letterKey * 0.05}s`}}>
+                      {letter}
+                    </span>
+                  ))}
                 </pre>
-                {showAboutMeArt && <pre id="art" className={`${styles.art} ${startAnim && "artAnim"}`}>{ABOUT_ME_ART}</pre>}
+              ))}
             </>
-        )}
-
-        <br />
-
-        {showWhoami && (
-            <>
-                <pre className={styles.command} onAnimationEnd={handleShowWhoami}
-                    style={{animationDelay: "250ms"}}>
-                    $ whoami
-                </pre>
-                {startWhoamiAnimation && (
-                    <>
-                        <pre className={styles.response}>
-                            {WHO_AM_I.split("").map((letter, key) => (
-                                <span key={key} className={styles.letter}
-                                    style={{animationDelay: `${key * 0.1}s`}}>
-                                    {letter}
-                                </span>
-                            ))}
-                        </pre>
-                    </>
-                )}
-            </>
-        )}
-
-        <br />
-
-        {showTechStack && (
-            <>
-                <pre className={styles.command} onAnimationEnd={handleSetStartTechStackAnimation}
-                style={{animationDelay: "250ms"}}>
-                    $ tech-stack
-                </pre>
-                {startTechStackAnimation && (
-                    <>
-                        {TECH_STACK.slice(0, currentTechIndex + 1).map((tech, lineKey) => (
-                            <pre key={lineKey} className={styles.response}>
-                                {tech.split("").map((letter, letterKey) => (
-                                    <span key={letterKey} className={styles.letter}
-                                        style={{animationDelay: `${letterKey * 0.05}s`}}>
-                                        {letter}
-                                    </span>
-                                ))}
-                            </pre>
-                        ))}
-                    </>
-                )}
-            </>
-        )}
+          )}
+        </>
+      )}
     </div>
   );
 }
