@@ -8,15 +8,17 @@ export function useAsciiScroll(containerRef: RefObject<HTMLElement | null>, anim
 
     observerRef.current = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        const elemPadding = parseFloat(
-          window.getComputedStyle(entry.target).padding
+        const terminalPadding = parseFloat(
+          window.getComputedStyle(entry.target).padding,
         );
         
-        const artElem = entry.target.children.namedItem("art") as HTMLElement | null;
+        const artElem = entry.target.children.namedItem("art");
         if (!artElem) return;
 
-        const isScrollable = artElem.clientWidth <= artElem.scrollWidth - elemPadding;
-        animStateSetter(isScrollable);
+        document.documentElement.style.setProperty("--ascii-art-width", `-${artElem.scrollWidth}px`);
+        const isOverflowing = artElem.clientWidth <= artElem.scrollWidth - terminalPadding;
+        
+        animStateSetter(isOverflowing);
       }
     });
 

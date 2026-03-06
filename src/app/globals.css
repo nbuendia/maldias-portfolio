@@ -1,6 +1,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --ascii-art-width: -100%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -58,7 +60,7 @@ a {
     transform: translateX(0);
   }
   50% {
-    transform: translateX(-100%);
+    transform: translateX(var(--ascii-art-width));
   }
   50.001% {
     transform: translateX(100vw);
