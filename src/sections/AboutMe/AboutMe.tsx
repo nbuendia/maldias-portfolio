@@ -1,14 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { ABOUT_ME_ART, TECH_STACK, WHO_AM_I } from "@/lib/constants";
-import { useAboutMeTxt, useTechStack, useWhoami } from "@/hooks";
+import { useAboutMeTxt, useAsciiScroll, useTechStack, useWhoami } from "@/hooks";
 
 import styles from "./AboutMe.module.css";
 
 export default function AboutMe() {
+  const projectContainerRef = useRef(null);
   const {startAboutMeAnimation, showAboutMeArt, handleShowAboutMeArt, handleAboutMeStateReset} = useAboutMeTxt();
   const {showWhoami, startWhoamiAnimation, handleShowWhoami, handleWhoamiStateReset} = useWhoami();
   const {showTechStack, startTechStackAnimation, currentTechIndex, handleSetStartTechStackAnimation, handleTeckStackStateReset} = useTechStack();
+
+  const [startAnim, setStartAnim] = useState(false);
+  useAsciiScroll(projectContainerRef, setStartAnim);
 
   useEffect(() => {   
     return () => {
@@ -19,13 +23,13 @@ export default function AboutMe() {
   }, [handleAboutMeStateReset, handleWhoamiStateReset, handleTeckStackStateReset]);
 
   return (
-    <div id="about" className={styles.container}>
+    <div id="about" ref={projectContainerRef} className={styles.container}>
         {startAboutMeAnimation && (
             <>
                 <pre className={styles.command} onAnimationEnd={handleShowAboutMeArt}>
                     $ cat about-me.txt
                 </pre>
-                {showAboutMeArt && <pre className={styles.art}>{ABOUT_ME_ART}</pre>}
+                {showAboutMeArt && <pre id="art" className={`${styles.art} ${startAnim && "artAnim"}`}>{ABOUT_ME_ART}</pre>}
             </>
         )}
 

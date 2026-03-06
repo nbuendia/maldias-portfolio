@@ -8,7 +8,7 @@ import { Icon } from "@/components/Icon";
 import styles from "./Projects.module.css";
 
 export default function Projects() {
-  const projectContainerRef = useRef<HTMLDivElement>(null);
+  const projectContainerRef = useRef(null);
   const { startProjectAnimation, showProjectsAscii, showProjectsSection, handleProjectsAsciiReset, handleShowProjectAscii } = useProjectsAscii();
   const { showProjects, projects, currentProjectIndex, handleProjectsStateReset, handleShowProjects, handleProjectStatus } = useProjects();
   
@@ -23,21 +23,6 @@ export default function Projects() {
     }
   }, [handleProjectsAsciiReset, handleProjectsStateReset]);
 
-  const resizeObserver = new ResizeObserver((entries) => {
-    for (const entry of entries) {
-      const elemPaddingCss = window.getComputedStyle(entry.target).padding;
-      const elemPaddingNum = parseFloat(elemPaddingCss);
-      const artElem = entry.target.children.namedItem("art");
-
-      if (artElem) {
-        const isScrollable = artElem.clientWidth <= artElem.scrollWidth - elemPaddingNum;
-        
-        if (isScrollable) setStartArtAnim(true);
-        else setStartArtAnim(false);
-      }
-    }
-  });
-
   return (
     <div id="projects" ref={projectContainerRef} className={styles.container}>
       {startProjectAnimation && (
@@ -45,7 +30,7 @@ export default function Projects() {
           <pre className={styles.command} onAnimationEnd={handleShowProjectAscii}>
             $ cat projects.txt
           </pre>
-          {showProjectsAscii && <pre id="art" className={`${styles.art} ${startArtAnim && styles.artAnim}`}>{PROJECT_ASCII}</pre>}
+          {showProjectsAscii && <pre id="art" className={`${styles.art} ${startArtAnim && "artAnim"}`}>{PROJECT_ASCII}</pre>}
         </>
       )}
 

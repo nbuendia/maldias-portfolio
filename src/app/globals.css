@@ -43,8 +43,27 @@ a {
   text-decoration: none;
 }
 
+.artAnim {
+  animation: scrollLeft 10s infinite linear;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  50.001% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { CONTACT_ASCII, CONTACT_INFO } from "@/lib/constants";
-import { useContactMeAscii, useConactMeInfo, useContactMeEmail } from "@/hooks";
+import { useContactMeAscii, useConactMeInfo, useContactMeEmail, useAsciiScroll } from "@/hooks";
 
 import { Icon } from "@/components/Icon";
 import { EllipsisLoader } from "@/components/EllipsisLoader";
@@ -10,9 +10,13 @@ import { EmailForm } from "@/sections/EmailForm";
 import styles from "./Contact.module.css";
 
 export default function Contact() {
+  const projectContaienrRef = useRef(null);
   const {showContactSection, showContactAscii, handleShowContactAscii, handleContactStateRest} = useContactMeAscii();
   const {showContactInfoSection, showContactInfo, currentContactIndex, handleShowContactInfo, handleContactInfoStateReset} = useConactMeInfo();
   const {showEmailSection, sendEmailPrompts, noEmailPrompts, yesEmailPrompts, showEllipsis, triggerBlurAction, handleContactStateReset} = useContactMeEmail();
+
+  const [startAnim, setStartAnim] = useState(false);
+  useAsciiScroll(projectContaienrRef, setStartAnim);
 
   useEffect(() => {
     return () => {
@@ -23,13 +27,13 @@ export default function Contact() {
   }, [handleContactStateRest, handleContactInfoStateReset, handleContactStateReset]);
 
   return (
-    <div id="contact" className={styles.container}>
+    <div id="contact" ref={projectContaienrRef} className={styles.container}>
       {showContactSection && (
         <>
           <pre className={styles.command} onAnimationEnd={handleShowContactAscii}>
             $ cat lets-chat.txt
           </pre>
-          {showContactAscii && <pre className={styles.art}>{CONTACT_ASCII}</pre>}
+          {showContactAscii && <pre id="art" className={`${styles.art} ${startAnim && "artAnim"}`}>{CONTACT_ASCII}</pre>}
         </>
       )}
 
