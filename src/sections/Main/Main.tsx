@@ -1,10 +1,16 @@
 "use client";
 
-import { useAboutMeTxt, useContactMeEmail, useMain, useToast } from "@/hooks";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
-import { CommandBar } from "@/components/CommandBar";
-import { Box } from "@/components/Box";
+import { useAboutMeTxt, useToast } from "@/hooks";
+// LOCAL HOOKS - MIGHT MOVE
+import { useMain, useTerminalCommand } from "./hooks";
+
 import { Toast } from "@/components/Toast";
+import { Terminal } from "@/components/Terminal";
+import { CommandBar } from "@/components/CommandBar";
+
 import { Banner } from "@/sections/Banner";
 import { AboutMe } from "@/sections/AboutMe";
 import { Projects } from "@/sections/Projects";
@@ -13,75 +19,45 @@ import { Contact } from "@/sections/Contact";
 import styles from "./Main.module.css";
 
 export default function Main() {
-  const {toasts, handleOnCloseToast} = useToast();
-  const {showComponent, terminalView, handleTerminalView} = useMain();
-  const {handleContactCommand} = useContactMeEmail();
-  const {handleAboutCommand} = useAboutMeTxt();
+  const { toasts, handleOnCloseToast } = useToast();
+  const { showComponent } = useMain();
+  const { terminal, handleCommand } = useTerminalCommand()
 
-  function handleCommand(cmd: string) {
-    const runMatch = cmd.match(/^run (.+)$/i);
-    const terminal = runMatch && runMatch[1].toLowerCase();
-    
-    if (runMatch && terminal) handleTerminalView(terminal);
-
-    switch (terminalView) {
-      case "about":
-        handleAboutCommand(cmd);
-        break;
-      case "projects":
-        // handleProjectsCommand(cmd);
-        break;
-      case "contact":
-        handleContactCommand(cmd);
-        break;
-      default:
-        break;
-    }
-  }
+  const terminalComponentList = {
+    home: <>HOME</>,
+    about: <AboutMe />,
+    projects: <Projects />,
+    contact: <Contact />
+  };
 
   return (
     <>
       {showComponent && (
         <>
           <Banner />
-
-          <Box className={styles.contentContainer}>
-            <Box column square className={styles.terminal}>
-              {terminalView === "home" ?
-                <>HOME</>
-                : terminalView === "about" ?
-                <AboutMe />
-                : terminalView === "projects" ?
-                <Projects /> 
-                : terminalView === "contact" ?
-                <Contact /> :
-                null
-              }
-            </Box>
-          </Box>
-        
+          <Terminal name={terminal} terminalComponentList={terminalComponentList} />
           <CommandBar onCommand={handleCommand} />
         </>
       )}
 
-        {toasts.map((toast) => (
-          <Toast key={toast.id} portalId={toast.id} alignment="right"
-            onClose={() => handleOnCloseToast(toast.id)}>
-            <div className={styles.toastContainer}>
-              {toast.message.includes(":") ? (
-                <>
-                  <>{toast.message.split(":")[0]}:</>
+      {toasts.map((toast) => (
+        <Toast key={toast.id} portalId={toast.id} alignment="right"
+          onClose={() => handleOnCloseToast(toast.id)}>
+          <div className={styles.toastContainer}>
+            {toast.message.includes(":") ? (
+              <>
+                {toast.message.split(":")[0]}:
               
-                  <pre className={styles.toastMessage}>
-                    {toast.message.split(":")[1]}
-                  </pre>
-                </>
-              ) : (
+                <pre className={styles.toastMessage}>
+                  {toast.message.split(":")[1]}
+                </pre>
+              </>
+            ) : (
                 <>{toast.message}</>
-              )}
-            </div>
-          </Toast>
-        ))}
+            )}
+          </div>
+        </Toast>
+      ))}
     </>
   );
 }
