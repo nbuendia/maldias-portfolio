@@ -11,6 +11,8 @@ import { mainSlice } from '@/features/Main';
 import { toastSlice } from '@/features/Toast';
 import { projectsSlice } from '@/features/Projects';
 import { emailFormSlice } from '@/features/EmailForm';
+import { ellipsisSlice } from '@/features/Ellipsis';
+import { terminalSlice } from '@/features/Terminal';
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +26,8 @@ export const store = configureStore({
     [toastSlice.reducerPath]: toastSlice.reducer,
     [projectsSlice.reducerPath]: projectsSlice.reducer,
     [emailFormSlice.reducerPath]: emailFormSlice.reducer,
+    [ellipsisSlice.reducerPath]: ellipsisSlice.reducer,
+    [terminalSlice.reducerPath]: terminalSlice.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>

@@ -1,20 +1,20 @@
 import styles from "./Terminal.module.css";
 
-import { useTerminalView } from "../Main/hooks";
 
 import { Box } from "@/components/Box";
 import { AboutMe } from "@/sections/AboutMe";
 import { Projects } from "@/sections/Projects";
 import { Contact } from "@/sections/Contact";
+import { useTerminal } from "./hooks";
 
 export default function Terminal() {
-  const {terminalView, handleTerminalView} = useTerminalView();
+  const {terminal, handleTerminalView} = useTerminal();
 
   const activeComponent = 
-    terminalView === "home" ? <>HOME</> 
-    : terminalView === "about" ? <AboutMe /> 
-    : terminalView === "projects" ? <Projects /> 
-    : terminalView === "contact" ? <Contact />
+    terminal === "home" ? <>HOME</> 
+    : terminal === "about" ? <AboutMe /> 
+    : terminal === "projects" ? <Projects /> 
+    : terminal === "contact" ? <Contact />
     : null;
 
   return (
