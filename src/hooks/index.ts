@@ -4,9 +4,9 @@ import { useCommandBar } from "./useCommandBar";
 import { useConactMeInfo } from "./useConactMeInfo";
 import { useContactMeAscii } from "./useContactMeAscii";
 import { useContactMeEmail } from "./useContactMeEmail";
+import { useEllipsis } from "./useEllipsis";
 import { useEmailForm } from "./useEmailForm";
 import { useGreeting } from "./useGreeting";
-import { useMain } from "./useMain";
 import { useProjectsAscii } from "./useProjectAscii";
 import { useProjects } from "./useProjects";
 import { useTechStack } from "./useTechStack";
@@ -21,9 +21,9 @@ export {
   useConactMeInfo,
   useContactMeAscii,
   useContactMeEmail,
+  useEllipsis,
   useEmailForm,
   useGreeting,
-  useMain,
   useProjectsAscii,
   useProjects,
   useTechStack,

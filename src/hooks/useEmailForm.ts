@@ -6,8 +6,9 @@ import emailjs from "@emailjs/browser";
 
 import { useToast } from "./useToast";
 
+import { setShowEllipsis } from "@/features/Ellipsis";
 import { setIsSubmitDisabled, setUserFormInfo, UserInfo, setDisplayForm, setIsSubmitLoading } from "@/features/EmailForm";
-import { NoEmailPrompts, SendEmailPrompts, setNoEmailPrompts, setSendEmailPrompts, setShowEllipsis, setYesEmailPrompts, YesEmailPrompts } from "@/features/ContactMe";
+import { NoEmailPrompts, SendEmailPrompts, setNoEmailPrompts, setSendEmailPrompts, setYesEmailPrompts, YesEmailPrompts } from "@/features/ContactMe";
 import { triggerCancelEmail, triggerSendEmail } from "@/lib/utils";
 import { S_ID, T_ID, P_KEY } from "@/lib/constants";
 
