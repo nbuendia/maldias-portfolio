@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { CONTACT_ASCII, CONTACT_INFO } from "@/lib/constants";
-import { useContactMeAscii, useConactMeInfo, useContactMeEmail, useAsciiScroll } from "@/hooks";
+import { useContactMeAscii, useConactMeInfo, useContactMeEmail, useAsciiScroll, useEllipsis } from "@/hooks";
 
 import { Icon } from "@/components/Icon";
 import { EllipsisLoader } from "@/components/EllipsisLoader";
@@ -11,9 +11,10 @@ import styles from "./Contact.module.css";
 
 export default function Contact() {
   const projectContaienrRef = useRef(null);
+  const { showEllipsis } = useEllipsis();
   const {showContactSection, showContactAscii, handleShowContactAscii, handleContactStateRest} = useContactMeAscii();
   const {showContactInfoSection, showContactInfo, currentContactIndex, handleShowContactInfo, handleContactInfoStateReset} = useConactMeInfo();
-  const {showEmailSection, sendEmailPrompts, noEmailPrompts, yesEmailPrompts, showEllipsis, triggerBlurAction, handleContactStateReset} = useContactMeEmail();
+  const {showEmailSection, sendEmailPrompts, noEmailPrompts, yesEmailPrompts, triggerBlurAction, handleContactStateReset} = useContactMeEmail();
 
   const [startAnim, setStartAnim] = useState(false);
   useAsciiScroll(projectContaienrRef, setStartAnim);
