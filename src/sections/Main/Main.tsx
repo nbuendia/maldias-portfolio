@@ -1,9 +1,6 @@
 "use client";
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
-
-import { useAboutMeTxt, useToast } from "@/hooks";
+import { useToast } from "@/hooks";
 // LOCAL HOOKS - MIGHT MOVE
 import { useMain, useTerminalCommand } from "./hooks";
 
