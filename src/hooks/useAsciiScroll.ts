@@ -1,8 +1,11 @@
 import { RefObject, useCallback, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
-// FIX "ANY"
-export function useAsciiScroll(containerRef: RefObject<HTMLElement | null>, animStateSetter: any) {
+export function useAsciiScroll(
+  containerRef: RefObject<HTMLElement | null>,
+  animStateSetter: ActionCreatorWithPayload<any, string>
+) {
   const observerRef = useRef<ResizeObserver | null>(null);
   const dispatch = useDispatch();
 

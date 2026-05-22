@@ -29,7 +29,7 @@ export function useTechStack() {
     if (currentTechIndex < TECH_STACK.length - 1) {
       const timeOut = setTimeout(() => {
         handleSetCurrentTechIndex(1);
-      }, 1000);
+      }, 1200);
   
       return () => clearTimeout(timeOut);
     }

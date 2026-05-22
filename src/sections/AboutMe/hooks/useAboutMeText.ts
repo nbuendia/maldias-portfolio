@@ -18,7 +18,7 @@ export function useAboutMeText() {
 
     const aboutMeAsciiTimeout = setTimeout(() => {
       dispatch(setShowWhoami(true));
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(aboutMeAsciiTimeout);
   }, [dispatch]);
@@ -36,7 +36,7 @@ export function useAboutMeText() {
   useEffect(() => {
     const aboutMeTimeOut = setTimeout(() => {
       dispatch(setStartAboutMeAnimation(true));
-    }, 1000);
+    }, 2000);
       
     return () => clearTimeout(aboutMeTimeOut);
   }, [dispatch]);
