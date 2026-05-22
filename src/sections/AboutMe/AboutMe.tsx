@@ -1,36 +1,51 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { ABOUT_ME_ART, TECH_STACK, WHO_AM_I } from "@/lib/constants";
-import { useAboutMeTxt, useAsciiScroll, useTechStack, useWhoami } from "@/hooks";
+import { useAsciiScroll } from "@/hooks";
+import {
+  useAboutMeReset,
+  useAboutMeState,
+  useAboutMeText,
+  useTechStack
+} from "./hooks";
 
 import styles from "./AboutMe.module.css";
 
 export default function AboutMe() {
   const projectContainerRef = useRef(null);
-  const {startAboutMeAnimation, showAboutMeArt, handleShowAboutMeArt, handleAboutMeStateReset} = useAboutMeTxt();
-  const {showWhoami, startWhoamiAnimation, handleShowWhoami, handleWhoamiStateReset} = useWhoami();
-  const {showTechStack, startTechStackAnimation, currentTechIndex, handleSetStartTechStackAnimation, handleTeckStackStateReset} = useTechStack();
+  
+  const {handleAboutMeStateReset, handleAboutMeAsciiStateReset, handleTechStackStateReset} = useAboutMeReset();
+  const {handleShowAboutMeAscii, setStartAsciiScrollAnim, handleShowWhoami} = useAboutMeText();
+  const {startTechStackAnimation, currentTechIndex, handleSetStartTechStackAnimation} = useTechStack();
+  
+  const {
+    startAboutMeAnimation,
+    showAboutMeArt,
+    startAsciiScrollAnim,
+    showWhoami,
+    startWhoamiAnimation,
+    showTechStack,
+  } = useAboutMeState();
 
-  const [startAnim, setStartAnim] = useState(false);
-  useAsciiScroll(projectContainerRef, setStartAnim);
+  useAsciiScroll(projectContainerRef, setStartAsciiScrollAnim);
 
   useEffect(() => {   
     return () => {
       handleAboutMeStateReset();
-      handleWhoamiStateReset();
-      handleTeckStackStateReset();
+      handleAboutMeAsciiStateReset();
+      handleTechStackStateReset();
     }
-  }, [handleAboutMeStateReset, handleWhoamiStateReset, handleTeckStackStateReset]);
+  }, [handleAboutMeStateReset, handleAboutMeAsciiStateReset, handleAboutMeAsciiStateReset]);
 
   return (
     <div id="about" ref={projectContainerRef} className={styles.container}>
       {startAboutMeAnimation && (
         <>
-          <pre className={styles.command} onAnimationEnd={handleShowAboutMeArt}>
+          <pre className={styles.command} onAnimationEnd={handleShowAboutMeAscii}>
             $ cat about-me.txt
           </pre>
 
-          {showAboutMeArt && <pre id="art" className={`${styles.art} ${startAnim && "artAnim"}`}>{ABOUT_ME_ART}</pre>}
+          {showAboutMeArt && <pre id="art" className={`${styles.art} ${startAsciiScrollAnim && "artAnim"}`}>{ABOUT_ME_ART}</pre>}
         </>
       )}
 

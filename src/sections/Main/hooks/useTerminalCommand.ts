@@ -1,19 +1,21 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 import { setTerminal } from "@/features/Terminal";
-// REMOVE ABOUT-ME-TXT FROM HERE
-import { useAboutMeTxt, useToast } from "@/hooks";
+
+import { useToast } from "@/hooks";
+// FIX HOOK IMPORTS. ORGANIZE BETTER
+import { useAboutCommand } from "@/sections/AboutMe/hooks";
+import { useContactCommand } from "./useContactCommand";
 
 import { TERMINAL_VIEWS } from "@/lib/constants";
-import { useContactCommand } from "./useContactCommand";
-import { RootState } from "@/store";
 
 export function useTerminalCommand() {
   const dispatch = useDispatch();
   const { handleToast } = useToast();
   const { handleContactCommand } = useContactCommand();
-  const { handleAboutCommand } = useAboutMeTxt();
+  const { handleAboutCommand } = useAboutCommand();
 
   const terminal = useSelector((state: RootState) => state.terminalSlice.terminal);
 

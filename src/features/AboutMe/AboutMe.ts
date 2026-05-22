@@ -8,6 +8,7 @@ interface AboutMeState {
   showTechStack: boolean;
   startTechStackAnimation: boolean;
   currentTechIndex: number;
+  startAsciiScrollAnim: boolean;
 }
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
   startWhoamiAnimation: false,
   showTechStack: false,
   startTechStackAnimation: false,
-  currentTechIndex: -1
+  currentTechIndex: -1,
+  startAsciiScrollAnim: false,
 } satisfies AboutMeState as AboutMeState;
 
 export const aboutMeSlice = createSlice({
@@ -45,6 +47,9 @@ export const aboutMeSlice = createSlice({
     },
     setCurrentTechIndex: (state, action) => {
       state.currentTechIndex = action.payload
-    }
+    },
+    setStartAsciiScrollAnim: (state, action) => {
+      state.startAsciiScrollAnim = action.payload
+    },
   },
 });
