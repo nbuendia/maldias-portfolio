@@ -8,7 +8,7 @@ import {
   useAboutMeText,
   useTechStack
 } from "./hooks";
-// TEST COMMENT
+
 import styles from "./AboutMe.module.css";
 
 export default function AboutMe() {
