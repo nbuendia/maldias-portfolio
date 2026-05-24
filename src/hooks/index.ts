@@ -6,8 +6,6 @@ import { useContactMeEmail } from "./useContactMeEmail";
 import { useEllipsis } from "./useEllipsis";
 import { useEmailForm } from "./useEmailForm";
 import { useGreeting } from "./useGreeting";
-import { useProjectsAscii } from "./useProjectAscii";
-import { useProjects } from "./useProjects";
 import { useToast } from "./useToast";
 import { useWelcomeBack } from "./useWelcomeBack";
 
@@ -20,8 +18,6 @@ export {
   useEllipsis,
   useEmailForm,
   useGreeting,
-  useProjectsAscii,
-  useProjects,
   useToast,
   useWelcomeBack,
 };
