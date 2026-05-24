@@ -1,7 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { ProjectStatus } from "@/features/Projects";
 import { PROJECT_ASCII } from "@/lib/constants";
-import { useAsciiScroll, useProjects, useProjectsAscii } from "@/hooks";
+
+import { useAsciiScroll } from "@/hooks";
+import {
+  useProjectsReset,
+  useProjectsState,
+  useProjects,
+  useProjectsList,
+} from "./hooks";
 
 import { Icon } from "@/components/Icon";
 
@@ -9,12 +16,13 @@ import styles from "./Projects.module.css";
 
 export default function Projects() {
   const projectContainerRef = useRef(null);
-  const { startProjectAnimation, showProjectsAscii, showProjectsSection, handleProjectsAsciiReset, handleShowProjectAscii } = useProjectsAscii();
-  const { showProjects, projects, currentProjectIndex, handleProjectsStateReset, handleShowProjects, handleProjectStatus } = useProjects();
   
-  const [startArtAnim, setStartArtAnim] = useState(false);
+  const {handleProjectsAsciiReset, handleProjectsStateReset} = useProjectsReset();
+  const {projects, currentProjectIndex, startProjectAnimation, showProjectsAscii, showProjectsSection, showProjects, startAsciiScrollAnim} = useProjectsState();
+  const {setStartAsciiScrollAnim, handleShowProjectAscii} = useProjects();
+  const {handleShowProjects, handleProjectStatus} = useProjectsList();
 
-  useAsciiScroll(projectContainerRef, setStartArtAnim);
+  useAsciiScroll(projectContainerRef, setStartAsciiScrollAnim);
 
   useEffect(() => {
     return () => {
@@ -30,7 +38,7 @@ export default function Projects() {
           <pre className={styles.command} onAnimationEnd={handleShowProjectAscii}>
             $ cat projects.txt
           </pre>
-          {showProjectsAscii && <pre id="art" className={`${styles.art} ${startArtAnim && "artAnim"}`}>{PROJECT_ASCII}</pre>}
+          {showProjectsAscii && <pre id="art" className={`${styles.art} ${startAsciiScrollAnim && "artAnim"}`}>{PROJECT_ASCII}</pre>}
         </>
       )}
 
