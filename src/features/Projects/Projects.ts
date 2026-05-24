@@ -25,6 +25,7 @@ interface ProjectsState {
   showProjectsSection: boolean;
   showProjects: boolean;
   currentProjectIndex: number;
+  startAsciiScrollAnim: boolean;
 };
 
 const initialState = {
@@ -34,6 +35,7 @@ const initialState = {
   showProjectsSection: false,
   showProjects: false,
   currentProjectIndex: -1,
+  startAsciiScrollAnim: false,
 } satisfies ProjectsState as ProjectsState;
 
 export const projectsSlice = createSlice({
@@ -57,7 +59,10 @@ export const projectsSlice = createSlice({
       state.showProjects = action.payload;
     },
     setCurrentProjectIndex: (state, action) => {
-      state.currentProjectIndex = action.payload
+      state.currentProjectIndex = action.payload;
+    },
+    setStartAsciiScrollAnim: (state, action) => {
+      state.startAsciiScrollAnim = action.payload;
     },
   },
 });

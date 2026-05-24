@@ -10,4 +10,5 @@ export const {
   setShowProjectsSection,
   setShowProjects,
   setCurrentProjectIndex,
+  setStartAsciiScrollAnim,
 } = projectsSlice.actions;
