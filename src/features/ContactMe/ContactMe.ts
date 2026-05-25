@@ -23,6 +23,7 @@ interface ContactMeState {
   showContactInfo: boolean;
   currentContactIndex: number;
   showEmailSection: boolean;
+  startAsciiScrollAnim: boolean;
   sendEmailPrompts: SendEmailPrompts;
   noEmailPrompts: NoEmailPrompts;
   yesEmailPrompts: YesEmailPrompts;
@@ -35,6 +36,7 @@ const initialState = {
   showContactInfo: false,
   currentContactIndex: -1,
   showEmailSection: false,
+  startAsciiScrollAnim: false,
   
   sendEmailPrompts: {
     sendEmailPrompt: false,
@@ -75,6 +77,9 @@ export const contactMeSlice = createSlice({
     },
     setShowEmailSection: (state, action) => {
       state.showEmailSection = action.payload;
+    },
+    setStartAsciiScrollAnim: (state, action) => {
+      state.startAsciiScrollAnim = action.payload;
     },
     setSendEmailPrompts: (state, action) => {
       state.sendEmailPrompts = {

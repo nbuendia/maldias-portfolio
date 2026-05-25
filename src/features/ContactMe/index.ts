@@ -10,6 +10,7 @@ export const {
   setShowContactInfo,
   setCurrentContactIndex,
   setShowEmailSection,
+  setStartAsciiScrollAnim,
   setSendEmailPrompts,
   setNoEmailPrompts,
   setYesEmailPrompts,
