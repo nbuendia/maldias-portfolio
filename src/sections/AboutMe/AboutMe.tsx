@@ -14,7 +14,7 @@ import styles from "./AboutMe.module.css";
 export default function AboutMe() {
   const projectContainerRef = useRef(null);
   
-  const {handleAboutMeStateReset, handleAboutMeAsciiStateReset, handleTechStackStateReset} = useAboutMeReset();
+  const {handleAboutMeStateReset} = useAboutMeReset();
   const {handleShowAboutMeAscii, setStartAsciiScrollAnim, handleShowWhoami} = useAboutMeText();
   const {startTechStackAnimation, currentTechIndex, handleSetStartTechStackAnimation} = useTechStack();
   
@@ -30,12 +30,8 @@ export default function AboutMe() {
   useAsciiScroll(projectContainerRef, setStartAsciiScrollAnim);
 
   useEffect(() => {   
-    return () => {
-      handleAboutMeStateReset();
-      handleAboutMeAsciiStateReset();
-      handleTechStackStateReset();
-    }
-  }, [handleAboutMeStateReset, handleAboutMeAsciiStateReset, handleAboutMeAsciiStateReset]);
+    return () => handleAboutMeStateReset();
+  }, [handleAboutMeStateReset]);
 
   return (
     <div id="about" ref={projectContainerRef} className={styles.container}>
