@@ -1,22 +1,25 @@
 'use client'
 
-import { useGreeting } from "@/hooks";
-import { FIRST_NAME, LAST_NAME } from "@/lib/constants";
+import { useGreeting, useShowGreeting } from "./hooks";
 
 import { Box } from "@/components/Box";
 import { Icon } from "@/components/Icon";
 
+import { FIRST_NAME, LAST_NAME } from "@/lib/constants";
+
 import styles from "./Greeting.module.css";
 
 export default function Greeting() {
-  const {showComponent, endGreeting, handleEndAnimation} = useGreeting();
+  const {showGreeting} = useShowGreeting();
+  const {endGreeting, handleEndAnimation} = useGreeting();
+  
   const firstName = FIRST_NAME;
   const lastName = LAST_NAME;
   const nameClasses = (letter: string) =>  `${styles.letter} ${letter === " " ? styles.space : ""}`;
 
   return (
     <>
-      {showComponent && (
+      {showGreeting && (
         <Box column className={`${styles.center} ${endGreeting ? styles.end : ''}`}>
           <span className={styles.hola}>
             <h1>HOLA</h1> 
