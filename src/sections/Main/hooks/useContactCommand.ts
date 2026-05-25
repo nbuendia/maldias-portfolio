@@ -16,7 +16,7 @@ import {
   triggerNoEmailAction,
   triggerResetEmailPrompt,
   triggerYesEmailAction,
-} from "@/lib/utils";
+} from "@/sections/Contact/utils";
 
 export function useContactCommand() {
   const dispatch = useDispatch();
