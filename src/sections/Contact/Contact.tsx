@@ -7,6 +7,7 @@ import {
   useContactEmail,
   useContactReset,
   useContactState,
+  useYesEmail,
   useCurrentContactIndex,
 } from "./hooks";
 
@@ -30,16 +31,16 @@ export default function Contact() {
     startAsciiScrollAnim,
     sendEmailPrompts,
     noEmailPrompts,
-    yesEmailPrompts,
   } = useContactState();
   const {
     setStartAsciiScrollAnim,
     handleShowContactAscii,
     handleShowContactInfo,
   } = useContact();
-  useCurrentContactIndex();
+  const {yesEmailPrompts} = useYesEmail();
   const {handleBlurAction} = useContactEmail();
-
+  
+  useCurrentContactIndex();
   useAsciiScroll(projectContaienrRef, setStartAsciiScrollAnim);
 
   useEffect(() => {

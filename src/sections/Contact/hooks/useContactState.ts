@@ -11,7 +11,6 @@ export function useContactState() {
   const startAsciiScrollAnim = useSelector((state: RootState) => state.contactMeSlice.startAsciiScrollAnim);
   const sendEmailPrompts = useSelector((state: RootState) => state.contactMeSlice.sendEmailPrompts);
   const noEmailPrompts = useSelector((state: RootState) => state.contactMeSlice.noEmailPrompts);
-  const yesEmailPrompts = useSelector((state: RootState) => state.contactMeSlice.yesEmailPrompts);
 
   return {
     showContactSection,
@@ -23,6 +22,5 @@ export function useContactState() {
     startAsciiScrollAnim,
     sendEmailPrompts,
     noEmailPrompts,
-    yesEmailPrompts,
   };
 }

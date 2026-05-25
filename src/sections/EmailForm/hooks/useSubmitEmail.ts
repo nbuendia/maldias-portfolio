@@ -4,13 +4,9 @@ import emailjs from "@emailjs/browser";
 
 import { setShowEllipsis } from "@/features/Ellipsis";
 import { setIsSubmitLoading } from "@/features/EmailForm";
-import {
-  setSendEmailPrompts,
-  setYesEmailPrompts,
-  YesEmailPrompts,
-  SendEmailPrompts,
-} from "@/features/ContactMe";
+import { setSendEmailPrompts, SendEmailPrompts } from "@/features/ContactMe";
 
+import { useYesEmail } from "@/sections/Contact/hooks";
 import { useToast } from "@/hooks";
 import { useClearUserInfo } from "./useClearUserInfo";
 import { useDisplayForm } from "./useDisplayForm";
@@ -22,16 +18,12 @@ export function useSubmitEmail() {
   const dispatch = useDispatch();
   const {handleClearUserInfo} = useClearUserInfo();
   const {handleDisplayForm} = useDisplayForm();
+  const {handleYesEmailPrompts} = useYesEmail();
   const {handleToast} = useToast();
 
   // REPEATS; MOVE TO LOCAL FILE IN COMPONENT
   const handleShowEllipsis = useCallback((state: boolean) => {
     dispatch(setShowEllipsis(state));
-  }, [dispatch]);
-
-  // REPEATS
-  const handleYesEmailPrompts = useCallback((key: keyof YesEmailPrompts, value: boolean) => {
-    dispatch(setYesEmailPrompts({ [key]: value }));
   }, [dispatch]);
 
   const handleSendEmailPrompts = useCallback((key: keyof SendEmailPrompts, value: boolean) => {
