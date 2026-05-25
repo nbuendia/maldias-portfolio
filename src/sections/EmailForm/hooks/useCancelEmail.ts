@@ -1,10 +1,10 @@
 import { MouseEvent, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import { setShowEllipsis } from "@/features/Ellipsis";
 import { setNoEmailPrompts, NoEmailPrompts } from "@/features/ContactMe";
 
 import { useYesEmail } from "@/sections/Contact/hooks";
+import { useEllipsis } from "@/hooks";
 import { useClearUserInfo } from "./useClearUserInfo";
 import { useDisplayForm } from "./useDisplayForm";
 import { triggerCancelEmail } from "../utils";
@@ -14,11 +14,7 @@ export function useCancelEmail() {
   const {handleClearUserInfo} = useClearUserInfo();
   const {handleDisplayForm} = useDisplayForm();
   const {handleYesEmailPrompts} = useYesEmail();
-
-  // REPEATS; MOVE TO LOCAL HOOK IN COMPONENT
-  const handleShowEllipsis = useCallback((state: boolean) => {
-    dispatch(setShowEllipsis(state));
-  }, [dispatch]);
+  const {handleShowEllipsis} = useEllipsis();
 
   const handleNoEmailPrompts = useCallback((key: keyof NoEmailPrompts, value: boolean) => {
     dispatch(setNoEmailPrompts({ [key]: value }));

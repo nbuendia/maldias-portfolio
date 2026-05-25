@@ -2,12 +2,11 @@ import { MouseEvent, RefObject, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import emailjs from "@emailjs/browser";
 
-import { setShowEllipsis } from "@/features/Ellipsis";
 import { setIsSubmitLoading } from "@/features/EmailForm";
 import { setSendEmailPrompts, SendEmailPrompts } from "@/features/ContactMe";
 
 import { useYesEmail } from "@/sections/Contact/hooks";
-import { useToast } from "@/hooks";
+import { useEllipsis, useToast } from "@/hooks";
 import { useClearUserInfo } from "./useClearUserInfo";
 import { useDisplayForm } from "./useDisplayForm";
 import { triggerSendEmail } from "../utils";
@@ -20,11 +19,7 @@ export function useSubmitEmail() {
   const {handleDisplayForm} = useDisplayForm();
   const {handleYesEmailPrompts} = useYesEmail();
   const {handleToast} = useToast();
-
-  // REPEATS; MOVE TO LOCAL FILE IN COMPONENT
-  const handleShowEllipsis = useCallback((state: boolean) => {
-    dispatch(setShowEllipsis(state));
-  }, [dispatch]);
+  const {handleShowEllipsis} = useEllipsis();
 
   const handleSendEmailPrompts = useCallback((key: keyof SendEmailPrompts, value: boolean) => {
     dispatch(setSendEmailPrompts({ [key]: value }));
