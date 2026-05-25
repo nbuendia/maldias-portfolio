@@ -4,6 +4,7 @@ import { useContactState } from "./useContactState";
 import { useContactEmail } from "./useContactEmail";
 import { useYesEmail } from "./useYesEmail";
 import { useCurrentContactIndex } from "./useCurrentContactIndex";
+import { useContactCommand } from "./useContactCommand";
 
 export {
   useContact,
@@ -12,4 +13,5 @@ export {
   useContactEmail,
   useYesEmail,
   useCurrentContactIndex,
+  useContactCommand,
 };
