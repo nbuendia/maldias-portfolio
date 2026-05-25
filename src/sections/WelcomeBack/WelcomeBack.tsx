@@ -1,15 +1,27 @@
 'use client'
 
-import { BACK, WELCOME } from "@/lib/constants";
-import { useWelcomeBack } from "@/hooks";
+import {
+  useReturnUser,
+  useSmiley,
+  useWelcomeBackAnimationEnd,
+} from "./hooks";
 
 import { Box } from "@/components/Box";
 import { Icon } from "@/components/Icon";
 
+import { BACK, WELCOME } from "@/lib/constants";
+
 import styles from "./WelcomeBack.module.css";
 
 export default function WelcomeBack() {
-  const {showComponent, smileyAnimation, endAnimation, endAnimationLetterIndex, handleSmileyAnimation, handleEndAnimation} = useWelcomeBack();
+  const {smileyAnimation, handleSmileyAnimation} = useSmiley();
+  const {showWelcomeBack} = useReturnUser();
+  const {
+    endAnimation,
+    endAnimationLetterIndex,
+    handleEndAnimation,
+  } = useWelcomeBackAnimationEnd();
+  
   const iconClasses = `${smileyAnimation ? styles.smiley : ""} ${endAnimation ? styles.fall : ""}`;
   const letterClasses = `${endAnimation ? styles.fall : styles.letter}`;
   const startLetterDelay = (key: number, delay = 0) => `${key * 0.10 + delay}s`;
@@ -17,7 +29,7 @@ export default function WelcomeBack() {
 
   return (
     <>
-      {showComponent && (
+      {showWelcomeBack && (
         <Box className={styles.container}>
           <h1>
             {WELCOME.map((letter, key) => (
