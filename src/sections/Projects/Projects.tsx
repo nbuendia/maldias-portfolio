@@ -16,8 +16,8 @@ import styles from "./Projects.module.css";
 
 export default function Projects() {
   const projectContainerRef = useRef(null);
-  
-  const {handleProjectsAsciiReset, handleProjectsStateReset} = useProjectsReset();
+
+  const {handleProjectsStateReset} = useProjectsReset();
   const {projects, currentProjectIndex, startProjectAnimation, showProjectsAscii, showProjectsSection, showProjects, startAsciiScrollAnim} = useProjectsState();
   const {setStartAsciiScrollAnim, handleShowProjectAscii} = useProjects();
   const {handleShowProjects, handleProjectStatus} = useProjectsList();
@@ -25,11 +25,8 @@ export default function Projects() {
   useAsciiScroll(projectContainerRef, setStartAsciiScrollAnim);
 
   useEffect(() => {
-    return () => {
-      handleProjectsAsciiReset();
-      handleProjectsStateReset();
-    }
-  }, [handleProjectsAsciiReset, handleProjectsStateReset]);
+    return () => handleProjectsStateReset();
+  }, [handleProjectsStateReset]);
 
   return (
     <div id="projects" ref={projectContainerRef} className={styles.container}>

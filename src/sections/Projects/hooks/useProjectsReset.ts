@@ -13,17 +13,14 @@ import {
 export function useProjectsReset() {
   const dispatch = useDispatch();
 
-  const handleProjectsAsciiReset = useCallback(() => {
+  const handleProjectsStateReset = useCallback(() => {
     dispatch(setShowProjectsAscii(false));
     dispatch(setStartProjectAnimation(false));
     dispatch(setShowProjectsSection(false));
-  }, [dispatch]);
-
-  const handleProjectsStateReset = useCallback(() => {
     dispatch(setProjects([]));
     dispatch(setShowProjects(false));
     dispatch(setCurrentProjectIndex(-1));
   }, [dispatch]);
 
-  return { handleProjectsAsciiReset, handleProjectsStateReset};
+  return { handleProjectsStateReset};
 }
