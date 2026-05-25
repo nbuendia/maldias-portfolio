@@ -4,10 +4,9 @@ import { RootState } from "@/store";
 
 import { setTerminal } from "@/features/Terminal";
 
-import { useToast } from "@/hooks";
-// FIX HOOK IMPORTS. ORGANIZE BETTER
 import { useAboutCommand } from "@/sections/AboutMe/hooks";
 import { useContactCommand } from "@/sections/Contact/hooks";
+import { useToast } from "@/hooks";
 
 import { TERMINAL_VIEWS } from "@/lib/constants";
 
