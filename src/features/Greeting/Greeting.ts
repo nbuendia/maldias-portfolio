@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface GreetingState {
-  showComponent: boolean;
+  showGreeting: boolean;
   isGreetingEnding: boolean;
 }
 
 const initialState = { 
-  showComponent: false,
+  showGreeting: false,
   isGreetingEnding: false,
 } satisfies GreetingState as GreetingState;
 
@@ -15,8 +15,8 @@ export const greetingSlice = createSlice({
   reducerPath: "greetingSlice",
   initialState,
   reducers: {
-    setShowComponent: (state, action) => {
-        state.showComponent = action.payload;
+    setShowGreeting: (state, action) => {
+        state.showGreeting = action.payload;
     },
     setIsGreetingEnding: (state, action) => {
       state.isGreetingEnding = action.payload;

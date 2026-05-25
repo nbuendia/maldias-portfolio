@@ -2,4 +2,4 @@ import { greetingSlice } from "./Greeting";
 
 export { greetingSlice };
 
-export const { setShowComponent, setIsGreetingEnding } = greetingSlice.actions;
+export const { setShowGreeting, setIsGreetingEnding } = greetingSlice.actions;
