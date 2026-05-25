@@ -1,7 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { CONTACT_ASCII, CONTACT_INFO } from "@/lib/constants";
-import { useContactMeAscii, useConactMeInfo, useContactMeEmail, useAsciiScroll, useEllipsis } from "@/hooks";
+import { useAsciiScroll, useEllipsis } from "@/hooks";
+import {
+  useContact,
+  useContactEmail,
+  useContactReset,
+  useContactState,
+  useCurrentContactIndex,
+} from "./hooks";
 
 import { Icon } from "@/components/Icon";
 import { EllipsisLoader } from "@/components/EllipsisLoader";
@@ -12,20 +19,32 @@ import styles from "./Contact.module.css";
 export default function Contact() {
   const projectContaienrRef = useRef(null);
   const { showEllipsis } = useEllipsis();
-  const {showContactSection, showContactAscii, handleShowContactAscii, handleContactStateRest} = useContactMeAscii();
-  const {showContactInfoSection, showContactInfo, currentContactIndex, handleShowContactInfo, handleContactInfoStateReset} = useConactMeInfo();
-  const {showEmailSection, sendEmailPrompts, noEmailPrompts, yesEmailPrompts, triggerBlurAction, handleContactStateReset} = useContactMeEmail();
+  const {handleContactStateReset} = useContactReset();
+  const {
+    showContactSection,
+    showContactAscii,
+    showContactInfoSection,
+    showContactInfo,
+    currentContactIndex,
+    showEmailSection,
+    startAsciiScrollAnim,
+    sendEmailPrompts,
+    noEmailPrompts,
+    yesEmailPrompts,
+  } = useContactState();
+  const {
+    setStartAsciiScrollAnim,
+    handleShowContactAscii,
+    handleShowContactInfo,
+  } = useContact();
+  useCurrentContactIndex();
+  const {handleBlurAction} = useContactEmail();
 
-  const [startAnim, setStartAnim] = useState(false);
-  useAsciiScroll(projectContaienrRef, setStartAnim);
+  useAsciiScroll(projectContaienrRef, setStartAsciiScrollAnim);
 
   useEffect(() => {
-    return () => {
-      handleContactStateRest();
-      handleContactInfoStateReset();
-      handleContactStateReset();
-    }
-  }, [handleContactStateRest, handleContactInfoStateReset, handleContactStateReset]);
+    return () => handleContactStateReset();
+  }, [handleContactStateReset]);
 
   return (
     <div id="contact" ref={projectContaienrRef} className={styles.container}>
@@ -34,7 +53,7 @@ export default function Contact() {
           <pre className={styles.command} onAnimationEnd={handleShowContactAscii}>
             $ cat lets-chat.txt
           </pre>
-          {showContactAscii && <pre id="art" className={`${styles.art} ${startAnim && "artAnim"}`}>{CONTACT_ASCII}</pre>}
+          {showContactAscii && <pre id="art" className={`${styles.art} ${startAsciiScrollAnim && "artAnim"}`}>{CONTACT_ASCII}</pre>}
         </>
       )}
 
@@ -71,7 +90,7 @@ export default function Contact() {
 
           {sendEmailPrompts.sendEmailPrompt &&
             // MOVE "ON ANIMATION END" TO EMAIL FORM COMPONENT
-            <pre className={`${styles.emailPrompt} ${sendEmailPrompts.triggerEmailAnimation ? styles.emailPromptAnimation : ""}`} onAnimationEnd={triggerBlurAction}>
+            <pre className={`${styles.emailPrompt} ${sendEmailPrompts.triggerEmailAnimation ? styles.emailPromptAnimation : ""}`} onAnimationEnd={handleBlurAction}>
               <Icon name="check" size="16px" color="green" className={styles.promptCheck} />
               Would you like to send me an email?
               <span className={styles.promptYesNo}>(y/n)</span>
