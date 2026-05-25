@@ -2,4 +2,4 @@ import { welcomeBackSlice } from "./WelcomeBack";
 
 export { welcomeBackSlice };
 
-export const { setShowComponent, setSmileyAnimation, setEndAnimation, setEndAnimationLetterIndex } = welcomeBackSlice.actions;
+export const { setShowWelcomeBack, setSmileyAnimation, setEndAnimation, setEndAnimationLetterIndex } = welcomeBackSlice.actions;

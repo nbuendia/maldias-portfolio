@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { BACK, WELCOME } from "@/lib/constants";
 
 interface WelcomeBackState {
-  showComponent: boolean;
+  showWelcomeBack: boolean;
   smileyAnimation: boolean;
   endAnimation: boolean;
   endAnimationLetterIndex: number;
 };
 
 const initialState = {
-  showComponent: false,
+  showWelcomeBack: false,
   smileyAnimation: false,
   endAnimation: false,
   endAnimationLetterIndex: WELCOME.length + BACK.length,
@@ -20,8 +20,8 @@ export const welcomeBackSlice = createSlice({
   reducerPath: "welcomeBackSlice",
   initialState,
   reducers: {
-    setShowComponent: (state, action) => {
-      state.showComponent = action.payload;
+    setShowWelcomeBack: (state, action) => {
+      state.showWelcomeBack = action.payload;
     },
     setSmileyAnimation: (state, action) => {
       state.smileyAnimation = action.payload;
