@@ -10,7 +10,7 @@ interface CommandBarProps {
 
 export default function CommandBar({ onCommand }: CommandBarProps) {
   const inputRef = useRef<HTMLDivElement>(null);
-  const { input, handleKeyDown } = useCommandBar(onCommand);
+  const {input, handleKeyDown} = useCommandBar(onCommand);
 
   useEffect(() => {
     inputRef.current?.focus();

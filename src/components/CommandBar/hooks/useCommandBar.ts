@@ -1,38 +1,33 @@
-import { useCallback, KeyboardEvent } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store";
-
-import { setInput } from "@/features/CommandBar";
-import { MAX_LENGTH } from "@/lib/constants";
+import { KeyboardEvent, SetStateAction, useCallback, useState } from "react";
 import { handleBackspace, handleEnter } from "../actions";
 
 export function useCommandBar(onCommand: (cmd: string) => void) {
-  // REMOVE ALL REDUX STATE; UPDATE TO MAKE IT LOCAL AND COMPONENT COMPLETELY INDEPENDENT
-  const dispatch = useDispatch();
-  const input = useSelector((state: RootState) => state.commandBarSlice.cmd);
+  const [input, setInput] = useState('');
 
-  const handleSetInput = useCallback((state: string) => {
-    dispatch(setInput(state));
-  }, [dispatch]);
+  // MIGHT DELETE IN THE FUTURE
+  const MAX_LENGTH = 250;
 
-  const handleAppendChar = useCallback((char: string) => {
-    dispatch(setInput(input + char));
-  }, [dispatch, input]);
-
+  const handleSetInput = useCallback((state: SetStateAction<string>) => {
+    setInput(state);
+  }, []);
+  
+  const handleAppendChar = useCallback((char: SetStateAction<string>) => {
+    setInput(input + char);
+  }, [input]);
+  
   const handleClearInput = useCallback(() => {
-    dispatch(setInput(''));
-  }, [dispatch]);
-
+    setInput('');
+  }, []);
 
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     event.preventDefault();
     const char = event.key.length === 1 ? event.key : '';
-    
+        
     if (char && input.length < MAX_LENGTH) handleAppendChar(char);
-
+    
     handleEnter(event, input, onCommand, handleClearInput);
     handleBackspace(event, handleSetInput, input);
   }
-  
+
   return { input, handleKeyDown };
 }
