@@ -1,5 +1,4 @@
 import { ABOUT_ME_ART, TECH_STACK, WHO_AM_I } from "./AboutMeConstants";
-import { MAX_LENGTH } from "./CommandBarConstants";
 import { CONTACT_ASCII, CONTACT_INFO, RESET_REGEX } from "./ContactConstants";
 import { S_ID, T_ID, P_KEY } from "./emailFormConstants";
 import { FIRST_NAME, LAST_NAME } from "./greetingConstants";
@@ -11,7 +10,6 @@ export {
   ABOUT_ME_ART,
   TECH_STACK,
   WHO_AM_I,
-  MAX_LENGTH,
   CONTACT_ASCII,
   CONTACT_INFO,
   RESET_REGEX,

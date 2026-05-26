@@ -3,7 +3,6 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { pokemonApi } from '@/services/pokemon';
 import { greetingSlice } from '@/features/Greeting';
-import { commandBarSlice } from '@/features/CommandBar';
 import { aboutMeSlice } from '@/features/AboutMe';
 import { contactMeSlice } from '@/features/ContactMe';
 import { welcomeBackSlice } from '@/features/WelcomeBack';
@@ -18,7 +17,6 @@ export const store = configureStore({
   reducer: {
     [pokemonApi.reducerPath]: pokemonApi.reducer,
     [greetingSlice.reducerPath]: greetingSlice.reducer,
-    [commandBarSlice.reducerPath]: commandBarSlice.reducer,
     [aboutMeSlice.reducerPath]: aboutMeSlice.reducer,
     [contactMeSlice.reducerPath]: contactMeSlice.reducer,
     [welcomeBackSlice.reducerPath]: welcomeBackSlice.reducer,
