@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { useCommandBar } from "@/hooks";
+import { useCommandBar } from "./hooks";
 
 import styles from "./CommandBar.module.css";
 
