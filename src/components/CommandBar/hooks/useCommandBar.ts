@@ -4,7 +4,7 @@ import { RootState } from "@/store";
 
 import { setInput } from "@/features/CommandBar";
 import { MAX_LENGTH } from "@/lib/constants";
-import { handleBackspace, handleEnter } from "../utils";
+import { handleBackspace, handleEnter } from "../actions";
 
 export function useCommandBar(onCommand: (cmd: string) => void) {
   // REMOVE ALL REDUX STATE; UPDATE TO MAKE IT LOCAL AND COMPONENT COMPLETELY INDEPENDENT
