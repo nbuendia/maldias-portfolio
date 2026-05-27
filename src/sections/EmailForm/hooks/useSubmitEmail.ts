@@ -9,12 +9,14 @@ import { useYesEmail } from "@/sections/Contact/hooks";
 import { useEllipsis, useToast } from "@/hooks";
 import { useClearUserInfo } from "./useClearUserInfo";
 import { useDisplayForm } from "./useDisplayForm";
-import { triggerSendEmail } from "../utils";
+import { useUserInfo } from "./useUserInfo";
+import { localStorageEmail, triggerSendEmail } from "../utils";
 
 import { S_ID, T_ID, P_KEY } from "@/lib/constants";
 
 export function useSubmitEmail() {
   const dispatch = useDispatch();
+  const {userFormInfo} = useUserInfo();
   const {handleClearUserInfo} = useClearUserInfo();
   const {handleDisplayForm} = useDisplayForm();
   const {handleYesEmailPrompts} = useYesEmail();
@@ -37,6 +39,7 @@ export function useSubmitEmail() {
       publicKey: P_KEY,
     }).then(() => {
       triggerSendEmail(handleSubmitLoading, handleDisplayForm, handleYesEmailPrompts, handleSendEmailPrompts, handleClearUserInfo, handleShowEllipsis);
+      localStorageEmail(userFormInfo);
     }, (error) => {
       console.error("ERROR!", error.text);
       handleToast("Oh no! Something went wrong! Please try again.");
