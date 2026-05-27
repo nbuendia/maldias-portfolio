@@ -18,6 +18,8 @@ import {
   triggerYesEmailAction,
 } from "@/sections/Contact/utils";
 
+import { TERMINAL_VIEWS } from "@/lib/constants";
+
 export function useContactCommand() {
   const dispatch = useDispatch();
   const { handleToast } = useToast();
@@ -42,18 +44,23 @@ export function useContactCommand() {
   function handleContactCommand(cmd: string) {
     if (!showEmailSection) return;
 
-    if (cmd === "n" || cmd === "N")
+    if (cmd.toLowerCase() === "n")
       triggerNoEmailAction(yesEmailPrompts, handleSendEmailPrompts, handleNoEmailPrompts);
 
-    else if (cmd === "y" || cmd === "Y")
+    else if (cmd.toLowerCase() === "y")
       triggerYesEmailAction(noEmailPrompts, handleSendEmailPrompts, handleYesEmailPrompts);
     
-    else if (cmd.startsWith("--reset") && noEmailPrompts.triggerNoEmail) 
+    else if (cmd.toLowerCase().startsWith("--reset") && noEmailPrompts.triggerNoEmail) 
       triggerResetEmailPrompt(handleShowEllipsis, handleNoEmailPrompts, handleSendEmailPrompts);
 
-    // WHEN RUN RUNNING OTHER COMMANDS, IT TRIGGERS ERROR TOAST AFTER N OR Y HAS BEEN ENTERED
-    else
-      handleToast(`Unknown command was entered: ${cmd}`);
+    else {
+      // REFACTOR THIS MESS
+      const runMatch = cmd.match(/^run (.+)$/i);
+      const terminal = runMatch && runMatch[1].toLowerCase();
+      const isValid = terminal && TERMINAL_VIEWS.includes(terminal);
+
+      if (!isValid) handleToast(`Unknown command was entered: ${cmd}`);
+    }
   }
 
   return {
