@@ -1,4 +1,4 @@
-import { KeyboardEvent, useCallback, useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import { 
   handleBackspace,
   handleEnter,
