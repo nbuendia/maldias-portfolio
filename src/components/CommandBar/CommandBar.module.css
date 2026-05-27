@@ -51,11 +51,17 @@
 }
 
 .caret {
-  animation: appear 1s ease-in 1s forwards, blink 1s step-start infinite;
+  animation: appear 1s ease-in forwards, blink 1s step-start infinite;
   margin-left: 1px;
   border-bottom: solid 1px white;
   visibility: hidden;
-} 
+}
+
+.activeLetter {
+  animation: activeBlink 1s step-start infinite;
+  border-bottom: solid 1px white;
+  font-weight: 600;
+}
 
 @keyframes blink {
   0%, 50% {
@@ -81,5 +87,14 @@
   }
   100% {
     visibility: visible;
+  }
+}
+
+@keyframes activeBlink {
+  0%, 50% {
+    border-bottom: solid 1px white;
+  }
+  51%, 100% {
+    border-bottom: none;
   }
 }

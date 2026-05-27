@@ -35,7 +35,7 @@ export function useCommandBar(onCommand: (cmd: string) => void) {
         
     if (char && input.length < MAX_LENGTH) handleInsertChar(char);
 
-    handleEnter(event, input, onCommand, handleClearInput);
+    handleEnter(event, input, onCommand, handleClearInput, setCaretPosition);
     handleBackspace(event, input, handleSetInput, caretPosition, setCaretPosition);
     handleArrowLeft(event, caretPosition, setCaretPosition);
     handleArrowRight(event, input, caretPosition, setCaretPosition);

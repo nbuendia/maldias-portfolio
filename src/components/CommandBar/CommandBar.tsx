@@ -16,6 +16,10 @@ export default function CommandBar({ onCommand }: CommandBarProps) {
     caretPosition,
   } = useCommandBar(onCommand);
 
+  const before = input.slice(0, caretPosition);
+  const active = input[caretPosition];
+  const after = input.slice(caretPosition + 1);
+
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
@@ -25,8 +29,10 @@ export default function CommandBar({ onCommand }: CommandBarProps) {
       <span className={styles.prompt}>NB C:\BuendiaBytes::</span>
 
       <div className={styles.commandInput} ref={inputRef} tabIndex={0} onKeyDown={(e) => handleKeyDown(e)}>
-        <span className={styles.commandInputText} >
-          {input}
+        <span className={styles.commandInputText}>
+          {before}
+          <span className={styles.activeLetter}>{active}</span>
+          {after}
           <span className={`${input.length === caretPosition ? styles.caret : ''}`}> </span>
         </span>
       </div>
