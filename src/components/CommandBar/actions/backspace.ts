@@ -3,7 +3,7 @@ import { KeyboardEvent } from "react";
 export function handleBackspace(
   event: KeyboardEvent<HTMLDivElement>,
   input: string,
-  updateInput: (next: string) => void,
+  setInput: (input: string) => void,
   caretPosition: number,
   setCaretPosition: (position: number) => void,
 ) {
@@ -14,7 +14,7 @@ export function handleBackspace(
       let newInput = input.split("");
       newInput.splice(caretPosition - 1, 1);
       
-      updateInput(newInput.join(""));
+      setInput(newInput.join(""));
       setCaretPosition(caretPosition - 1);
     }
   }

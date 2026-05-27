@@ -4,14 +4,14 @@ export function handleEnter(
   event: KeyboardEvent<HTMLDivElement>,
   cmd: string,
   onCommand: (cmd: string) => void,
-  clearInput: () => void,
+  setInput: (input: string) => void,
   setCaretPosition: (position: number) => void,
 ) {
   if (event.key === "Enter") {
     event.preventDefault();
         
     onCommand(cmd.trim());
-    clearInput();
+    setInput("");
     setCaretPosition(0);
   }
 }

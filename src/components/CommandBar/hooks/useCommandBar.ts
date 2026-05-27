@@ -1,10 +1,11 @@
-import { KeyboardEvent, SetStateAction, useCallback, useEffect, useState } from "react";
+import { KeyboardEvent, useCallback, useState } from "react";
 import { 
   handleBackspace,
   handleEnter,
   handleArrowLeft,
   handleArrowRight,
 } from "../actions";
+import { handleInsertChar } from "../utils";
 
 export function useCommandBar(onCommand: (cmd: string) => void) {
   const [input, setInput] = useState('');
@@ -13,30 +14,15 @@ export function useCommandBar(onCommand: (cmd: string) => void) {
   // MIGHT DELETE IN THE FUTURE
   const MAX_LENGTH = 250;
 
-  const handleSetInput = useCallback((state: SetStateAction<string>) => {
-    setInput(state);
-  }, []);
-  
-  const handleInsertChar = useCallback((char: string) => {
-    let newInput = input.split("");
-    newInput.splice(caretPosition, 0, char);
-      
-    setInput(newInput.join(""));
-    setCaretPosition(caretPosition + 1);
-  }, [input, caretPosition]);
-  
-  const handleClearInput = useCallback(() => {
-    setInput('');
-  }, []);
-
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     event.preventDefault();
     const char = event.key.length === 1 ? event.key : '';
         
-    if (char && input.length < MAX_LENGTH) handleInsertChar(char);
+    if (char && input.length < MAX_LENGTH) 
+      handleInsertChar(char, input, setInput, caretPosition, setCaretPosition);
 
-    handleEnter(event, input, onCommand, handleClearInput, setCaretPosition);
-    handleBackspace(event, input, handleSetInput, caretPosition, setCaretPosition);
+    handleEnter(event, input, onCommand, setInput, setCaretPosition);
+    handleBackspace(event, input, setInput, caretPosition, setCaretPosition);
     handleArrowLeft(event, caretPosition, setCaretPosition);
     handleArrowRight(event, input, caretPosition, setCaretPosition);
   }
