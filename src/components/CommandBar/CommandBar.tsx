@@ -10,7 +10,11 @@ interface CommandBarProps {
 
 export default function CommandBar({ onCommand }: CommandBarProps) {
   const inputRef = useRef<HTMLDivElement>(null);
-  const {input, handleKeyDown} = useCommandBar(onCommand);
+  const {
+    input,
+    handleKeyDown,
+    caretPosition,
+  } = useCommandBar(onCommand);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -23,7 +27,7 @@ export default function CommandBar({ onCommand }: CommandBarProps) {
       <div className={styles.commandInput} ref={inputRef} tabIndex={0} onKeyDown={(e) => handleKeyDown(e)}>
         <span className={styles.commandInputText} >
           {input}
-          <span className={styles.caret}> </span>
+          <span className={`${input.length === caretPosition ? styles.caret : ''}`}> </span>
         </span>
       </div>
     </div>

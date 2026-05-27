@@ -2,11 +2,20 @@ import { KeyboardEvent } from "react";
 
 export function handleBackspace(
   event: KeyboardEvent<HTMLDivElement>,
+  input: string,
   updateInput: (next: string) => void,
-  currentInput: string,
+  caretPosition: number,
+  setCaretPosition: (position: number) => void,
 ) {
   if (event.key === "Backspace") {
     event.preventDefault();
-    updateInput(currentInput.slice(0, -1));
+    
+    if (caretPosition !== 0) {
+      let newInput = input.split("");
+      newInput.splice(caretPosition - 1, 1);
+      
+      updateInput(newInput.join(""));
+      setCaretPosition(caretPosition - 1);
+    }
   }
 }
