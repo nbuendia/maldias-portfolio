@@ -23,7 +23,6 @@ export function useContactReset() {
   const sendEmailPromptReset = {
     sendEmailPrompt: false,
     triggerEmailAnimation: false,
-    // sentEmailConfrimation: false,
   } as SendEmailPrompts;
   
   const noEmailPromptReset = {
