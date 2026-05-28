@@ -1,9 +1,9 @@
-import { CSSProperties, HTMLAttributes, ReactNode, useEffect, useState } from "react";
+import { CSSProperties, HTMLAttributes, ReactNode, useRef } from "react";
 
+import { useTooltip } from "./hooks";
 import { onMouseEnter, onMouseLeave } from "./utils";
 
 import styles from "./Tooltip.module.css";
-import { useTooltip } from "./hooks";
 
 interface TooltipProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
@@ -12,20 +12,23 @@ interface TooltipProps extends HTMLAttributes<HTMLElement> {
 }
 
 export default function Tooltip({ children, message, position = "below", ...props }: TooltipProps) {
+  const tooltipRef = useRef<HTMLSpanElement>(null);
+  const tooltipKidRefs = useRef<HTMLSpanElement>(null);
+
   const {
     isHovering,
     setIsHovering,
     exitHover,
     setExitHover,
     positionSpacing,
-  } = useTooltip();
+  } = useTooltip(tooltipRef, tooltipKidRefs, position);
 
   const defaultClass = styles.container;
   const incomingStyles = props.style && props.style;
 
   const positionStyle = positionSpacing && {
     ...(position === "right" && {left: positionSpacing, marginLeft: 0}),
-    ...(position === "left" && {left: positionSpacing, marginRight: 0}),
+    ...(position === "left" && {left: 0, marginRight: 0, width: positionSpacing}),
     ...(position === "above" && {top: positionSpacing, marginBottom: 0}),
     ...(position === "below" && {top: positionSpacing, marginTop: 0}),
   } as CSSProperties;
@@ -45,11 +48,11 @@ export default function Tooltip({ children, message, position = "below", ...prop
 
   return (
     <>
-      <span id="children" onMouseEnter={() => onMouseEnter(setIsHovering, setExitHover)} onMouseLeave={() => onMouseLeave(setIsHovering, setExitHover)}>
+      <span ref={tooltipKidRefs} onMouseEnter={() => onMouseEnter(setIsHovering, setExitHover)} onMouseLeave={() => onMouseLeave(setIsHovering, setExitHover)}>
         {children}
       </span>
       
-      <span className={classes} style={styling}>
+      <span ref={tooltipRef} className={classes} style={styling}>
         {message}
       </span>
     </>
