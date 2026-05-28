@@ -57,9 +57,9 @@ export function useContactCommand() {
       // REFACTOR THIS MESS
       const runMatch = cmd.match(/^run (.+)$/i);
       const terminal = runMatch && runMatch[1].toLowerCase();
-      const isValid = terminal && TERMINAL_VIEWS.includes(terminal);
+      const isValid = terminal && TERMINAL_VIEWS.includes(terminal)
 
-      if (!isValid) handleToast(`Unknown command was entered: ${cmd}`);
+      if (!isValid && !cmd.startsWith("run")) handleToast(`Unknown command was entered: ${cmd}`);
     }
   }
 
