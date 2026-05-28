@@ -1,7 +1,6 @@
 .container {
   opacity: 0;
-
-  position: absolute;
+  position: fixed;
   display: flex;
   border-radius: 6px;
   border: 1px solid #5e5e5e;
