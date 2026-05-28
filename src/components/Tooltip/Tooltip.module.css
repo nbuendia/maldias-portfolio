@@ -1,0 +1,39 @@
+.container {
+  opacity: 0;
+
+  position: absolute;
+  display: flex;
+  border-radius: 6px;
+  border: 1px solid #5e5e5e;
+  background: #3C3C3C;
+  margin: 1em;
+  padding: 1em;
+  text-wrap: pretty;
+  cursor: default;
+}
+
+.fadeIn {
+  animation: fadeIn 500ms ease-in forwards;
+}
+
+.fadeOut {
+  animation: fadeOut 500ms ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
