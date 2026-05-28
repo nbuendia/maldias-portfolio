@@ -56,7 +56,13 @@
 }
 
 .confrimation {
+  display: flex;
+  align-items: center;
   font-style: italic;
+}
+
+.info {
+  width: min-content;
 }
 
 @keyframes glitch {

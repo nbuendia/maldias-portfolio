@@ -13,6 +13,7 @@ import {
 
 import { Icon } from "@/components/Icon";
 import { EllipsisLoader } from "@/components/EllipsisLoader";
+import { Tooltip } from "@/components/Tooltip";
 import { EmailForm } from "@/sections/EmailForm";
 
 import styles from "./Contact.module.css";
@@ -42,6 +43,8 @@ export default function Contact() {
   
   useCurrentContactIndex();
   useAsciiScroll(projectContaienrRef, setStartAsciiScrollAnim);
+
+  const emailSentTooltipMsg = "If you wish to send another email, please wait a day to send. Thank you for your patience.";
 
   useEffect(() => {
     return () => handleContactStateReset();
@@ -111,6 +114,10 @@ export default function Contact() {
           {sendEmailPrompts.sentEmailConfrimation && (
             <pre className={styles.confrimation}>
               Your email has been sent!
+
+              <Tooltip message={emailSentTooltipMsg} position="right">
+                <Icon name="info" size="16px" className={styles.info} />
+              </Tooltip>
             </pre>
           )}
 
