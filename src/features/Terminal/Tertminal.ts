@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  terminal: "about",
+  terminal: "home",
 };
 
 export const terminalSlice = createSlice({
