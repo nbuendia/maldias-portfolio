@@ -9,6 +9,7 @@ import { Terminal } from "@/components/Terminal";
 import { CommandBar } from "@/components/CommandBar";
 
 import { Banner } from "@/sections/Banner";
+import { Home } from "@/sections/Home";
 import { AboutMe } from "@/sections/AboutMe";
 import { Projects } from "@/sections/Projects";
 import { Contact } from "@/sections/Contact";
@@ -21,7 +22,7 @@ export default function Main() {
   const { terminal, handleCommand } = useTerminalCommand()
 
   const terminalComponentList = {
-    home: <>HOME</>,
+    home: <Home />,
     about: <AboutMe />,
     projects: <Projects />,
     contact: <Contact />
