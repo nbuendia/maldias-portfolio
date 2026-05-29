@@ -1,0 +1,53 @@
+.container {
+  align-content: flex-end;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  padding: 20px;
+}
+
+.title,
+.intro,
+.commandInfoContainer {
+  font-family: var(--font-cutive-mono);
+  white-space: break-spaces;
+}
+
+.title {
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.intro {
+  border-top: dashed 1px whitesmoke;
+  border-bottom: dashed 1px whitesmoke;
+  padding: 1em 0;
+}
+
+.commandInfoContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.instructions_fact {
+  margin-bottom: 0.25em;
+}
+
+.instructions {
+  margin-bottom: 1em;
+}
+
+.command {
+  display: flex;
+  align-items: center;
+}
+
+.commandIcon {
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.homeCommand {
+  font-weight: 600;
+}
