@@ -19,7 +19,12 @@ export function useProjectsList() {
   const currentProjectIndex = useSelector((state: RootState) => state.projectsSlice.currentProjectIndex);
 
   const handleShowProjects = useCallback(() => {
-    dispatch(setShowProjects(true));
+    const showProjectsTimeout = setTimeout(() => {
+      dispatch(setShowProjects(true));
+    }, 3000);
+
+    return () => clearTimeout(showProjectsTimeout);
+    
   }, [dispatch]);
 
   function handleProjectStatus(status: keyof ProjectStatus) {
