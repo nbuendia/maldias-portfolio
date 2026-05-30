@@ -6,15 +6,18 @@
   padding: 20px;
 }
 
-.art {
-  color: yellow;
-  overflow: visible;
+.command {
+  display: flex;
+  align-items: center;
+  animation: glitch 1s ease-in 1s forwards;
+  font-family: var(--font-cutive-mono);
+  margin-bottom: 1em;
 }
 
-.command {
-  animation: glitch 1s ease-in 1s forwards;
-  color: magenta;
-  font-family: var(--font-cutive-mono);
+.commandIcon {
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .response {

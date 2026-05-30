@@ -1,8 +1,6 @@
 import { useEffect, useRef } from "react";
 import { ProjectStatus } from "@/features/Projects";
-import { PROJECT_ASCII } from "@/lib/constants";
 
-import { useAsciiScroll } from "@/hooks";
 import {
   useProjectsReset,
   useProjectsState,
@@ -16,13 +14,11 @@ import styles from "./Projects.module.css";
 
 export default function Projects() {
   const projectContainerRef = useRef(null);
-
   const {handleProjectsStateReset} = useProjectsReset();
-  const {projects, currentProjectIndex, startProjectAnimation, showProjectsAscii, showProjectsSection, showProjects, startAsciiScrollAnim} = useProjectsState();
-  const {setStartAsciiScrollAnim, handleShowProjectAscii} = useProjects();
+  const {projects, currentProjectIndex, showProjectsSection, showProjects} = useProjectsState();
   const {handleShowProjects, handleProjectStatus} = useProjectsList();
-
-  useAsciiScroll(projectContainerRef, setStartAsciiScrollAnim);
+  
+  useProjects();
 
   useEffect(() => {
     return () => handleProjectsStateReset();
@@ -30,29 +26,17 @@ export default function Projects() {
 
   return (
     <div id="projects" ref={projectContainerRef} className={styles.container}>
-      {startProjectAnimation && (
-        <>
-          <pre className={styles.command} onAnimationEnd={handleShowProjectAscii}>
-            $ cat projects.txt
-          </pre>
-          {showProjectsAscii && <pre id="art" className={`${styles.art} ${startAsciiScrollAnim && "artAnim"}`}>{PROJECT_ASCII}</pre>}
-        </>
-      )}
-
-      <br />
-
       {showProjectsSection && (
         <>
           <pre className={styles.command} onAnimationEnd={handleShowProjects}>
-            $ cat project-list.txt
+            <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
+            run project-list.txt
           </pre>
 
           {showProjects && (
             <>
               {projects.slice(0, currentProjectIndex + 1).map((project, idx) => (
                 <div key={idx} className={styles.projectsContainer}>
-                  <Icon name="image" size="75px" />
-
                   <div className={styles.projectDescriptionContainer}>
                     <span className={styles.projectTitle}>
                       {project.name}
