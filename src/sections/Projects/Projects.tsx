@@ -7,6 +7,7 @@ import {
   useProjects,
   useProjectsList,
 } from "./hooks";
+import { PROJECT_LIST_COMMAND } from "./utils";
 
 import { Icon } from "@/components/Icon";
 
@@ -30,7 +31,11 @@ export default function Projects() {
         <>
           <pre className={styles.command} onAnimationEnd={handleShowProjects}>
             <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
-            run project-list.txt
+            {PROJECT_LIST_COMMAND.split("").map((letter, idx) => (
+              <span key={idx} className={styles.letter} style={{animationDelay: `${idx * 0.1}s`}}>
+                {letter}
+              </span>
+            ))}
           </pre>
 
           {showProjects && (
