@@ -19,23 +19,17 @@ export interface ProjectStatus {
 }
 
 interface ProjectsState {
-  showProjectsAscii: boolean;
-  startProjectAnimation: boolean;
   projects: ProjectsList[],
   showProjectsSection: boolean;
   showProjects: boolean;
   currentProjectIndex: number;
-  startAsciiScrollAnim: boolean;
 };
 
 const initialState = {
-  showProjectsAscii: false,
-  startProjectAnimation: false,
   projects: [] as ProjectsList[],
   showProjectsSection: false,
   showProjects: false,
   currentProjectIndex: -1,
-  startAsciiScrollAnim: false,
 } satisfies ProjectsState as ProjectsState;
 
 export const projectsSlice = createSlice({
@@ -43,12 +37,6 @@ export const projectsSlice = createSlice({
   reducerPath: "projectsSlice",
   initialState,
   reducers: {
-    setShowProjectsAscii: (state, action) => {
-      state.showProjectsAscii = action.payload;
-    },
-    setStartProjectAnimation: (state, action) => {
-      state.startProjectAnimation = action.payload;
-    },
     setProjects: (state, action) => {
       state.projects = [...action.payload];
     },
@@ -60,9 +48,6 @@ export const projectsSlice = createSlice({
     },
     setCurrentProjectIndex: (state, action) => {
       state.currentProjectIndex = action.payload;
-    },
-    setStartAsciiScrollAnim: (state, action) => {
-      state.startAsciiScrollAnim = action.payload;
     },
   },
 });

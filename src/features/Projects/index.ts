@@ -4,11 +4,8 @@ export { projectsSlice };
 export type { ProjectsList, ProjectStatus } from "./Projects";
 
 export const {
-  setShowProjectsAscii,
-  setStartProjectAnimation,
   setProjects,
   setShowProjectsSection,
   setShowProjects,
   setCurrentProjectIndex,
-  setStartAsciiScrollAnim,
 } = projectsSlice.actions;
