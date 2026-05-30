@@ -3,7 +3,6 @@ import { CONTACT_ASCII, CONTACT_INFO, RESET_REGEX } from "./ContactConstants";
 import { S_ID, T_ID, P_KEY } from "./emailFormConstants";
 import { FIRST_NAME, LAST_NAME } from "./greetingConstants";
 import { TERMINAL_VIEWS } from "./MainConstants";
-import { PROJECT_ASCII } from "./projectsConstants";
 import { BACK, WELCOME } from "./WelcomeBackConstants";
 
 export {
@@ -19,7 +18,6 @@ export {
   FIRST_NAME,
   LAST_NAME,
   TERMINAL_VIEWS,
-  PROJECT_ASCII,
   BACK,
   WELCOME,
 };
