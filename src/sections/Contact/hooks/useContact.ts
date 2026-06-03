@@ -2,41 +2,30 @@ import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import {
-  setShowContactAscii,
   setShowContactInfo,
   setShowContactInfoSection,
-  setShowContactSection,
-  setStartAsciiScrollAnim,
 } from "@/features/ContactMe";
 
 export function useContact() {
   const dispatch = useDispatch();
 
-  const handleShowContactAscii = useCallback(() => {
-    dispatch(setShowContactAscii(true));
-    
-    const showContactInfoSectionTimeout = setTimeout(() => {
-      dispatch(setShowContactInfoSection(true));
-    }, 1000);
-
-    return () => clearTimeout(showContactInfoSectionTimeout);
-  }, [dispatch]);
-
   const handleShowContactInfo = useCallback(() => {
-    dispatch(setShowContactInfo(true));
+    const showContactInfoTimeout = setTimeout(() => {
+      dispatch(setShowContactInfo(true));
+    }, 4000);
+
+    return () => clearTimeout(showContactInfoTimeout);
   }, [dispatch]);
   
   useEffect(() => {
     const showContactSectionTimeout = setTimeout(() => {
-      dispatch(setShowContactSection(true));
+      dispatch(setShowContactInfoSection(true));
     }, 1000);
   
     return () => clearTimeout(showContactSectionTimeout);
   }, [dispatch]);
 
   return {
-    handleShowContactAscii,
     handleShowContactInfo,
-    setStartAsciiScrollAnim,
   };
 }
