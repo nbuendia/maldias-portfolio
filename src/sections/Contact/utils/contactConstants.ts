@@ -14,3 +14,5 @@ export const CONTACT_INFO = [{
   }];
 
 export const RESET_REGEX = /^--reset(?:\s+([\w-]+))?/;
+
+export const EMAIL_SENT_TOOLTIP_MSG = "If you wish to send another email, please wait a day to send. Thank you for your patience.";

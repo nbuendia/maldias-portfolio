@@ -8,7 +8,12 @@ import {
   useContactState,
   useYesEmail,
 } from "./hooks";
-import { CONTACT_INFO, CONTACT_INFO_COMMAND } from "./utils";
+
+import {
+  CONTACT_INFO,
+  CONTACT_INFO_COMMAND,
+  EMAIL_SENT_TOOLTIP_MSG,
+} from "./utils";
 
 import { Icon } from "@/components/Icon";
 import { EllipsisLoader } from "@/components/EllipsisLoader";
@@ -31,8 +36,6 @@ export default function Contact() {
   const {handleShowContactInfo} = useContact();
   const {yesEmailPrompts} = useYesEmail();
   const {handleBlurAction} = useContactEmail();
-
-  const emailSentTooltipMsg = "If you wish to send another email, please wait a day to send. Thank you for your patience.";
 
   useEffect(() => {
     return () => handleContactStateReset();
@@ -100,7 +103,7 @@ export default function Contact() {
             <pre className={styles.confrimation}>
               Your email has been sent!
 
-              <Tooltip message={emailSentTooltipMsg} position="right">
+              <Tooltip message={EMAIL_SENT_TOOLTIP_MSG} position="right">
                 <Icon name="info" size="16px" className={styles.info} />
               </Tooltip>
             </pre>
