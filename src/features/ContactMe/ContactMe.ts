@@ -17,26 +17,18 @@ export interface YesEmailPrompts {
 }
 
 interface ContactMeState {
-  showContactSection: boolean;
-  showContactAscii: boolean;
   showContactInfoSection: boolean;
   showContactInfo: boolean;
-  currentContactIndex: number;
   showEmailSection: boolean;
-  startAsciiScrollAnim: boolean;
   sendEmailPrompts: SendEmailPrompts;
   noEmailPrompts: NoEmailPrompts;
   yesEmailPrompts: YesEmailPrompts;
 };
 
 const initialState = {
-  showContactSection: false,
-  showContactAscii: false,
   showContactInfoSection: false,
   showContactInfo: false,
-  currentContactIndex: -1,
   showEmailSection: false,
-  startAsciiScrollAnim: false,
   
   sendEmailPrompts: {
     sendEmailPrompt: false,
@@ -60,26 +52,14 @@ export const contactMeSlice = createSlice({
   reducerPath: "contactMeSlice",
   initialState,
   reducers: {
-    setShowContactSection: (state, action) => {
-      state.showContactSection = action.payload;
-    },
-    setShowContactAscii: (state, action) => {
-      state.showContactAscii = action.payload;
-    },
     setShowContactInfoSection: (state, action) => {
       state.showContactInfoSection = action.payload;
     },
     setShowContactInfo: (state, action) => {
       state.showContactInfo = action.payload;
     },
-    setCurrentContactIndex: (state, action) => {
-      state.currentContactIndex = action.payload;
-    },
     setShowEmailSection: (state, action) => {
       state.showEmailSection = action.payload;
-    },
-    setStartAsciiScrollAnim: (state, action) => {
-      state.startAsciiScrollAnim = action.payload;
     },
     setSendEmailPrompts: (state, action) => {
       state.sendEmailPrompts = {

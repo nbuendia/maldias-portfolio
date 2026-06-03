@@ -4,13 +4,9 @@ export { contactMeSlice };
 export type { SendEmailPrompts, NoEmailPrompts, YesEmailPrompts } from "./ContactMe";
 
 export const {
-  setShowContactSection,
-  setShowContactAscii,
   setShowContactInfoSection,
   setShowContactInfo,
-  setCurrentContactIndex,
   setShowEmailSection,
-  setStartAsciiScrollAnim,
   setSendEmailPrompts,
   setNoEmailPrompts,
   setYesEmailPrompts,
