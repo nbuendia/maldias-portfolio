@@ -1,3 +1,11 @@
+.command,
+.response,
+.contactInfo,
+.contactInfoLabel,
+.emailPrompt {
+  font-family: var(--font-cutive-mono);
+}
+
 .container {
   align-content: flex-end;
   overflow-y: auto;
@@ -6,19 +14,16 @@
 }
 
 .command {
-  animation: glitch 1s ease-in 1s forwards;
-  color: magenta;
-  font-family: var(--font-cutive-mono);
-}
-
-.art {
   display: flex;
-  color: yellow;
+  align-items: center;
+  animation: glitch 1s ease-in 3s forwards;
+  margin-bottom: 1em;
 }
 
-.response {
-  color: cyan;
-  font-family: var(--font-cutive-mono);
+.commandIcon {
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .letter {
@@ -27,11 +32,25 @@
   opacity: 0;
 }
 
+.contactInfoSection {
+  border-top: dashed 1px whitesmoke;
+  border-bottom: dashed 1px whitesmoke;
+  padding: 1em 0;
+}
+
+.contactInfo {
+  display: flex;
+  align-items: center;
+  color: cyan;
+}
+
+.contactLink:hover {
+  text-decoration: underline;
+}
+
 .emailPrompt {
   display: flex;
   align-items: center;
-  color: magenta;
-  font-family: var(--font-cutive-mono);
 }
 
 .emailPromptAnimation {
@@ -44,7 +63,7 @@
 }
 
 .promptYesNo {
-  color: #BB00BB;
+  color: #979797;
   font-style: italic;
 }
 

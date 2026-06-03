@@ -1,15 +1,14 @@
 import { useEffect, useRef } from "react";
 
-import { CONTACT_ASCII, CONTACT_INFO } from "@/lib/constants";
-import { useAsciiScroll, useEllipsis } from "@/hooks";
+import { useEllipsis } from "@/hooks";
 import {
   useContact,
   useContactEmail,
   useContactReset,
   useContactState,
   useYesEmail,
-  useCurrentContactIndex,
 } from "./hooks";
+import { CONTACT_INFO, CONTACT_INFO_COMMAND } from "./utils";
 
 import { Icon } from "@/components/Icon";
 import { EllipsisLoader } from "@/components/EllipsisLoader";
@@ -20,29 +19,18 @@ import styles from "./Contact.module.css";
 
 export default function Contact() {
   const projectContaienrRef = useRef(null);
-  const { showEllipsis } = useEllipsis();
+  const {showEllipsis} = useEllipsis();
   const {handleContactStateReset} = useContactReset();
   const {
-    showContactSection,
-    showContactAscii,
     showContactInfoSection,
     showContactInfo,
-    currentContactIndex,
     showEmailSection,
-    startAsciiScrollAnim,
     sendEmailPrompts,
     noEmailPrompts,
   } = useContactState();
-  const {
-    setStartAsciiScrollAnim,
-    handleShowContactAscii,
-    handleShowContactInfo,
-  } = useContact();
+  const {handleShowContactInfo} = useContact();
   const {yesEmailPrompts} = useYesEmail();
   const {handleBlurAction} = useContactEmail();
-  
-  useCurrentContactIndex();
-  useAsciiScroll(projectContaienrRef, setStartAsciiScrollAnim);
 
   const emailSentTooltipMsg = "If you wish to send another email, please wait a day to send. Thank you for your patience.";
 
@@ -52,36 +40,33 @@ export default function Contact() {
 
   return (
     <div id="contact" ref={projectContaienrRef} className={styles.container}>
-      {showContactSection && (
-        <>
-          <pre className={styles.command} onAnimationEnd={handleShowContactAscii}>
-            $ cat lets-chat.txt
-          </pre>
-          {showContactAscii && <pre id="art" className={`${styles.art} ${startAsciiScrollAnim && "artAnim"}`}>{CONTACT_ASCII}</pre>}
-        </>
-      )}
-
-      <br />
-
       {showContactInfoSection && (
         <>
-          <pre className={styles.command} onAnimationEnd={handleShowContactInfo}
-            style={{animationDelay: "250ms"}}>
-              $ cat contcact-info.txt
-          </pre>
-          {showContactInfo && (
-            <>
-              {CONTACT_INFO.slice(0, currentContactIndex + 1).map((info, infoKey) => (
-                <pre key={infoKey} className={styles.response}>
-                  {info.split("").map((letter, letterKey) => (
-                    <span key={letterKey} className={styles.letter} 
-                        style={{animationDelay: `${letterKey * 0.05}s`}}>
-                      {letter}
-                    </span>
-                  ))}
-                </pre>
+          <pre className={styles.command} onAnimationEnd={handleShowContactInfo}>
+              <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
+              {CONTACT_INFO_COMMAND.split("").map((letter, idx) => (
+                <span key={idx} className={styles.letter} style={{animationDelay: `${idx * 0.1}s`}}>
+                  {letter}
+                </span>
               ))}
-            </>
+          </pre>
+          
+          {showContactInfo && (
+            <pre className={styles.contactInfoSection}>
+              {CONTACT_INFO.map((info, idx) => (
+                <span key={idx} className={styles.contactInfo}>
+                  <Icon name={info.icon} color={"whitesmoke"} size="16px" className={styles.commandIcon} />
+                  <pre className={styles.contactInfoLabel}>{info.label}: </pre>
+                  {info.label === "Name" ? (
+                    <span>{info.info}</span>
+                  ) : (
+                    <a href={info.info} target="_blank" className={styles.contactLink}>
+                      {info.info}
+                    </a>
+                  )}
+                </span>
+              ))}
+            </pre>
           )}
         </>
       )}
