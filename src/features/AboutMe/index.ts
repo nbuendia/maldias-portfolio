@@ -2,13 +2,9 @@ import { aboutMeSlice } from "./AboutMe";
 
 export { aboutMeSlice };
 
-export const { 
-  setStartAboutMeAnimation,
-  setShowAboutMeArt,
+export const {
   setShowWhoami,
   setStartWhoamiAnimation,
   setShowTechStack,
   setStartTechStackAnimation,
-  setCurrentTechIndex,
-  setStartAsciiScrollAnim,
 } = aboutMeSlice.actions;
