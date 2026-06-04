@@ -1,7 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
-import { ABOUT_ME_ART, TECH_STACK, WHO_AM_I } from "@/lib/constants";
-import { useAsciiScroll } from "@/hooks";
 import {
   useAboutMeReset,
   useAboutMeState,
@@ -9,57 +7,48 @@ import {
   useTechStack
 } from "./hooks";
 
+import {
+  TECH_STACK_COMMAND,
+  WHO_AM_I,
+  WHOAMI_COMMAND,
+  TECH_STACK,
+} from "./utils";
+
+import { Icon } from "@/components/Icon";
+
 import styles from "./AboutMe.module.css";
 
-export default function AboutMe() {
-  const projectContainerRef = useRef(null);
-  
+export default function AboutMe() {  
   const {handleAboutMeStateReset} = useAboutMeReset();
-  const {handleShowAboutMeAscii, setStartAsciiScrollAnim, handleShowWhoami} = useAboutMeText();
-  const {startTechStackAnimation, currentTechIndex, handleSetStartTechStackAnimation} = useTechStack();
+  const {handleShowWhoami} = useAboutMeText();
+  const {startTechStackAnimation, handleSetStartTechStackAnimation} = useTechStack();
   
   const {
-    startAboutMeAnimation,
-    showAboutMeArt,
-    startAsciiScrollAnim,
     showWhoami,
     startWhoamiAnimation,
     showTechStack,
   } = useAboutMeState();
-
-  useAsciiScroll(projectContainerRef, setStartAsciiScrollAnim);
 
   useEffect(() => {   
     return () => handleAboutMeStateReset();
   }, [handleAboutMeStateReset]);
 
   return (
-    <div id="about" ref={projectContainerRef} className={styles.container}>
-      {startAboutMeAnimation && (
-        <>
-          <pre className={styles.command} onAnimationEnd={handleShowAboutMeAscii}>
-            $ cat about-me.txt
-          </pre>
-
-          {showAboutMeArt && <pre id="art" className={`${styles.art} ${startAsciiScrollAnim && "artAnim"}`}>{ABOUT_ME_ART}</pre>}
-        </>
-      )}
-
-      <br />
-
+    <div id="about" className={styles.container}>
       {showWhoami && (
         <>
-          <pre className={styles.command} onAnimationEnd={handleShowWhoami} style={{animationDelay: "250ms"}}>
-            $ whoami
+          <pre className={styles.command} onAnimationEnd={handleShowWhoami}>
+            <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
+            {WHOAMI_COMMAND.split("").map((letter, idx) => (
+              <span key={idx} className={styles.letter} style={{animationDelay: `${idx * 0.1}s`}}>
+                {letter}
+              </span>
+            ))}
           </pre>
             
           {startWhoamiAnimation && (
-            <pre className={styles.response}>
-              {WHO_AM_I.split("").map((letter, key) => (
-                <span key={key} className={styles.letter} style={{animationDelay: `${key * 0.1}s`}}>
-                  {letter}
-                </span>
-              ))}
+            <pre className={styles.whoamiInfo}>
+              {WHO_AM_I}
             </pre>
           )}
         </>
@@ -69,22 +58,33 @@ export default function AboutMe() {
 
       {showTechStack && (
         <>
-          <pre className={styles.command} onAnimationEnd={handleSetStartTechStackAnimation} style={{animationDelay: "250ms"}}>
-            $ tech-stack
+          <pre className={styles.command} style={{marginBottom: "2em"}} onAnimationEnd={handleSetStartTechStackAnimation}>
+            <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
+            
+            {TECH_STACK_COMMAND.split("").map((letter, idx) => (
+              <span key={idx} className={styles.letter} style={{animationDelay: `${idx * 0.1}s`}}>
+                {letter}
+              </span>
+            ))}
           </pre>
           
           {startTechStackAnimation && (
-            <>
-              {TECH_STACK.slice(0, currentTechIndex + 1).map((tech, lineKey) => (
-                <pre key={lineKey} className={styles.response}>
-                  {tech.split("").map((letter, letterKey) => (
-                    <span key={letterKey} className={styles.letter} style={{animationDelay: `${letterKey * 0.05}s`}}>
-                      {letter}
+            <pre className={styles.techStackContainer}>
+              {TECH_STACK.map((techList, key) => (
+                <div key={key} className={styles.techStackBlock}>
+                  <span className={styles.techStackBlockLabel}>
+                    <Icon name={techList.icon} size="14px" color="whitesmoke" className={styles.commandIcon} />
+                    {techList.label}
+                  </span>
+
+                  {techList.list.map((tech, idx) => (
+                    <span key={idx}>
+                      {tech}
                     </span>
                   ))}
-                </pre>
+                </div>
               ))}
-            </>
+            </pre>
           )}
         </>
       )}

@@ -1,3 +1,10 @@
+.command,
+.response,
+.whoamiInfo,
+.techStackContainer {
+  font-family: var(--font-cutive-mono);
+}
+
 .container {
   align-content: flex-end;
   overflow-y: auto;
@@ -11,20 +18,61 @@
 }
 
 .command {
-  animation: glitch 1s ease-in 1s forwards;
-  color: magenta;
-  font-family: var(--font-cutive-mono);
+  display: flex;
+  align-items: center;
+  animation: glitch 1s ease-in 2s forwards;
+  margin-bottom: 1em;
+}
+
+.commandIcon {
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.whoamiInfo {
+  border-top: dashed 1px whitesmoke;
+  border-bottom: dashed 1px whitesmoke;
+  padding: 1em 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  color: cyan;
 }
 
 .response {
   color: cyan;
-  font-family: var(--font-cutive-mono);
 }
 
 .letter {
   display: inline-block;
   animation: typeEffect 1s step-start 3s forwards;
   opacity: 0;
+}
+
+.techStackContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.techStackBlock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border: solid 1px whitesmoke;
+  padding: 0.5em;
+  padding-top: 1em;
+}
+
+.techStackBlockLabel {
+  position: absolute;
+  top: -0.75em;
+  display: flex;
+  background: #141414;
+  padding: 0 0.5em;
+  font-weight: 600;
 }
 
 @keyframes glitch {
