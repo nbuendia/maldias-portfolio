@@ -1,12 +1,13 @@
 "use client";
 
 import { useToast } from "@/hooks";
-// LOCAL HOOKS - MIGHT MOVE
 import { useMain, useTerminalCommand } from "./hooks";
+import { commandList } from "./utils";
 
 import { Toast } from "@/components/Toast";
 import { Terminal } from "@/components/Terminal";
 import { CommandBar } from "@/components/CommandBar";
+import { DropDown } from "@/components/DropDown";
 
 import { Banner } from "@/sections/Banner";
 import { Home } from "@/sections/Home";
@@ -33,7 +34,11 @@ export default function Main() {
       {showComponent && (
         <>
           <Banner />
-          <Terminal name={terminal} terminalComponentList={terminalComponentList} />
+
+          <Terminal name={terminal} terminalComponentList={terminalComponentList}>
+            {terminal !== "home" && <DropDown label="COMMAND LIST" menuItems={commandList} handleMenuItemClick={handleCommand} />}
+          </Terminal>
+
           <CommandBar onCommand={handleCommand} />
         </>
       )}
@@ -51,7 +56,7 @@ export default function Main() {
                 </pre>
               </>
             ) : (
-                <>{toast.message}</>
+              <>{toast.message}</>
             )}
           </div>
         </Toast>
