@@ -12,23 +12,29 @@ export default function Home() {
         Frontend focused software developer with experience building fullstack web applications, internal tools and intuitive user interfaces.
       </div>
 
-      <br />
-
-      <div className={styles.commandInfoContainer}>
-        <span className={styles.instructions_fact}>
-          This is a terminal style, interactive portfolio.
+      <div className={styles.instructionsContainer}>
+        <span className={styles.title}>
+          How To Navigate:
         </span>
 
         <span className={styles.instructions}>
-          Use the commands listed below to navigate through different parts of the site.
+          This is a terminal style, interactive portfolio.
         </span>
 
-        <span>Available commands:</span>
+        <span>
+          Type commands in input below or use the dropdown on the upper right of the terminal to navigate through different parts of the site.
+        </span>
+      </div>
+
+      <div className={styles.commandListContainer}>
+        <span className={styles.title}>
+          Available commands:
+        </span>
         
         {TERMINAL_COMMANDS.map((command, commandKey) => (
           <span key={commandKey} className={styles.command}>
             <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
-            <span className={command === "home" ? styles.homeCommand : ""}>run {command}</span>
+            <span>run {command}</span>
           </span>
           ))
         }
