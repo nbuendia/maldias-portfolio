@@ -36,7 +36,7 @@ export default function Main() {
           <Banner />
 
           <Terminal name={terminal} terminalComponentList={terminalComponentList}>
-            {terminal !== "home" && <DropDown label="COMMAND LIST" menuItems={COMMAND_LIST} handleMenuItemClick={handleCommand} />}
+            <DropDown label="COMMAND LIST" menuItems={COMMAND_LIST} handleMenuItemClick={handleCommand} />
           </Terminal>
 
           <CommandBar onCommand={handleCommand} />
