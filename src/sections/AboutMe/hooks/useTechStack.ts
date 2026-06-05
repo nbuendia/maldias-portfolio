@@ -11,7 +11,7 @@ export function useTechStack() {
   const handleSetStartTechStackAnimation = useCallback(() => {
     const techStackTimeout = setTimeout(() => {
       dispatch(setStartTechStackAnimation(true));
-    }, 2000);
+    }, 3000);
 
     return () => clearTimeout(techStackTimeout);
   }, [dispatch]);

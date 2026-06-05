@@ -28,7 +28,7 @@ export function useAboutMeText() {
   useEffect(() => {
     const aboutMeTimeOut = setTimeout(() => {
       dispatch(setShowWhoami(true));
-    }, 2000);
+    }, 1000);
       
     return () => clearTimeout(aboutMeTimeOut);
   }, [dispatch]);
