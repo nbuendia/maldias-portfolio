@@ -2,7 +2,7 @@
 
 import { useToast } from "@/hooks";
 import { useMain, useTerminalCommand } from "./hooks";
-import { commandList } from "./utils";
+import { COMMAND_LIST } from "./utils";
 
 import { Toast } from "@/components/Toast";
 import { Terminal } from "@/components/Terminal";
@@ -36,7 +36,7 @@ export default function Main() {
           <Banner />
 
           <Terminal name={terminal} terminalComponentList={terminalComponentList}>
-            {terminal !== "home" && <DropDown label="COMMAND LIST" menuItems={commandList} handleMenuItemClick={handleCommand} />}
+            {terminal !== "home" && <DropDown label="COMMAND LIST" menuItems={COMMAND_LIST} handleMenuItemClick={handleCommand} />}
           </Terminal>
 
           <CommandBar onCommand={handleCommand} />
