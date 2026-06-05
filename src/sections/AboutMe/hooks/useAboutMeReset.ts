@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { 
   setShowTechStack,
   setShowWhoami,
-  setStartTechStackAnimation
+  setStartWhoamiAnimation,
+  setStartTechStackAnimation,
 } from "@/features/AboutMe";
 
 export function useAboutMeReset() {
@@ -11,6 +12,7 @@ export function useAboutMeReset() {
 
   const handleAboutMeStateReset = useCallback(() => {
     dispatch(setShowWhoami(false));
+    dispatch(setStartWhoamiAnimation(false));
     dispatch(setShowTechStack(false));
     dispatch(setStartTechStackAnimation(false));
   }, [dispatch]);
