@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Rick & Morty Randomizer",
-    "description": "A web app that displays a unique random character from the show Rick and Morty for you everyday. Dont Like your chatacter of the day? You have the option to choose another!",
+    "description": "A web app that displays a unique random Rick and Morty character for you every day. Not a fan of your character? You can always choose another!",
     "technologies": [ "JavaScript", "HTML", "CSS", "React", "Material UI", "Netlify" ],
     "image": "",
     "status": "completed",
@@ -13,7 +13,7 @@
   {
     "id": 2,
     "name": "Space Jams",
-    "description": "Inspired by outerspace, I built a web app that contains space related information from different sources.",
+    "description": "Inspired by the stars and space, I built a web app that brings together space related information for users to explore different corners of the universe.",
     "technologies": [ "JavaScript", "HTML", "CSS", "React", "Material UI" ],
     "image": "",
     "status": "wip",
@@ -23,46 +23,35 @@
   },
   {
     "id": 3,
-    "name": "Space Jams micro-service",
-    "description": "A micro service that consumes data from various APIs, consolidates and optimizes the data to feed to one of my personal projects.",
-    "technologies": [ "JavaScript", "Node.js", "Express", "Render" ],
+    "name": "Buendia Bytes",
+    "description": "My personal portfolio showcasing my projects, lessons learned along the way and some of my favorite tools of the trade. This is it! You're in it!",
+    "technologies": [ "TypeScript", "CSS", "React", "Redux", "Next.js" ],
     "image": "",
-    "status": "not-started",
+    "status": "wip",
     "url": "",
-    "github": "",
-    "tags": [ "api", "micro-service", "nasa", "astronomy" ]
+    "github": "https://github.com/nbuendia/maldias-portfolio",
+    "tags": [ "personal-portfolio", "portfolio", "web-app", "frontend", "multi-page-app" ]
   },
   {
     "id": 4,
-    "name": "Portfolio API",
-    "description": "A minimal API that has the data of the projects I'm most proud of and have worked on throughout my coding journey.",
-    "technologies": [ "C#", "Scalar", "MongoDB", "Render"],
+    "name": "Space Jams micro-service",
+    "description": "A microservice that gathers data from various APIs, cleans, optimizes and serves it to my Space Jams project.",
+    "technologies": [ "JavaScript", "Node.js", "Express", "Postgres" ],
     "image": "",
     "status": "not-started",
     "url": "",
     "github": "",
-    "tags": [ "api" ]
+    "tags": [ "api", "micro-service", "backend", "nasa", "astronomy" ]
   },
   {
     "id": 5,
-    "name": "Buendia UI",
-    "description": "A UI component library I've created to use in some of my personal projects.",
-    "technologies": [ "TypeScript", "CSS", "React", "Redux", "Material Icons", "Storybook", "npm registry" ],
+    "name": "Portfolio API",
+    "description": "A minimal API that stores and delivers data for the projects I'm most proud of throughout my development journey.",
+    "technologies": [ "C#", "Scalar", "MongoDB" ],
     "image": "",
     "status": "not-started",
     "url": "",
     "github": "",
-    "tags": [ "component-library", "ui", "components", "frontend", "npm" ]
-  },
-  {
-    "id": 6,
-    "name": "Buendia Bytes",
-    "description": "My personal porfolio displaying all my planned and completed projects, things I've learned along the way and some of my favorite tools of the trade. This is it! you're in it!",
-    "technologies": [ "TypeScript", "CSS", "React", "Redux", "Next.js" ],
-    "image": "",
-    "status": "not-started",
-    "url": "",
-    "github": "",
-    "tags": [ "personal-portfolio", "portfolio", "web-app", "frontend", "multi-page-app" ]
+    "tags": [ "api", "backend" ]
   }
 ]
