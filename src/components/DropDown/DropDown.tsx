@@ -10,7 +10,6 @@ import styles from "./DropDown.module.css";
 interface DropDownProps extends HTMLAttributes<HTMLElement> {
   label: string;
   menuItems: string[];
-  iconClass?: string;
   handleMenuItemClick: (cmd: string) => void;
 }
 
