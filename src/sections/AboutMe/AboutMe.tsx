@@ -15,6 +15,7 @@ import {
 } from "./utils";
 
 import { Icon } from "@/components/Icon";
+import { TyperwriterText } from "@/components/TyperwriterText";
 
 import styles from "./AboutMe.module.css";
 
@@ -37,14 +38,7 @@ export default function AboutMe() {
     <div id="about" className={styles.container}>
       {showWhoami && (
         <>
-          <pre className={styles.command} onAnimationEnd={handleShowWhoami}>
-            <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
-            {WHOAMI_COMMAND.split("").map((letter, idx) => (
-              <span key={idx} className={styles.letter} style={{animationDelay: `${idx * 0.1}s`}}>
-                {letter}
-              </span>
-            ))}
-          </pre>
+          <TyperwriterText text={WHOAMI_COMMAND} handleOnAnimationEnd={handleShowWhoami} />
             
           {startWhoamiAnimation && (
             <pre className={styles.whoamiInfo}>
@@ -58,15 +52,7 @@ export default function AboutMe() {
 
       {showTechStack && (
         <>
-          <pre className={styles.command} style={{marginBottom: "2em"}} onAnimationEnd={handleSetStartTechStackAnimation}>
-            <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
-            
-            {TECH_STACK_COMMAND.split("").map((letter, idx) => (
-              <span key={idx} className={styles.letter} style={{animationDelay: `${idx * 0.1}s`}}>
-                {letter}
-              </span>
-            ))}
-          </pre>
+          <TyperwriterText text={TECH_STACK_COMMAND} handleOnAnimationEnd={handleSetStartTechStackAnimation} />
           
           {startTechStackAnimation && (
             <pre className={styles.techStackContainer}>

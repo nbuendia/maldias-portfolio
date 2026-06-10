@@ -1,4 +1,3 @@
-.command,
 .response,
 .whoamiInfo,
 .techStackContainer {
@@ -18,13 +17,6 @@
   color: yellow;
 }
 
-.command {
-  display: flex;
-  align-items: center;
-  animation: glitch 1s ease-in 2s forwards;
-  margin-bottom: 1em;
-}
-
 .commandIcon {
   margin-left: 0;
   margin-bottom: 0;
@@ -42,12 +34,6 @@
 
 .response {
   color: cyan;
-}
-
-.letter {
-  display: inline-block;
-  animation: typeEffect 1s step-start 3s forwards;
-  opacity: 0;
 }
 
 .techStackContainer {
