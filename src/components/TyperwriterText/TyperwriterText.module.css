@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  align-items: center;
+  animation: glitch 1s ease-in 3s forwards;
+  margin-bottom: 1em;
+  font-family: var(--font-cutive-mono);
+}
+
+.icon {
+  margin-left: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.letter {
+  display: inline-block;
+  animation: typeEffect 1s step-start 3s forwards;
+  opacity: 0;
+}
+
+@keyframes glitch {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes typeEffect {
+  0%, 50% {
+    opacity: 0;
+  }
+  51%, 100% {
+    opacity: 1;
+  }
+}
