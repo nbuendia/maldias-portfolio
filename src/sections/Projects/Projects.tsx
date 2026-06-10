@@ -10,6 +10,7 @@ import {
 import { PROJECT_LIST_COMMAND } from "./utils";
 
 import { Icon } from "@/components/Icon";
+import { TyperwriterText } from "@/components/TyperwriterText";
 
 import styles from "./Projects.module.css";
 
@@ -29,14 +30,7 @@ export default function Projects() {
     <div id="projects" ref={projectContainerRef} className={styles.container}>
       {showProjectsSection && (
         <>
-          <pre className={styles.command} onAnimationEnd={handleShowProjects}>
-            <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
-            {PROJECT_LIST_COMMAND.split("").map((letter, idx) => (
-              <span key={idx} className={styles.letter} style={{animationDelay: `${idx * 0.1}s`}}>
-                {letter}
-              </span>
-            ))}
-          </pre>
+          <TyperwriterText text={PROJECT_LIST_COMMAND} handleOnAnimationEnd={handleShowProjects} />
 
           {showProjects && (
             <>
@@ -45,7 +39,9 @@ export default function Projects() {
                   <div className={styles.projectDescriptionContainer}>
                     <span className={styles.projectTitle}>
                       {project.name}
-                      <Icon name="target" size="6px" color={handleProjectStatus(project.status as keyof ProjectStatus)}
+                      
+                      <Icon name="target" size="6px" 
+                        color={handleProjectStatus(project.status as keyof ProjectStatus)}
                         className={styles.iconAnim} />
                     </span>
                     
