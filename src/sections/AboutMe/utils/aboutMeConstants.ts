@@ -1,4 +1,4 @@
-export const WHOAMI_COMMAND = "whoami.txt";
+export const WHOAMI_COMMAND = "cat who-am-i.txt";
 
 export const WHO_AM_I = `Who am I? I'm your favorite bartender, a growing developer and lifelong student.
 
@@ -8,7 +8,7 @@ My desire to be better than I was yesterday progressed into a fascination with e
 
 What can I say, I love a challenge.`;
 
-export const TECH_STACK_COMMAND = "tech-stack.txt";
+export const TECH_STACK_COMMAND = "cat tech-stack.txt";
 
 const TECH_STACK_FRONTEND = {
   icon: "web",
