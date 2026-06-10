@@ -13,11 +13,11 @@ export function useAboutMeText() {
   const handleShowWhoami = useCallback(() => {
     const whoamiInfoTimeout= setTimeout(() => {
       dispatch(setStartWhoamiAnimation(true));
-    }, 3000);
+    }, 4000);
   
     const whoamiTimeout = setTimeout(() => {
       dispatch(setShowTechStack(true));
-    }, 5000);
+    }, 6000);
   
     return () => {
       clearTimeout(whoamiInfoTimeout);
