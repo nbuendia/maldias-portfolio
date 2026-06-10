@@ -18,6 +18,7 @@ import {
 import { Icon } from "@/components/Icon";
 import { EllipsisLoader } from "@/components/EllipsisLoader";
 import { Tooltip } from "@/components/Tooltip";
+import { TyperwriterText } from "@/components/TyperwriterText";
 import { EmailForm } from "@/sections/EmailForm";
 
 import styles from "./Contact.module.css";
@@ -45,20 +46,14 @@ export default function Contact() {
     <div id="contact" ref={projectContaienrRef} className={styles.container}>
       {showContactInfoSection && (
         <>
-          <pre className={styles.command} onAnimationEnd={handleShowContactInfo}>
-              <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
-              {CONTACT_INFO_COMMAND.split("").map((letter, idx) => (
-                <span key={idx} className={styles.letter} style={{animationDelay: `${idx * 0.1}s`}}>
-                  {letter}
-                </span>
-              ))}
-          </pre>
+          <TyperwriterText text={CONTACT_INFO_COMMAND} handleOnAnimationEnd={handleShowContactInfo} />
           
           {showContactInfo && (
             <pre className={styles.contactInfoSection}>
               {CONTACT_INFO.map((info, idx) => (
                 <span key={idx} className={styles.contactInfo}>
                   <Icon name={info.icon} color={"whitesmoke"} size="16px" className={styles.commandIcon} />
+                  
                   <pre className={styles.contactInfoLabel}>{info.label}: </pre>
                   {info.label === "Name" ? (
                     <span>{info.info}</span>
