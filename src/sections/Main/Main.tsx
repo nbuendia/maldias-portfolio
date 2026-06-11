@@ -1,7 +1,7 @@
 "use client";
 
 import { useToast } from "@/hooks";
-import { useMain, useTerminalCommand } from "./hooks";
+import { useMain, useMenuClick, useTerminalCommand } from "./hooks";
 import { COMMAND_LIST } from "./utils";
 
 import { Toast } from "@/components/Toast";
@@ -21,6 +21,11 @@ export default function Main() {
   const { toasts, handleOnCloseToast } = useToast();
   const { showComponent } = useMain();
   const { terminal, handleCommand } = useTerminalCommand()
+  const {
+    input,
+    setInput,
+    handleMenuItemClick,
+  } = useMenuClick(handleCommand);
 
   const terminalComponentList = {
     home: <Home />,
@@ -36,10 +41,10 @@ export default function Main() {
           <Banner />
 
           <Terminal name={terminal} terminalComponentList={terminalComponentList}>
-            <DropDown label="COMMAND LIST" menuItems={COMMAND_LIST} handleMenuItemClick={handleCommand} />
+            <DropDown label="COMMAND LIST" menuItems={COMMAND_LIST} handleMenuItemClick={handleMenuItemClick} />
           </Terminal>
 
-          <CommandBar onCommand={handleCommand} />
+          <CommandBar value={input} onChange={setInput} onCommand={handleCommand} />
         </>
       )}
 
