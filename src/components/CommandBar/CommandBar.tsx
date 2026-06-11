@@ -5,20 +5,18 @@ import { useCommandBar } from "./hooks";
 import styles from "./CommandBar.module.css";
 
 interface CommandBarProps {
+  value: string;
+  onChange: (input: string) => void;
   onCommand: (cmd: string) => void;
 }
 
-export default function CommandBar({ onCommand }: CommandBarProps) {
+export default function CommandBar({ value, onChange, onCommand }: CommandBarProps) {
   const inputRef = useRef<HTMLDivElement>(null);
-  const {
-    input,
-    handleKeyDown,
-    caretPosition,
-  } = useCommandBar(onCommand);
+  const { handleKeyDown, caretPosition } = useCommandBar(value, onChange, onCommand);
 
-  const before = input.slice(0, caretPosition);
-  const active = input[caretPosition];
-  const after = input.slice(caretPosition + 1);
+  const before = value.slice(0, caretPosition);
+  const active = value[caretPosition];
+  const after = value.slice(caretPosition + 1);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -33,7 +31,7 @@ export default function CommandBar({ onCommand }: CommandBarProps) {
           {before}
           <span className={styles.activeLetter}>{active}</span>
           {after}
-          <span className={`${input.length === caretPosition ? styles.caret : ''}`}> </span>
+          <span className={`${value.length === caretPosition ? styles.caret : ''}`}> </span>
         </span>
       </div>
     </div>
