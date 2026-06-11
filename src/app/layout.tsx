@@ -18,7 +18,7 @@ const CutiveMono = Cutive_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "React-Redux-Next-app",
+  title: "Buendia Bytes",
   description: "All my beautiful jewels",
 };
 
