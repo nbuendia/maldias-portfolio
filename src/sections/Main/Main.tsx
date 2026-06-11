@@ -44,7 +44,7 @@ export default function Main() {
             <DropDown label="COMMAND LIST" menuItems={COMMAND_LIST} handleMenuItemClick={handleMenuItemClick} />
           </Terminal>
 
-          <CommandBar value={input} onChange={setInput} onCommand={handleCommand} />
+          <CommandBar input={input} onChange={setInput} onCommand={handleCommand} />
         </>
       )}
 

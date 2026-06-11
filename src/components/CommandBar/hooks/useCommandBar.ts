@@ -1,4 +1,4 @@
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
 import { 
   handleBackspace,
   handleEnter,
@@ -8,11 +8,15 @@ import {
 import { handleInsertChar } from "../utils";
 
 export function useCommandBar(
-  value: string,
+  input: string,
   onChange: (input: string) => void,
   onCommand: (cmd: string) => void)
   {
-  const [caretPosition, setCaretPosition] = useState(value.length)
+  const [caretPosition, setCaretPosition] = useState(input.length);
+
+  useEffect(() => {
+    if (input.length === 0) setCaretPosition(0);
+  });
 
   // MIGHT DELETE IN THE FUTURE
   const MAX_LENGTH = 250;
@@ -21,13 +25,13 @@ export function useCommandBar(
     event.preventDefault();
     const char = event.key.length === 1 ? event.key : '';
         
-    if (char && value.length < MAX_LENGTH) 
-      handleInsertChar(char, value, onChange, caretPosition, setCaretPosition);
+    if (char && input.length < MAX_LENGTH) 
+      handleInsertChar(char, input, onChange, caretPosition, setCaretPosition);
 
-    handleEnter(event, value, onCommand, onChange, setCaretPosition);
-    handleBackspace(event, value, onChange, caretPosition, setCaretPosition);
+    handleEnter(event, input, onCommand, onChange, setCaretPosition);
+    handleBackspace(event, input, onChange, caretPosition, setCaretPosition);
     handleArrowLeft(event, caretPosition, setCaretPosition);
-    handleArrowRight(event, value, caretPosition, setCaretPosition);
+    handleArrowRight(event, input, caretPosition, setCaretPosition);
   }
 
   return {
