@@ -88,7 +88,6 @@ export default function Contact() {
             <pre className={styles.response}>
               Okay! If you change your mind, use command:<br/>
               <span className={styles.noEmail}>
-                {/* UPDATE THIS TO INCLUDE "SEND-EMAIL" -- RESET WORKS WITHOUT IT */}
                 --reset send-email
               </span>
             </pre>

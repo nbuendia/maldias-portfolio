@@ -50,8 +50,16 @@ export function useContactCommand() {
     else if (cmd.toLowerCase() === "y")
       triggerYesEmailAction(noEmailPrompts, handleSendEmailPrompts, handleYesEmailPrompts);
     
-    else if (cmd.toLowerCase().startsWith("--reset") && noEmailPrompts.triggerNoEmail) 
-      triggerResetEmailPrompt(handleShowEllipsis, handleNoEmailPrompts, handleSendEmailPrompts);
+    // MOVE --RESET TO A HIGHER COMPONENT IN FUTURE
+    else if (cmd.toLowerCase().startsWith("--reset") && noEmailPrompts.triggerNoEmail) {
+      const runMatch = cmd.match(/^--reset\s+(.+)$/i);
+
+      if (runMatch && runMatch[1] === "send-email")
+        triggerResetEmailPrompt(handleShowEllipsis, handleNoEmailPrompts, handleSendEmailPrompts);
+      
+      else if (runMatch && runMatch[1] !== "send-email")
+        handleToast(`Unknown reset command was entered: ${runMatch[1]}`);
+    }
 
     else {
       // REFACTOR THIS MESS
