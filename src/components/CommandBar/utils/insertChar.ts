@@ -5,7 +5,7 @@ export function handleInsertChar(
   caretPosition: number,
   setCaretPosition: (position: number) => void,
 ) {
-  let newInput = input.split("");
+  const newInput = input.split("");
   newInput.splice(caretPosition, 0, char);
 
   setInput(newInput.join(""));

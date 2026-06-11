@@ -1,4 +1,4 @@
-import { CSSProperties, HTMLAttributes, useEffect, useRef, useState } from "react";
+import { CSSProperties, HTMLAttributes, useRef } from "react";
 
 import { useDropdown, useDropdownStyles } from "./hooks";
 import { handleMenuClick } from "./utils";

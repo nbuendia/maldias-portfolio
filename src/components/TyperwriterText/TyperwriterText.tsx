@@ -9,7 +9,7 @@ interface TyperwriterTextProps extends HTMLAttributes<HTMLElement> {
   handleOnAnimationEnd?: () => void;
 }
 
-export default function TyperwriterText({ text, handleOnAnimationEnd, ...props }: TyperwriterTextProps) {
+export default function TyperwriterText({ text, handleOnAnimationEnd }: TyperwriterTextProps) {
   return (
     <pre className={styles.container} onAnimationEnd={handleOnAnimationEnd}>
       <Icon name="terminal_2" size="16px" color="green" className={styles.icon} />

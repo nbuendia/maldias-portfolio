@@ -11,7 +11,7 @@ export function handleBackspace(
     event.preventDefault();
     
     if (caretPosition !== 0) {
-      let newInput = input.split("");
+      const newInput = input.split("");
       newInput.splice(caretPosition - 1, 1);
       
       setInput(newInput.join(""));
