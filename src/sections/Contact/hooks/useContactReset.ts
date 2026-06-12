@@ -17,22 +17,23 @@ import { setShowEllipsis } from "@/features/Ellipsis";
 export function useContactReset() {
   const dispatch = useDispatch();
 
-  const sendEmailPromptReset = {
-    sendEmailPrompt: false,
-    triggerEmailAnimation: false,
-  } as SendEmailPrompts;
-  
-  const noEmailPromptReset = {
-    triggerNoEmail: false,
-    noEmailResetIsLoading: false,
-  } as NoEmailPrompts;
-  
-  const yesEmailPromptReset = {
-    triggerYesEmail: false,
-    triggerEmailBlurAnimation: false,
-  } as YesEmailPrompts;
-
   const handleContactStateReset = useCallback(() => {
+    const sendEmailPromptReset: SendEmailPrompts = {
+      sendEmailPrompt: false,
+      triggerEmailAnimation: false,
+      sentEmailConfrimation: false // MIGHT NEED TO REMOVE THIS
+    };
+
+    const noEmailPromptReset: NoEmailPrompts = {
+      triggerNoEmail: false,
+      noEmailResetIsLoading: false,
+    };
+
+    const yesEmailPromptReset: YesEmailPrompts = {
+      triggerYesEmail: false,
+      triggerEmailBlurAnimation: false,
+    };
+
     dispatch(setShowContactInfoSection(false));
     dispatch(setShowContactInfo(false));
     dispatch(setShowEmailSection(false));

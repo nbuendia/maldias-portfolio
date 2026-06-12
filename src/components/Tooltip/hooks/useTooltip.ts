@@ -26,7 +26,7 @@ export function useTooltip(
       if (position === "above") setPositionSpacing(kidTop - tooltipHeight - (kidHeight/2) + "px");  
       if (position === "below") setPositionSpacing(kidTop + (kidHeight) + "px");        
     }
-  });
+  }, [tooltipKidRefs, tooltipRef, position]);
 
   return {
     isHovering,

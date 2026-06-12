@@ -32,7 +32,7 @@ export function useContactEmail() {
       if (today > emailExpiryDate) localStorage.removeItem("email");
       else handleSendEmailPrompts("sentEmailConfrimation", true);
     }
-  }, []);
+  }, [handleSendEmailPrompts]);
 
   useEffect(() => {
     if (!showContactInfo) return;
@@ -44,7 +44,7 @@ export function useContactEmail() {
     }, 2000);
 
     return () => clearTimeout(showEmailSectionTimeout);
-  }, [dispatch, showContactInfo]);
+  }, [dispatch, showContactInfo, handleSendEmailPrompts, sendEmailPrompts.sentEmailConfrimation]);
 
   return { handleBlurAction };
 }

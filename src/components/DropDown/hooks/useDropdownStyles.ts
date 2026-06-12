@@ -21,7 +21,7 @@ export function useDropdownStyles(
       setListWidth(width + "px");
       setListHeight(maxHeight + "px");
     }
-  });
+  }, [dropdownRef, menuItemsRef]);
 
   return { listPosition, listWidth, listHeight };
 }

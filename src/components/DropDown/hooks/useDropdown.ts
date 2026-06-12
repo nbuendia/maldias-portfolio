@@ -16,7 +16,7 @@ export function useDropdown(
 
     document.addEventListener("mousedown", handleOutsideClick);
     return () => document.removeEventListener("mousedown", handleOutsideClick);
-  }, []);
+  }, [dropdownRef, menuItemsRef]);
 
   return { isDropdownOpen, setIsDropdownOpen };
 }

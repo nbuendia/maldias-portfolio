@@ -16,7 +16,7 @@ export function useCommandBar(
 
   useEffect(() => {
     if (input.length === 0) setCaretPosition(0);
-  });
+  }, [input.length]);
 
   // MIGHT DELETE IN THE FUTURE
   const MAX_LENGTH = 250;
