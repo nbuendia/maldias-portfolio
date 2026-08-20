@@ -5,7 +5,7 @@ import { Main } from "@/sections/Main";
 
 export default function Home() {
   return (
-    <Container column style={{background: "#2D2C2C", height: "100vh"}}>
+    <Container column style={{background: "#2D2C2C"}}>
       <Greeting />
       <WelcomeBack />
       <Main />
