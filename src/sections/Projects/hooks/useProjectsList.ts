@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 
@@ -13,6 +13,7 @@ import projectsList from "@/lib/data/projects.json";
 
 export function useProjectsList() {
   const dispatch = useDispatch();
+  const timeouts = useRef<NodeJS.Timeout[]>([]);
 
   const projects = useSelector((state: RootState) => state.projectsSlice.projects);
   const showProjects = useSelector((state: RootState) => state.projectsSlice.showProjects);
@@ -23,8 +24,7 @@ export function useProjectsList() {
       dispatch(setShowProjects(true));
     }, 3000);
 
-    return () => clearTimeout(showProjectsTimeout);
-    
+    timeouts.current.push(showProjectsTimeout);    
   }, [dispatch]);
 
   function handleProjectStatus(status: keyof ProjectStatus) {
@@ -57,6 +57,13 @@ export function useProjectsList() {
       return () => clearTimeout(currentlProjectIndexTimeout);
     }
   });
+
+  useEffect(() => {
+    return () => {
+      timeouts.current.forEach((timeout) => clearTimeout(timeout));
+      timeouts.current = [];
+    }
+  }, [timeouts]);
 
   return {
     handleShowProjects,

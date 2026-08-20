@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 
 import {
@@ -9,9 +9,10 @@ import {
 
 export function useAboutMeText() {
   const dispatch = useDispatch();
+  const timeouts = useRef<NodeJS.Timeout[]>([]);
 
   const handleShowWhoami = useCallback(() => {
-    const whoamiInfoTimeout= setTimeout(() => {
+    const whoamiInfoTimeout = setTimeout(() => {
       dispatch(setStartWhoamiAnimation(true));
     }, 4000);
   
@@ -19,10 +20,7 @@ export function useAboutMeText() {
       dispatch(setShowTechStack(true));
     }, 6000);
   
-    return () => {
-      clearTimeout(whoamiInfoTimeout);
-      clearTimeout(whoamiTimeout);
-    }
+    timeouts.current.push(whoamiInfoTimeout, whoamiTimeout);
   }, [dispatch]);
 
   useEffect(() => {
@@ -32,6 +30,13 @@ export function useAboutMeText() {
       
     return () => clearTimeout(aboutMeTimeOut);
   }, [dispatch]);
+
+  useEffect(() => {
+    return () => {
+      timeouts.current.forEach((timeout) => clearTimeout(timeout));
+      timeouts.current = [];
+    }
+  }, [timeouts]);
 
   return {
     handleShowWhoami,
