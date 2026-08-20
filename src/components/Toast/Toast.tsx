@@ -41,7 +41,7 @@ export default function Toast({ alignment, fontSize = "14px", onClose, children,
         </span>
       )}
     </div>,
-    document.body,
+    document.getElementById("toast-group") as Element,
     portalId,
   )
 }
