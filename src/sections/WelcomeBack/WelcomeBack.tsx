@@ -31,7 +31,7 @@ export default function WelcomeBack() {
     <>
       {showWelcomeBack && (
         <Box className={styles.container}>
-          <h1>
+          <h1 className={styles.noBreak}>
             {WELCOME.map((letter, key) => (
               <span key={key} className={letterClasses}
                 style={{animationDelay: endAnimation ? endLetterDelay(key, 0.8) : startLetterDelay(key)}}>
@@ -39,7 +39,8 @@ export default function WelcomeBack() {
               </span>
             ))}
           </h1>
-          <h1>
+
+          <h1 className={styles.noBreak}>
             {BACK.map((letter, key) => (
               <span key={key} className={letterClasses} onAnimationEnd={() => handleSmileyAnimation()}
                 style={{animationDelay: endAnimation ? endLetterDelay(key) : startLetterDelay(key, 0.8)}}>
@@ -47,8 +48,9 @@ export default function WelcomeBack() {
               </span>
             ))}
           </h1>
+
           <Icon name="mood" size="48px" className={iconClasses} onAnimationEnd={() => handleEndAnimation()}
-                style={{animationDelay: `${endAnimation ? "650ms" : 0}`}}/>
+            style={{animationDelay: `${endAnimation ? "650ms" : 0}`}}/>
         </Box>
       )}
     </>
