@@ -28,7 +28,7 @@
     "technologies": [ "TypeScript", "CSS", "React", "Redux", "Next.js" ],
     "image": "",
     "status": "wip",
-    "url": "",
+    "url": "https://buendia-bytes.netlify.app/",
     "github": "https://github.com/nbuendia/maldias-portfolio",
     "tags": [ "personal-portfolio", "portfolio", "web-app", "frontend", "multi-page-app" ]
   },
