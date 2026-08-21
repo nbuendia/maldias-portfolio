@@ -7,7 +7,7 @@
 
 .container {
   align-content: flex-end;
-  overflow-y: auto;
+  overflow: hidden auto;
   height: 100%;
   width: 100%;
   padding: 20px;
@@ -29,6 +29,11 @@
   display: flex;
   align-items: center;
   color: cyan;
+}
+
+.contactLink {
+  overflow-wrap: anywhere;
+  white-space: break-spaces;
 }
 
 .contactLink:hover {

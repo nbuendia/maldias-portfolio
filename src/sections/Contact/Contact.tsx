@@ -51,10 +51,12 @@ export default function Contact() {
           {showContactInfo && (
             <pre className={styles.contactInfoSection}>
               {CONTACT_INFO.map((info, idx) => (
-                <span key={idx} className={styles.contactInfo}>
-                  <Icon name={info.icon} color={"whitesmoke"} size="16px" className={styles.commandIcon} />
+                <span key={idx} className={styles.contactInfo} style={{gap: info.gap}}>
+                  <span style={{display: "flex"}}>
+                    <Icon name={info.icon} color={"whitesmoke"} size="16px" className={styles.commandIcon} />
+                    <pre className={styles.contactInfoLabel}>{info.label}: </pre>
+                  </span>
                   
-                  <pre className={styles.contactInfoLabel}>{info.label}: </pre>
                   {info.label === "Name" ? (
                     <span>{info.info}</span>
                   ) : (
@@ -77,20 +79,22 @@ export default function Contact() {
 
           {sendEmailPrompts.sendEmailPrompt &&
             // MOVE "ON ANIMATION END" TO EMAIL FORM COMPONENT
-            <pre className={`${styles.emailPrompt} ${sendEmailPrompts.triggerEmailAnimation ? styles.emailPromptAnimation : ""}`} onAnimationEnd={handleBlurAction}>
+            <span className={`${styles.emailPrompt} ${sendEmailPrompts.triggerEmailAnimation ? styles.emailPromptAnimation : ""}`} onAnimationEnd={handleBlurAction}>
               <Icon name="check" size="16px" color="green" className={styles.promptCheck} />
-              Would you like to send me an email?
-              <span className={styles.promptYesNo}>(y/n)</span>
-            </pre>
+              <span>
+                Would you like to send me an email?
+                <span className={styles.promptYesNo}>(y/n)</span>
+              </span>
+            </span>
           }
 
           {noEmailPrompts.triggerNoEmail && (
-            <pre className={styles.response}>
+            <span className={styles.response}>
               Okay! If you change your mind, use command:<br/>
               <span className={styles.noEmail}>
                 --reset send-email
               </span>
-            </pre>
+            </span>
           )}
 
           {sendEmailPrompts.sentEmailConfrimation && (
