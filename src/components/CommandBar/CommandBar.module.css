@@ -61,6 +61,11 @@
   font-weight: 600;
 }
 
+.activeLetterNoFocus {
+  font-weight: 600;
+  border-bottom: none;
+}
+
 @keyframes blink {
   0%, 50% {
     opacity: 1;
