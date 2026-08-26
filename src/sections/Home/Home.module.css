@@ -16,8 +16,7 @@
 }
 
 .intro,
-.instructionsContainer,
-.commandListContainer {
+.instructionsContainer {
   margin-bottom: 1em;
 }
 
@@ -36,6 +35,12 @@
   border-top: dashed 1px whitesmoke;
   border-bottom: dashed 1px whitesmoke;
   padding: 1em 0;
+}
+
+.instructionsContainerMobile {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 .instructions {

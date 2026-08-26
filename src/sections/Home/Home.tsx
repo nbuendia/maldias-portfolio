@@ -1,44 +1,59 @@
 import { Icon } from "@/components/Icon";
 
-import { TERMINAL_COMMANDS } from "./utils";
+import { useDeviceCheck } from "@/hooks";
+
+import {
+  TERMINAL_COMMANDS,
+  INTRO,
+  INSTRUCTIONS_PT_ONE,
+  INSTRUCTIONS_PT_TWO,
+  INSTRUCTIONS_PT_TWO_MOBILE,
+} from "./utils";
 
 import styles from "./Home.module.css";
 
 export default function Home() {
+  const {isMobileOrTablet} = useDeviceCheck();
+
+  const instructionsContainerClasses = `${styles.instructionsContainer} ${isMobileOrTablet ? styles.instructionsContainerMobile : ""}`;
+
   return (
     <div className={styles.container}>
       <div className={styles.intro}>
         <pre className={styles.title}>Software Developer</pre>
-        Frontend focused software developer with experience building fullstack web applications, internal tools and intuitive user interfaces.
+        {INTRO}
       </div>
 
-      <div className={styles.instructionsContainer}>
+      <div className={instructionsContainerClasses}>
         <span className={styles.title}>
           How To Navigate:
         </span>
 
         <span className={styles.instructions}>
-          This is a terminal style, interactive portfolio.
+          {INSTRUCTIONS_PT_ONE}
         </span>
 
         <span>
-          Type commands in input below or use the dropdown on the upper right of the terminal to navigate through different parts of the site.
+          {!isMobileOrTablet && INSTRUCTIONS_PT_TWO + INSTRUCTIONS_PT_TWO_MOBILE}
+          {isMobileOrTablet && INSTRUCTIONS_PT_TWO_MOBILE[0].toUpperCase() + INSTRUCTIONS_PT_TWO_MOBILE.slice(1)}
         </span>
       </div>
 
-      <div className={styles.commandListContainer}>
-        <span className={styles.title}>
-          Available commands:
-        </span>
-        
-        {TERMINAL_COMMANDS.map((command, commandKey) => (
-          <span key={commandKey} className={styles.command}>
-            <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
-            <span>run {command}</span>
+      {!isMobileOrTablet && 
+        <div className={styles.commandListContainer}>
+          <span className={styles.title}>
+            Available commands:
           </span>
-          ))
-        }
-      </div>
+          
+          {TERMINAL_COMMANDS.map((command, commandKey) => (
+            <span key={commandKey} className={styles.command}>
+              <Icon name="terminal_2" size="16px" color="green" className={styles.commandIcon} />
+              <span>run {command}</span>
+            </span>
+            ))
+          }
+        </div>
+      }
     </div>
   )
 }
