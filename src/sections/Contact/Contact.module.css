@@ -1,7 +1,8 @@
 .response,
 .contactInfo,
 .contactInfoLabel,
-.emailPrompt {
+.emailPrompt,
+.promptButtonContainer {
   font-family: var(--font-cutive-mono);
 }
 
@@ -57,6 +58,19 @@
 .promptYesNo {
   color: #979797;
   font-style: italic;
+}
+
+.promptButtonContainer {
+  display: flex;
+  margin: 0.5em 1em;
+  gap: 1em;
+}
+
+.promptButton {
+  box-shadow: 0 0 5px 1px rgba(0, 255, 255, 0.5) inset;
+  border: dotted 1px cyan;
+  border-radius: 1em;
+  padding: 0 0.5em;
 }
 
 .noEmail {

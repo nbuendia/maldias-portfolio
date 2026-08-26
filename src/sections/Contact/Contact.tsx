@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { useEllipsis } from "@/hooks";
+import { useEllipsis, useDeviceCheck } from "@/hooks";
 import {
   useContact,
   useContactEmail,
@@ -13,6 +13,7 @@ import {
   CONTACT_INFO,
   CONTACT_INFO_COMMAND,
   EMAIL_SENT_TOOLTIP_MSG,
+  triggerPromptAction,
 } from "./utils";
 
 import { Icon } from "@/components/Icon";
@@ -23,7 +24,11 @@ import { EmailForm } from "@/sections/EmailForm";
 
 import styles from "./Contact.module.css";
 
-export default function Contact() {
+interface ContactProps {
+  handleMobileOptions: (input: string) => void;
+}
+
+export default function Contact({ handleMobileOptions }: ContactProps) {
   const projectContaienrRef = useRef(null);
   const {showEllipsis} = useEllipsis();
   const {handleContactStateReset} = useContactReset();
@@ -37,6 +42,10 @@ export default function Contact() {
   const {handleShowContactInfo} = useContact();
   const {yesEmailPrompts} = useYesEmail();
   const {handleBlurAction} = useContactEmail();
+  const {isMobileOrTablet} = useDeviceCheck();
+  const {handlePromptClick, handleResetClick} = triggerPromptAction(handleMobileOptions);
+
+  const resetResponse = isMobileOrTablet ? "click button below" : "use command:";
 
   useEffect(() => {
     return () => handleContactStateReset();
@@ -78,22 +87,41 @@ export default function Contact() {
           {showEllipsis && <EllipsisLoader />}
 
           {sendEmailPrompts.sendEmailPrompt &&
-            // MOVE "ON ANIMATION END" TO EMAIL FORM COMPONENT
-            <span className={`${styles.emailPrompt} ${sendEmailPrompts.triggerEmailAnimation ? styles.emailPromptAnimation : ""}`} onAnimationEnd={handleBlurAction}>
-              <Icon name="check" size="16px" color="green" className={styles.promptCheck} />
-              <span>
-                Would you like to send me an email?
-                <span className={styles.promptYesNo}>(y/n)</span>
-              </span>
-            </span>
+            <>
+              {/* MOVE "ON ANIMATION END" TO EMAIL FORM COMPONENT */}
+              <div className={`${styles.emailPrompt} ${sendEmailPrompts.triggerEmailAnimation ? styles.emailPromptAnimation : ""}`} onAnimationEnd={handleBlurAction}>
+                <Icon name="check" size="16px" color="green" className={styles.promptCheck} />
+                <span>
+                  Would you like to send me an email?
+                  {!isMobileOrTablet && <span className={styles.promptYesNo}>(y/n)</span>}
+                </span>
+              </div>
+
+              {isMobileOrTablet && 
+                <div className={styles.promptButtonContainer}>
+                  <span className={styles.promptButton} onClick={handlePromptClick}>Yes</span>
+                  <span className={styles.promptButton} onClick={handlePromptClick}>No</span>
+                </div>
+              }
+            </>
           }
 
           {noEmailPrompts.triggerNoEmail && (
             <span className={styles.response}>
-              Okay! If you change your mind, use command:<br/>
-              <span className={styles.noEmail}>
-                --reset send-email
-              </span>
+              Okay! If you change your mind, {resetResponse}<br/>
+              {!isMobileOrTablet &&
+                <span className={styles.noEmail}>
+                  --reset send-email
+                </span>
+              }
+
+              {isMobileOrTablet &&
+                <div className={styles.promptButtonContainer} style={{margin: ".5em 0"}}>
+                  <span className={styles.promptButton} onClick={handleResetClick}>
+                    reset send-email
+                  </span>
+                </div>
+              }
             </span>
           )}
 
