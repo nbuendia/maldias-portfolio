@@ -4,7 +4,7 @@ export function useMenuClick(handleCommand: (cmd: string) => void) {
   const [input, setInput] = useState("");
 
   function handleMenuItemClick(cmd: string) {
-    const typingDelay = cmd.length * 100 + 200;
+    const typingDelay = cmd.length * 100 + 500;
     let count = 1;
 
     const addLetterInterval = setInterval(() => {
