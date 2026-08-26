@@ -32,7 +32,7 @@ export default function Main() {
     home: <Home />,
     about: <AboutMe />,
     projects: <Projects />,
-    contact: <Contact />
+    contact: <Contact handleMobileOptions={handleMenuItemClick} />
   };
 
   return (
