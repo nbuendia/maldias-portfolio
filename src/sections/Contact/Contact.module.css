@@ -9,9 +9,9 @@
 .container {
   align-content: flex-end;
   overflow: hidden auto;
-  height: 100%;
   width: 100%;
   padding: 20px;
+  margin-top: 1em;
 }
 
 .commandIcon {
