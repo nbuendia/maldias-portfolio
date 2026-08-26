@@ -2,9 +2,9 @@ export const WHOAMI_COMMAND = "cat who-am-i.txt";
 
 export const WHO_AM_I = `Who am I? I'm your favorite bartender, a growing developer and lifelong student.
 
-I'd spend my day daydreaming about games, animation and art. My curiosity led me to teach myself C# and Unity, which evolved into attending school for fullstack web development. What started as fun and games soon turned into a career and I had the pleasure of working alongside some of the most impressive minds at Shopify and Rockstar Games.
+I used to spend my days daydreaming about games, animation and art. Curiosity led me to teach myself C# and Unity, which eventually brought me to school for fullstack web development. What started as fun and games soon turned into a career. I had the pleasure of working alongside some of the most impressive minds at Shopify and Rockstar Games.
 
-My desire to be better than I was yesterday progressed into a fascination with engineering and robotics. Today I'm actively pursuing a degree in Computer Engineering, learning more about hardware and integrating it with my software background.
+Wanting to keep learning and growing as a developer steered me into engineering and robotics. Today I'm actively pursuing a degree in Computer Engineering, learning more about hardware and how to integrate it with my software background.
 
 What can I say, I love a challenge.`;
 
