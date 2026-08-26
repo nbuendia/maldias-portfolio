@@ -10,7 +10,7 @@ export function useDeviceCheck() {
     const isMobile = mobileRegex.test(userAgent);
     const hasTouchScreen = maxTouchPoints > 0;
   
-    setIsMobileOrTablet(isMobile && hasTouchScreen);
+    setIsMobileOrTablet(isMobile || hasTouchScreen);
   }, []);
 
   return { isMobileOrTablet };
