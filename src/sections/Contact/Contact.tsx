@@ -80,11 +80,9 @@ export default function Contact({ handleMobileOptions }: ContactProps) {
         </>
       )}
 
-      <br />
-
       {showEmailSection && (
         <>
-          {showEllipsis && <EllipsisLoader />}
+          {showEllipsis && <EllipsisLoader style={{marginTop: "1em"}} />}
 
           {sendEmailPrompts.sendEmailPrompt &&
             <>
@@ -107,8 +105,8 @@ export default function Contact({ handleMobileOptions }: ContactProps) {
           }
 
           {noEmailPrompts.triggerNoEmail && (
-            <span className={styles.response}>
-              Okay! If you change your mind, {resetResponse}<br/>
+            <div className={styles.response}>
+              Okay! If you change your mind, {resetResponse}
               {!isMobileOrTablet &&
                 <span className={styles.noEmail}>
                   --reset send-email
@@ -116,13 +114,13 @@ export default function Contact({ handleMobileOptions }: ContactProps) {
               }
 
               {isMobileOrTablet &&
-                <div className={styles.promptButtonContainer} style={{margin: ".5em 0"}}>
+                <div className={styles.promptButtonContainer} style={{margin: "1em 0 0"}}>
                   <span className={styles.promptButton} onClick={handleResetClick}>
                     reset send-email
                   </span>
                 </div>
               }
-            </span>
+            </div>
           )}
 
           {sendEmailPrompts.sentEmailConfrimation && (
