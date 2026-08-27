@@ -12,6 +12,7 @@ import { projectsSlice } from '@/features/Projects';
 import { emailFormSlice } from '@/features/EmailForm';
 import { ellipsisSlice } from '@/features/Ellipsis';
 import { terminalSlice } from '@/features/Terminal';
+import { orientationSlice } from '@/features/Orientation';
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     [emailFormSlice.reducerPath]: emailFormSlice.reducer,
     [ellipsisSlice.reducerPath]: ellipsisSlice.reducer,
     [terminalSlice.reducerPath]: terminalSlice.reducer,
+    [orientationSlice.reducerPath]: orientationSlice.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
