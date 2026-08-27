@@ -4,7 +4,6 @@ export function useDropdownStyles(
   dropdownRef: RefObject<HTMLDivElement | null>,
   menuItemsRef: RefObject<HTMLDivElement | null>,
 ) {
-  const [listPosition, setListPosition] = useState<string | null>(null);
   const [listWidth, setListWidth] = useState<string | null>(null);
   const [listHeight, setListHeight] = useState<string | null>(null);
 
@@ -12,16 +11,12 @@ export function useDropdownStyles(
     if (dropdownRef.current && menuItemsRef.current) {
       const boundingClientRect = dropdownRef.current.getBoundingClientRect();
       const maxHeight = menuItemsRef.current.scrollHeight;
-
-      const top = boundingClientRect.top;
-      const height = boundingClientRect.height;
       const width = boundingClientRect.width;
 
-      setListPosition(top + height + "px");
       setListWidth(width + "px");
       setListHeight(maxHeight + "px");
     }
   }, [dropdownRef, menuItemsRef]);
 
-  return { listPosition, listWidth, listHeight };
+  return { listWidth, listHeight };
 }

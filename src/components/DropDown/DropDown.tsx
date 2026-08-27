@@ -18,15 +18,17 @@ export default function DropDown({label, menuItems, handleMenuItemClick, ...prop
   const menuItemsRef = useRef<HTMLDivElement>(null);
 
   const {isDropdownOpen, setIsDropdownOpen} = useDropdown(dropdownRef, menuItemsRef);
-  const {listPosition, listWidth, listHeight} = useDropdownStyles(dropdownRef, menuItemsRef);
+  const {listWidth, listHeight} = useDropdownStyles(dropdownRef, menuItemsRef);
 
   const defaultClass = styles.container;
   const incomingClass = props.className && props.className;
+  const classes = [defaultClass, incomingClass].filter(Boolean).join(" ");
+  
   const addShadow = isDropdownOpen && styles.shadow;
-  const classes = [defaultClass, incomingClass, addShadow].filter(Boolean).join(" ");
+  const dropDownLabelClasses = [styles.dropDownLabel, addShadow].join(" ")
 
   const menuListPosition = {
-    ...{top: listPosition, width: listWidth, height: (isDropdownOpen ? listHeight : 0)}
+    ...{width: listWidth, height: (isDropdownOpen ? listHeight : 0)}
   } as CSSProperties;
 
   function handleMenuClose(
@@ -39,8 +41,8 @@ export default function DropDown({label, menuItems, handleMenuItemClick, ...prop
   }
 
   return (
-    <>
-      <div ref={dropdownRef} className={classes} style={props.style}>
+    <div className={classes} style={props.style}>
+      <div ref={dropdownRef} className={dropDownLabelClasses}>
         <span className={styles.label}>
           {label}
         </span>
@@ -59,6 +61,6 @@ export default function DropDown({label, menuItems, handleMenuItemClick, ...prop
           </span>
         ))}
       </div>
-    </>
+    </div>
   )
 }

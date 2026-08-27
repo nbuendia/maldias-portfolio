@@ -1,5 +1,9 @@
 .container {
-  position: fixed;
+  position: absolute;
+}
+
+.dropDownLabel {
+  position: relative;
   border-style: none none solid solid;
   background-color: #3C3C3C;
   display: flex;
