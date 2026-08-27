@@ -8,3 +8,20 @@
   color: red;
   font-family: var(--font-cutive-mono);
 }
+
+.landscapeOrientation {
+  position: absolute;
+  opacity: 1;
+  animation: resize 1s ease-in forwards;
+}
+
+@keyframes resize {
+  from {
+    height: calc(100% - 10rem);
+    transform: translateY(7rem);
+  }
+  to {
+    height: calc(100% - 3rem);
+    transform: translateY(0);
+  }
+}

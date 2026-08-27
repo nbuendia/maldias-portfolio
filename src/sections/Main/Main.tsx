@@ -1,6 +1,6 @@
 "use client";
 
-import { useToast } from "@/hooks";
+import { useDeviceCheck, useOrientation, useToast } from "@/hooks";
 import { useMain, useMenuClick, useTerminalCommand } from "./hooks";
 import { COMMAND_LIST } from "./utils";
 
@@ -20,8 +20,10 @@ import styles from "./Main.module.css";
 
 export default function Main() {
   const { toasts, handleOnCloseToast } = useToast();
+  const { isMobileOrTablet } = useDeviceCheck();
+  const { orientation } = useOrientation();
   const { showComponent } = useMain();
-  const { terminal, handleCommand } = useTerminalCommand()
+  const { terminal, handleCommand } = useTerminalCommand();
   const {
     input,
     setInput,
@@ -35,13 +37,15 @@ export default function Main() {
     contact: <Contact handleMobileOptions={handleMenuItemClick} />
   };
 
+  const mobileOrientationClass = `${isMobileOrTablet && orientation.orientation === "landscape" ? styles.landscapeOrientation : ""}`;
+
   return (
     <>
       {showComponent && (
         <>
           <Banner />
 
-          <Terminal name={terminal} terminalComponentList={terminalComponentList}>
+          <Terminal name={terminal} terminalComponentList={terminalComponentList} className={mobileOrientationClass}>
             <DropDown label="COMMAND LIST" menuItems={COMMAND_LIST} handleMenuItemClick={handleMenuItemClick} />
           </Terminal>
 
